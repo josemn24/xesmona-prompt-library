@@ -41,6 +41,7 @@ export const categories: Category[] = [
   { id: "sales", label: "Ventas", module: "business" },
   { id: "operations", label: "Operaciones", module: "business" },
   { id: "project-management", label: "Gestión de proyectos", module: "business" },
+  { id: "lean-startup", label: "Lean Startup", module: "business" },
 
   // Productividad
   { id: "organization", label: "Organización", module: "productivity" },

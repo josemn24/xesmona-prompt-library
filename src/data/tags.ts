@@ -28,4 +28,10 @@ export const tags: Tag[] = [
   { id: "migration", label: "Migración" },
   { id: "analysis", label: "Análisis" },
   { id: "conversion", label: "Conversión" },
+  { id: "lean-startup", label: "Lean Startup" },
+  { id: "validated-learning", label: "Aprendizaje validado" },
+  { id: "experimentation", label: "Experimentación" },
+  { id: "mvp", label: "MVP" },
+  { id: "pivot", label: "Pivot" },
+  { id: "growth-engine", label: "Motor de crecimiento" },
 ];

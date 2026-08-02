@@ -23,6 +23,12 @@ describe("toSearchablePrompt", () => {
 });
 
 describe("searchPrompts", () => {
+  it("encuentra el sistema Lean Startup por categoría y etiquetas", () => {
+    const results = searchPrompts(allPrompts, "Lean Startup");
+    expect(results.some((r) => r.prompt.id === "guiar-ciclo-lean")).toBe(true);
+    expect(results.some((r) => r.prompt.tags.includes("mvp"))).toBe(true);
+  });
+
   it("devuelve todos los prompts si la consulta está vacía", () => {
     expect(searchPrompts(allPrompts, "   ")).toHaveLength(allPrompts.length);
   });

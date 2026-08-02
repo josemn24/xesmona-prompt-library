@@ -8,6 +8,17 @@ import {
 } from "@/src/lib/filters";
 
 describe("applyFilters", () => {
+  it("filtra los prompts Lean Startup por categoría y etiqueta", () => {
+    const results = applyFilters(allPrompts, {
+      ...emptyFilters,
+      categories: ["lean-startup"],
+      tags: ["experimentation"],
+    });
+    expect(results.length).toBeGreaterThanOrEqual(5);
+    expect(results.every((prompt) => prompt.categories.includes("lean-startup"))).toBe(true);
+    expect(results.every((prompt) => prompt.tags.includes("experimentation"))).toBe(true);
+  });
+
   it("sin filtros devuelve todos los prompts", () => {
     expect(applyFilters(allPrompts, emptyFilters)).toHaveLength(allPrompts.length);
   });

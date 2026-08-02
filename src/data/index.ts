@@ -3,6 +3,7 @@ import { modules } from "./modules";
 import { artificialIntelligencePrompts } from "./prompts/artificial-intelligence";
 import { businessPrompts } from "./prompts/business";
 import { marketingPrompts } from "./prompts/marketing";
+import { leanStartupPrompts } from "./prompts/lean-startup";
 import { productivityPrompts } from "./prompts/productivity";
 import { softwareDevelopmentPrompts } from "./prompts/software-development";
 import { subcategories } from "./subcategories";
@@ -31,6 +32,7 @@ export const allPrompts: Prompt[] = [
   ...softwareDevelopmentPrompts,
   ...artificialIntelligencePrompts,
   ...marketingPrompts,
+  ...leanStartupPrompts,
   ...businessPrompts,
   ...productivityPrompts,
 ];
