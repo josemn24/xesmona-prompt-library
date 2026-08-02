@@ -7,6 +7,7 @@ export const subcategories: Subcategory[] = [
   { id: "microservices", label: "Microservicios", category: "software-architecture" },
   { id: "distributed-systems", label: "Sistemas distribuidos", category: "software-architecture" },
   { id: "design-patterns", label: "Patrones de diseño", category: "software-architecture" },
+  { id: "quality-attributes", label: "Atributos de calidad", category: "software-architecture" },
 
   // Control de versiones
   { id: "git", label: "Git", category: "version-control" },
