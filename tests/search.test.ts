@@ -1,0 +1,83 @@
+import { describe, expect, it } from "vitest";
+import { allPrompts } from "@/src/data";
+import { searchPrompts, toSearchablePrompt } from "@/src/lib/search";
+import { normalizeText } from "@/src/lib/text";
+
+describe("normalizeText", () => {
+  it("convierte a minúsculas, elimina diacríticos y colapsa espacios", () => {
+    expect(normalizeText("  Depuración   AVANZADA ")).toBe("depuracion avanzada");
+    expect(normalizeText("Observabilidad")).toBe("observabilidad");
+  });
+});
+
+describe("toSearchablePrompt", () => {
+  it("transforma las referencias taxonómicas en etiquetas legibles", () => {
+    const prompt = allPrompts.find((p) => p.id === "threat-modeling");
+    expect(prompt).toBeDefined();
+    if (!prompt) return;
+    const searchable = toSearchablePrompt(prompt);
+    expect(searchable.categories).toContain("seguridad del software");
+    expect(searchable.tags).toContain("checklist");
+    expect(searchable.tags).toContain("api");
+  });
+});
+
+describe("searchPrompts", () => {
+  it("devuelve todos los prompts si la consulta está vacía", () => {
+    expect(searchPrompts(allPrompts, "   ")).toHaveLength(allPrompts.length);
+  });
+
+  it("prioriza las coincidencias en el título sobre las del contenido", () => {
+    const results = searchPrompts(allPrompts, "sql");
+    expect(results.length).toBeGreaterThan(0);
+    // "Optimize a slow SQL query" lleva SQL en el título y en las etiquetas.
+    expect(results[0]?.prompt.id).toBe("optimize-sql-query");
+  });
+
+  it("tolera errores tipográficos leves", () => {
+    const results = searchPrompts(allPrompts, "arquitecura");
+    expect(results.length).toBeGreaterThan(0);
+    expect(
+      results.some((r) => r.prompt.categories.includes("software-architecture")),
+    ).toBe(true);
+  });
+
+  it("tolera faltas de ortografía en términos técnicos", () => {
+    const results = searchPrompts(allPrompts, "typescrpt");
+    expect(results.length).toBeGreaterThan(0);
+    expect(results.some((r) => r.prompt.tags.includes("typescript"))).toBe(true);
+  });
+
+  it("es insensible a mayúsculas y acentos", () => {
+    const withAccents = searchPrompts(allPrompts, "observabilidad");
+    expect(withAccents.length).toBeGreaterThan(0);
+    expect(
+      withAccents.some((r) => r.prompt.categories.includes("observability")),
+    ).toBe(true);
+
+    const upperCase = searchPrompts(allPrompts, "DOCKER");
+    expect(upperCase.some((r) => r.prompt.tags.includes("docker"))).toBe(true);
+  });
+
+  it("encuentra prompts por nombres de categoría y subcategoría", () => {
+    const byCategory = searchPrompts(allPrompts, "copywriting");
+    expect(byCategory.some((r) => r.prompt.categories.includes("copywriting"))).toBe(true);
+
+    const bySubcategory = searchPrompts(allPrompts, "contenedores");
+    expect(
+      bySubcategory.some((r) => (r.prompt.subcategories ?? []).includes("containers")),
+    ).toBe(true);
+  });
+
+  it("encuentra prompts en ambos idiomas", () => {
+    const spanish = searchPrompts(allPrompts, "pull request");
+    expect(spanish.some((r) => r.prompt.id === "review-pull-request")).toBe(true);
+
+    const english = searchPrompts(allPrompts, "business model");
+    expect(english.length).toBeGreaterThan(0);
+  });
+
+  it("devuelve una lista vacía cuando nada coincide", () => {
+    expect(searchPrompts(allPrompts, "xzqwkj")).toEqual([]);
+  });
+});

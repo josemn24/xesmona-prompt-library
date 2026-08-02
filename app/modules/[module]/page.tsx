@@ -1,0 +1,118 @@
+import { ArrowRight } from "lucide-react";
+import type { Metadata } from "next";
+import Link from "next/link";
+import { notFound } from "next/navigation";
+import { PromptCard } from "@/src/components/prompt-card";
+import { modules } from "@/src/data";
+import { promptsUrl } from "@/src/lib/query-params";
+import {
+  countPromptsForCategory,
+  getCategoriesForModule,
+  getModuleById,
+  getPromptsForModule,
+  sortByUpdatedAtDesc,
+} from "@/src/lib/taxonomy";
+
+type PageProps = {
+  params: Promise<{ module: string }>;
+};
+
+export function generateStaticParams() {
+  return modules.map((module) => ({ module: module.id }));
+}
+
+export const dynamicParams = false;
+
+export async function generateMetadata({
+  params,
+}: PageProps): Promise<Metadata> {
+  const { module: moduleId } = await params;
+  const moduleData = getModuleById(moduleId);
+  if (!moduleData) {
+    return { title: "Módulo no encontrado" };
+  }
+  return {
+    title: moduleData.label,
+    description: moduleData.description,
+    openGraph: {
+      title: moduleData.label,
+      description: moduleData.description,
+    },
+  };
+}
+
+export default async function ModulePage({ params }: PageProps) {
+  const { module: moduleId } = await params;
+  const moduleData = getModuleById(moduleId);
+  if (!moduleData) notFound();
+
+  const moduleCategories = getCategoriesForModule(moduleData.id);
+  const modulePrompts = sortByUpdatedAtDesc(getPromptsForModule(moduleData.id));
+
+  return (
+    <div className="mx-auto max-w-6xl px-4 py-10 sm:px-6">
+      <header className="max-w-3xl">
+        <h1 className="text-2xl font-bold tracking-tight text-neutral-900 sm:text-3xl">
+          {moduleData.label}
+        </h1>
+        <p className="mt-3 text-neutral-600">{moduleData.description}</p>
+        <p className="mt-4 text-sm text-neutral-600">
+          {modulePrompts.length}{" "}
+          {modulePrompts.length === 1
+            ? "prompt en este módulo"
+            : "prompts en este módulo"}
+          {" · "}
+          <Link
+            href={promptsUrl({ module: moduleData.id })}
+            className="inline-flex items-center gap-1 font-medium text-blue-800 underline-offset-4 hover:underline"
+          >
+            Abrir en el explorador con este filtro aplicado
+            <ArrowRight className="size-4" aria-hidden />
+          </Link>
+        </p>
+      </header>
+
+      <section aria-labelledby="categorias" className="mt-10">
+        <h2
+          id="categorias"
+          className="text-xl font-semibold tracking-tight text-neutral-900"
+        >
+          Categorías
+        </h2>
+        <ul className="mt-4 flex flex-wrap gap-2">
+          {moduleCategories.map((category) => {
+            const count = countPromptsForCategory(category.id);
+            return (
+              <li key={category.id}>
+                <Link
+                  href={promptsUrl({
+                    module: moduleData.id,
+                    categories: [category.id],
+                  })}
+                  className="inline-flex items-center gap-1.5 rounded-full border border-neutral-200 bg-white px-3 py-1.5 text-sm font-medium text-neutral-700 transition-colors hover:border-neutral-400"
+                >
+                  {category.label}
+                  <span className="text-xs text-neutral-500">({count})</span>
+                </Link>
+              </li>
+            );
+          })}
+        </ul>
+      </section>
+
+      <section aria-labelledby="prompts-del-modulo" className="mt-10">
+        <h2
+          id="prompts-del-modulo"
+          className="text-xl font-semibold tracking-tight text-neutral-900"
+        >
+          Prompts de {moduleData.label}
+        </h2>
+        <div className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          {modulePrompts.map((prompt) => (
+            <PromptCard key={prompt.id} prompt={prompt} />
+          ))}
+        </div>
+      </section>
+    </div>
+  );
+}
