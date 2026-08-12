@@ -9,6 +9,7 @@ export const subcategories: Subcategory[] = [
   { id: "design-patterns", label: "Patrones de diseño", category: "software-architecture" },
   { id: "quality-attributes", label: "Atributos de calidad", category: "software-architecture" },
   { id: "c4-model", label: "Modelo C4", category: "software-architecture" },
+  { id: "application-structure", label: "Organización interna", category: "software-architecture" },
 
   // Control de versiones
   { id: "git", label: "Git", category: "version-control" },

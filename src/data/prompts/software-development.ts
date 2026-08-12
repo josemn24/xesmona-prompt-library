@@ -399,6 +399,167 @@ Termina con una síntesis de las tres tensiones que más deberían influir en la
     updatedAt: "2026-08-12",
   },
   {
+    id: "analyze-internal-application-organization",
+    slug: "analizar-organizacion-interna",
+    title: "Analizar la organización interna de una aplicación",
+    description:
+      "Diagnóstico de la estructura interna de una aplicación para identificar su organización dominante, la localización de cambios, la cohesión, el acoplamiento y su capacidad de evolución.",
+    content: `Actúa como un arquitecto de software que analiza la estructura interna de una aplicación existente.
+
+Descripción de la aplicación y estructura del código:
+{{application}}
+
+Contexto adicional (equipo, ritmo de cambios, problemas conocidos y stack):
+{{context}}
+
+Identifica si la aplicación está organizada principalmente por:
+
+- capas técnicas;
+- funcionalidades;
+- módulos;
+- componentes;
+- casos de uso;
+- una combinación de varias estrategias.
+
+No infieras la organización solo por los nombres de las carpetas: contrasta la estructura física con las dependencias reales y el flujo de ejecución.
+
+Evalúa:
+
+- localización de cambios;
+- cohesión;
+- acoplamiento;
+- facilidad para descubrir código;
+- encapsulación;
+- testabilidad;
+- capacidad de evolución.
+
+Para cada dimensión:
+
+1. Describe la situación observada.
+2. Cita la evidencia disponible: directorios, módulos, dependencias, imports, interfaces, tests o flujos.
+3. Indica si el problema es confirmado, probable o no puede determinarse.
+4. Explica qué tipo de cambio futuro lo haría especialmente costoso: nueva funcionalidad, cambio de persistencia, integración externa, modificación transversal, escalado del equipo u otro.
+
+Presenta el resultado en este orden:
+
+1. Resumen de la organización dominante y de las combinaciones detectadas.
+2. Mapa breve de las fronteras y dependencias principales.
+3. Evaluación por dimensión.
+4. Problemas priorizados, con evidencia, impacto y cambio futuro que los agravaría.
+5. Preguntas abiertas y datos que faltan para confirmar el diagnóstico.
+
+Reglas:
+
+- No propongas todavía una reorganización completa.
+- No confundas una estructura diferente de la preferida con un problema.
+- Distingue acoplamiento entre módulos, acoplamiento a infraestructura y acoplamiento a detalles de implementación.
+- Señala los casos en los que una frontera parece existir en los directorios, pero no está protegida por dependencias o encapsulación.
+- No inventes módulos ni dependencias que no aparezcan en la descripción.
+- Si la información no permite evaluar una dimensión, indícalo en lugar de rellenarla con recomendaciones genéricas.
+
+El objetivo es producir un diagnóstico útil para comparar estrategias de organización en una fase posterior.`,
+    language: "es",
+    module: "software-development",
+    categories: ["software-architecture"],
+    subcategories: ["application-structure"],
+    tags: ["analysis", "checklist"],
+    useCases: [
+      "Diagnosticar la estructura de un código existente antes de reorganizarlo",
+      "Identificar por qué los cambios atraviesan demasiadas partes de una aplicación",
+      "Preparar una revisión de modularidad con un equipo de desarrollo",
+    ],
+    notes:
+      "Proporciona un árbol de directorios junto con ejemplos de dependencias y flujos relevantes; la estructura de carpetas por sí sola no demuestra una frontera.",
+    createdAt: "2026-08-12",
+    updatedAt: "2026-08-12",
+  },
+  {
+    id: "compare-application-organization-strategies",
+    slug: "comparar-estrategias-de-organizacion",
+    title: "Comparar estrategias de organización interna",
+    description:
+      "Comparación contextual de organización por capas, funcionalidades, módulos de dominio, casos de uso y vertical slices sin asumir un ganador universal.",
+    content: `Actúa como un arquitecto de software especializado en organización interna y diseño modular.
+
+Compara las siguientes estrategias de organización para esta aplicación:
+
+- paquetes por capa técnica;
+- organización por funcionalidad;
+- módulos de dominio;
+- organización por casos de uso;
+- vertical slices.
+
+Contexto:
+{{context}}
+
+Si se conoce, organización actual:
+{{current_structure}}
+
+Evalúa cada alternativa según:
+
+- tamaño del sistema;
+- tamaño y estructura del equipo;
+- frecuencia y distribución de cambios;
+- independencia entre funcionalidades;
+- necesidad de reutilización;
+- complejidad del dominio;
+- testabilidad;
+- facilidad de onboarding;
+- coste y riesgo de transición desde la organización actual.
+
+Para cada estrategia explica:
+
+1. Cómo estructura el código y dónde coloca las dependencias.
+2. Qué tipo de cambios localiza bien y cuáles tiende a dispersar.
+3. Qué límites y responsabilidades hace visibles.
+4. Qué problemas de acoplamiento, duplicación o descubribilidad puede introducir.
+5. Qué capacidades necesita el equipo para mantenerla.
+6. Bajo qué condiciones la elegirías.
+7. Bajo qué condiciones dejaría de ser una buena opción.
+
+Distingue explícitamente:
+
+- organización física del código;
+- modularidad lógica;
+- dirección de dependencias;
+- reutilización;
+- unidades de despliegue.
+
+No trates las estrategias como mutuamente excluyentes cuando puedan combinarse por niveles. Por ejemplo, una aplicación puede organizarse por módulos de dominio, contener casos de uso dentro de cada módulo y aplicar vertical slices solo a funcionalidades con alta frecuencia de cambio.
+
+Presenta el resultado en este orden:
+
+1. Hechos, supuestos e incertidumbres del contexto.
+2. Tabla comparativa de las cinco estrategias.
+3. Condiciones que favorecen cada estrategia.
+4. Riesgos y costes de transición.
+5. Preguntas cuya respuesta podría cambiar la elección.
+
+Reglas:
+
+- No determines un ganador universal.
+- No recomiendes una estrategia por moda o por familiaridad con una tecnología.
+- No inventes el tamaño del sistema, del equipo ni la complejidad del dominio.
+- Distingue una estrategia que encaja bien en teoría de una que el equipo puede sostener en la práctica.
+- Si el contexto es insuficiente, formula preguntas concretas y ofrece conclusiones condicionales.
+
+Prioriza la capacidad de localizar cambios y mantener límites comprensibles sobre la apariencia de una estructura ideal.`,
+    language: "es",
+    module: "software-development",
+    categories: ["software-architecture"],
+    subcategories: ["application-structure"],
+    tags: ["analysis", "template"],
+    useCases: [
+      "Comparar una reorganización por funcionalidades con una estructura por capas",
+      "Elegir una estrategia de modularidad para un sistema nuevo o existente",
+      "Preparar una decisión de organización interna con el equipo",
+    ],
+    notes:
+      "Úsalo después de diagnosticar la organización actual. La estrategia elegida puede variar entre módulos si el dominio y el ritmo de cambio no son homogéneos.",
+    createdAt: "2026-08-12",
+    updatedAt: "2026-08-12",
+  },
+  {
     id: "generate-architectural-alternatives",
     slug: "generar-alternativas-arquitectonicas",
     title: "Generar alternativas para una decisión arquitectónica",
@@ -1407,5 +1568,161 @@ Reglas de estilo: frases cortas, ejemplos antes que explicaciones, nada de docum
     ],
     createdAt: "2025-12-28",
     updatedAt: "2026-02-08",
+  },
+  {
+    id: "evaluate-architecture-evolvability",
+    slug: "evaluar-evolucion-arquitectura",
+    title: "Evaluar la capacidad de evolución de una arquitectura",
+    description:
+      "Análisis de cómo respondería una arquitectura ante escenarios de cambio reales: crecimiento, nuevos requisitos, fallos de proveedores y restricciones regulatorias.",
+    content: `Actúa como un arquitecto de software evaluando la capacidad de evolución de un sistema.
+
+Descripción de la arquitectura:
+{{architecture}}
+
+Evalúa cómo respondería esta arquitectura ante los siguientes escenarios:
+
+1. El tráfico crece 10×.
+2. El número de desarrolladores pasa de 8 a 40.
+3. Uno de los proveedores críticos deja de estar disponible.
+4. Aparece un requisito de residencia regional de datos.
+5. Una funcionalidad necesita desplegarse independientemente.
+6. El modelo de datos principal debe cambiar.
+
+Para cada escenario identifica:
+
+- Componentes afectados.
+- Cambios necesarios.
+- Blast radius (qué otras partes del sistema se ven impactadas).
+- Riesgos.
+- Decisiones arquitectónicas que dificultan el cambio.
+
+Finalmente identifica los 3 puntos de mayor rigidez estructural de la arquitectura.
+
+Reglas:
+
+- Sé específico: señala componentes, capas o decisiones concretas, no generalidades.
+- Distingue entre cambios que requieren refactor local y cambios que obligan a rediseñar.
+- Si un escenario no aplica al contexto descrito, indícalo y explica por qué.
+- No propongas una arquitectura alternativa: el objetivo es diagnosticar la actual.`,
+    language: "es",
+    module: "software-development",
+    categories: ["software-architecture"],
+    subcategories: ["quality-attributes"],
+    tags: ["analysis", "checklist"],
+    useCases: [
+      "Evaluar si una arquitectura aguantará el crecimiento previsto",
+      "Preparar una revisión de arquitectura antes de un cambio de escala",
+      "Identificar puntos de rigidez antes de planificar una evolución",
+    ],
+    createdAt: "2026-08-12",
+    updatedAt: "2026-08-12",
+  },
+  {
+    id: "define-architecture-fitness-functions",
+    slug: "definir-fitness-functions-arquitectura",
+    title: "Definir fitness functions para una arquitectura",
+    description:
+      "Conversión de decisiones y principios arquitectónicos en fitness functions automatizables: reglas, verificaciones, herramientas y frecuencia de evaluación.",
+    content: `Actúa como un arquitecto de software especializado en gobernanza arquitectónica automatizada.
+
+Convierte las siguientes decisiones y principios arquitectónicos en fitness functions automatizables.
+
+Arquitectura:
+{{architecture}}
+
+Decisiones y principios a convertir:
+{{decisions}}
+
+Para cada regla devuelve:
+
+- Regla arquitectónica.
+- Riesgo que evita.
+- Cómo verificarla.
+- Herramienta o técnica posible.
+- Dónde ejecutarla: local, CI, staging o producción.
+- Frecuencia de evaluación.
+
+Prioriza mecanismos automáticos sobre revisiones manuales.
+
+Reglas:
+
+- Prefiere verificaciones que puedan ejecutarse en CI sobre revisiones humanas.
+- Distingue entre reglas que pueden automatizarse por completo y las que requieren juicio humano.
+- Para cada regla manual, explica por qué no puede automatizarse y qué reduciría la fricción.
+- Incluye al menos una fitness function de producción cuando el principio dependa de comportamiento en runtime (latencia, tasa de error, disponibilidad).
+- No propongas herramientas propietarias sin mencionar alternativas abiertas.`,
+    language: "es",
+    module: "software-development",
+    categories: ["software-architecture"],
+    subcategories: ["quality-attributes"],
+    tags: ["analysis", "checklist"],
+    useCases: [
+      "Automatizar la gobernanza de decisiones arquitectónicas",
+      "Definir reglas verificables antes de iniciar un proyecto",
+      "Convertir ADRs en checks automáticos en el pipeline de CI",
+    ],
+    createdAt: "2026-08-12",
+    updatedAt: "2026-08-12",
+  },
+  {
+    id: "critical-architecture-review",
+    slug: "revision-critica-arquitectura",
+    title: "Realizar una revisión crítica de una arquitectura",
+    description:
+      "Revisión crítica profunda de una arquitectura en 10 dimensiones: supuestos, restricciones, complejidad, acoplamiento, datos, fallos, evolución, operación, seguridad y economía.",
+    content: `Actúa como revisor crítico de esta arquitectura.
+
+Tu objetivo no es rediseñarla inmediatamente, sino descubrir dónde pueden estar equivocadas nuestras decisiones.
+
+Descripción de la arquitectura:
+{{architecture}}
+
+Contexto adicional (restricciones, equipo, plazos, estado actual):
+{{context}}
+
+Analiza:
+
+1. Supuestos: ¿Qué estamos dando por cierto sin evidencia?
+2. Restricciones: ¿Qué restricciones reales condicionan el diseño?
+3. Complejidad: ¿Qué complejidad parece necesaria y cuál puede ser accidental?
+4. Acoplamiento: ¿Dónde existen dependencias difíciles de cambiar?
+5. Datos: ¿Está claro quién posee cada dato?
+6. Fallos: ¿Cómo falla el sistema?
+7. Evolución: ¿Qué cambios futuros serían especialmente costosos?
+8. Operación: ¿Qué será difícil observar, desplegar, depurar o recuperar?
+9. Seguridad: ¿Qué límites de confianza existen?
+10. Economía: ¿Estamos pagando complejidad hoy por necesidades hipotéticas futuras?
+
+Para cada hallazgo clasifica:
+
+- Severidad: baja, media o alta.
+- Confianza: baja, media o alta.
+- Evidencia: qué parte del diseño origina el hallazgo.
+
+Separa claramente:
+
+- Problemas observados.
+- Riesgos potenciales.
+- Preguntas abiertas.
+
+Reglas:
+
+- No propongas una arquitectura alternativa hasta finalizar el diagnóstico.
+- Sé específico: cita componentes, decisiones o flujos concretos de la descripción.
+- Distingue entre lo que está mal y lo que simplemente es un trade-off consciente.
+- Si una dimensión no aplica al contexto, indícalo en lugar de forzar un hallazgo genérico.`,
+    language: "es",
+    module: "software-development",
+    categories: ["software-architecture"],
+    subcategories: ["quality-attributes"],
+    tags: ["analysis", "checklist"],
+    useCases: [
+      "Revisar una arquitectura antes de comprometer recursos",
+      "Descubrir supuestos y riesgos ocultos en un diseño",
+      "Preparar una revisión con un arquitecto externo",
+    ],
+    createdAt: "2026-08-12",
+    updatedAt: "2026-08-12",
   },
 ];
