@@ -260,6 +260,456 @@ Reglas:
     updatedAt: "2026-08-02",
   },
   {
+    id: "convert-requirements-into-quality-scenarios",
+    slug: "convertir-requisitos-en-escenarios-de-calidad",
+    title: "Convertir requisitos no funcionales en escenarios de calidad",
+    description:
+      "Transformación de requisitos no funcionales vagos en escenarios de calidad verificables, con métricas, umbrales, prioridades y conflictos explícitos.",
+    content: `Actúa como un arquitecto de software especializado en requisitos de calidad.
+
+Convierte los siguientes requisitos no funcionales en escenarios de calidad verificables. No diseñes todavía una arquitectura ni elijas tecnologías: primero transforma las expectativas en criterios que puedan validarse.
+
+Requisitos:
+{{requirements}}
+
+Para cada requisito:
+
+1. Asígnale un identificador estable (por ejemplo, NFR-01).
+2. Normaliza su intención en una frase breve y separa el requisito explícito de cualquier supuesto.
+3. Construye uno o más escenarios de calidad independientes y comprobables. Para cada escenario indica:
+   - atributo de calidad;
+   - fuente del estímulo;
+   - estímulo;
+   - contexto o condiciones de operación;
+   - componente, servicio o parte afectada;
+   - respuesta esperada;
+   - métrica verificable y umbral de aceptación;
+   - prioridad (crítica, importante u opcional).
+4. Señala los datos que faltan para poder medir el escenario: volumen, carga, percentil, ventana temporal, tasa de error, objetivo de recuperación, nivel de protección u otro parámetro relevante.
+5. Detecta requisitos que puedan entrar en conflicto. Para cada posible conflicto indica los identificadores implicados, los atributos afectados, la causa de la tensión y qué decisión o dato falta para resolverla.
+
+Presenta el resultado en este orden:
+
+1. Supuestos e incertidumbres.
+2. Tabla de requisitos normalizados.
+3. Tabla de escenarios de calidad verificables.
+4. Requisitos potencialmente conflictivos.
+5. Lista priorizada de preguntas o decisiones pendientes.
+
+Reglas:
+
+- No uses métricas vagas como "rápido", "seguro", "escalable" o "fácil de mantener" sin indicar qué medida concreta falta.
+- Usa unidades, porcentajes, percentiles, ventanas temporales, cargas y umbrales cuando estén disponibles.
+- No inventes cifras. Si falta un valor, marca el umbral como desconocido y formula la pregunta necesaria.
+- Distingue entre rendimiento, escalabilidad, disponibilidad, resiliencia, seguridad, privacidad, mantenibilidad, operabilidad y coste.
+- No conviertas automáticamente todos los requisitos en trade-offs: señala solo conflictos razonables y explica la evidencia.
+- Mantén trazabilidad entre cada escenario y el requisito del que procede.
+- Si un requisito mezcla varias cualidades o comportamientos, divídelo en escenarios separados.
+
+Usa una redacción concreta para que cada escenario pueda convertirse posteriormente en una prueba, una alerta, un objetivo operativo o un criterio de aceptación.`,
+    language: "es",
+    module: "software-development",
+    categories: ["software-architecture"],
+    subcategories: ["quality-attributes"],
+    tags: ["analysis", "checklist", "template"],
+    useCases: [
+      "Convertir requisitos no funcionales vagos en criterios de aceptación medibles",
+      "Preparar escenarios de calidad antes de comparar alternativas arquitectónicas",
+      "Detectar ambigüedades y conflictos en requisitos de un sistema",
+    ],
+    notes:
+      "Úsalo después de recopilar los requisitos y antes de recomendar una arquitectura. Valida los umbrales con las personas responsables del negocio y de la operación.",
+    createdAt: "2026-08-12",
+    updatedAt: "2026-08-12",
+  },
+  {
+    id: "analyze-quality-attribute-tensions",
+    slug: "analizar-tensiones-entre-atributos-de-calidad",
+    title: "Analizar tensiones entre atributos de calidad",
+    description:
+      "Construcción de una matriz contextual de relaciones entre atributos de calidad para distinguir refuerzos, independencia y trade-offs antes de tomar decisiones arquitectónicas.",
+    content: `Actúa como un arquitecto de software especializado en análisis de trade-offs.
+
+Analiza los siguientes atributos de calidad y construye una matriz de tensiones arquitectónicas. El objetivo es hacer explícitas las fuerzas que condicionarán decisiones posteriores, no proponer todavía una arquitectura.
+
+Atributos de calidad:
+{{quality_attributes}}
+
+Contexto del sistema, restricciones y prioridades conocidas:
+{{context}}
+
+Presta especial atención a:
+
+- rendimiento;
+- escalabilidad;
+- disponibilidad;
+- resiliencia;
+- seguridad;
+- privacidad;
+- mantenibilidad;
+- operabilidad;
+- coste.
+
+Para cada pareja relevante de atributos indica una de estas relaciones:
+
+- se refuerzan mutuamente;
+- son independientes en este contexto;
+- generan un trade-off.
+
+Para cada relación explica brevemente:
+
+1. por qué existe o por qué no hay interacción relevante;
+2. qué mecanismo o restricción del contexto la provoca;
+3. qué síntoma o métrica podría hacerla observable;
+4. qué información falta, si la relación no puede determinarse con confianza.
+
+Presenta el resultado en este orden:
+
+1. Resumen de prioridades y restricciones que influyen en las tensiones.
+2. Matriz de relaciones entre parejas relevantes, omitiendo la diagonal y las duplicidades.
+3. Explicación de cada trade-off, ordenada por impacto.
+4. Atributos que se refuerzan mutuamente y cómo aprovechar esa relación.
+5. Atributos que parecen independientes, indicando las condiciones bajo las que podrían dejar de serlo.
+6. Preguntas y decisiones pendientes que deberían resolverse antes de comparar arquitecturas.
+
+Reglas:
+
+- Analiza solo parejas relevantes para el contexto; no rellenes una matriz completa con relaciones genéricas.
+- No supongas que todos los atributos tienen la misma prioridad.
+- Distingue disponibilidad de resiliencia, y seguridad de privacidad.
+- Explica la causa del trade-off, no solo lo nombres. Por ejemplo, indica si proviene de replicación, controles de acceso, cifrado, asincronía, complejidad operativa, recursos adicionales o coste de cambio.
+- Considera también tensiones entre coste y los demás atributos, y entre operabilidad y resiliencia.
+- No recomiendes una arquitectura, patrón, proveedor ni tecnología.
+- Si no hay datos suficientes, marca la conclusión como provisional y formula la pregunta que permitiría confirmarla.
+
+Termina con una síntesis de las tres tensiones que más deberían influir en la siguiente fase de decisión arquitectónica.`,
+    language: "es",
+    module: "software-development",
+    categories: ["software-architecture"],
+    subcategories: ["quality-attributes"],
+    tags: ["analysis", "checklist", "template"],
+    useCases: [
+      "Preparar una conversación de trade-offs con negocio y equipos técnicos",
+      "Comparar prioridades antes de evaluar alternativas arquitectónicas",
+      "Hacer explícitas las consecuencias de priorizar un atributo de calidad",
+    ],
+    notes:
+      "Úsalo después de convertir los requisitos en escenarios medibles y antes del prompt de recomendación arquitectónica. No sustituye la validación de los objetivos con las personas responsables.",
+    createdAt: "2026-08-12",
+    updatedAt: "2026-08-12",
+  },
+  {
+    id: "generate-architectural-alternatives",
+    slug: "generar-alternativas-arquitectonicas",
+    title: "Generar alternativas para una decisión arquitectónica",
+    description:
+      "Exploración de alternativas arquitectónicas reales y comparables, incluyendo opciones incrementales y no hacer nada todavía cuando sean razonables.",
+    content: `Actúa como un arquitecto de software pragmático especializado en explorar decisiones con incertidumbre.
+
+Para la siguiente decisión arquitectónica, genera alternativas reales y comparables. Todavía no elijas una solución definitiva: primero amplía el espacio de opciones y haz explícitas sus consecuencias.
+
+Decisión:
+{{decision}}
+
+Contexto:
+{{context}}
+
+Restricciones:
+{{constraints}}
+
+Antes de proponer alternativas, separa brevemente:
+
+- hechos conocidos;
+- supuestos;
+- incertidumbres;
+- criterios que parecen decisivos.
+
+Genera normalmente entre dos y cuatro alternativas. Incluye la alternativa "no hacer nada todavía" o mantener la solución actual si es razonable y explica qué riesgo implica no actuar.
+
+Para cada alternativa analiza:
+
+- descripción y alcance;
+- beneficios;
+- costes iniciales;
+- riesgos;
+- complejidad técnica y organizativa introducida;
+- impacto operacional;
+- impacto a largo plazo;
+- reversibilidad y dificultad de migración o abandono;
+- supuestos de los que depende.
+
+Después:
+
+1. Explica qué alternativas son realmente comparables y cuáles resuelven problemas distintos.
+2. Indica qué alternativa representa el camino incremental más pequeño.
+3. Identifica los riesgos de las opciones descartadas o aplazadas.
+4. Enumera la información adicional que podría cambiar potencialmente la decisión, indicando qué alternativa favorecería cada dato.
+
+Reglas:
+
+- No presentes variantes artificiales ni alternativas de paja.
+- No recomiendes una arquitectura por moda ni asumas que la solución técnicamente más sofisticada es la mejor.
+- No inventes restricciones, costes, volúmenes o capacidades del equipo.
+- Distingue una alternativa arquitectónica de una elección concreta de tecnología.
+- No cierres con una recomendación definitiva si faltan datos que puedan cambiar materialmente el resultado.
+- Si el contexto es insuficiente, formula las preguntas de mayor impacto después de generar las opciones provisionales.
+
+Presenta una tabla comparativa final, pero no uses puntuaciones con falsa precisión: justifica cada comparación con hechos, supuestos o incertidumbres.`,
+    language: "es",
+    module: "software-development",
+    categories: ["software-architecture"],
+    subcategories: ["quality-attributes"],
+    tags: ["analysis", "template"],
+    useCases: [
+      "Explorar opciones antes de tomar una decisión arquitectónica",
+      "Comparar una migración incremental con un cambio más profundo",
+      "Preparar un debate técnico con alternativas que no sean hombres de paja",
+    ],
+    notes:
+      "Úsalo antes de evaluar el impacto económico y organizativo de cada alternativa y antes del prompt de recomendación arquitectónica.",
+    createdAt: "2026-08-12",
+    updatedAt: "2026-08-12",
+  },
+  {
+    id: "evaluate-economic-impact-of-architectural-decision",
+    slug: "evaluar-impacto-economico-decision-arquitectonica",
+    title: "Evaluar el impacto económico y organizativo de una decisión arquitectónica",
+    description:
+      "Evaluación de alternativas arquitectónicas considerando coste inicial, TCO, operación, conocimiento, riesgo, reversibilidad, lock-in, coste de oportunidad y complejidad accidental.",
+    content: `Actúa como un arquitecto de software con experiencia en economía de decisiones técnicas y diseño organizativo.
+
+Evalúa esta decisión arquitectónica considerando no solamente su calidad técnica, sino también su impacto económico y organizativo. No elijas automáticamente la alternativa técnicamente más sofisticada.
+
+Contexto:
+{{context}}
+
+Alternativas:
+{{alternatives}}
+
+Antes de comparar, separa claramente:
+
+- hechos respaldados por el contexto;
+- supuestos necesarios para estimar;
+- incertidumbres;
+- información que falta y puede cambiar la conclusión.
+
+Evalúa cada alternativa considerando:
+
+| Dimensión | Pregunta |
+|---|---|
+| Coste inicial | ¿Qué esfuerzo requiere implementarla? |
+| TCO | ¿Qué coste genera durante 3-5 años? |
+| Operación | ¿Qué infraestructura, soporte y carga operativa necesita? |
+| Conocimiento | ¿Qué expertise necesita el equipo y qué formación o contratación implica? |
+| Riesgo | ¿Qué puede salir mal y cuál sería el impacto? |
+| Reversibilidad | ¿Qué tan difícil es abandonar o sustituir la decisión? |
+| Lock-in | ¿Qué dependencias externas, técnicas u organizativas crea? |
+| Coste de oportunidad | ¿Qué dejamos de construir o mantener por elegirla? |
+| Complejidad | ¿Cuánta complejidad accidental introduce en desarrollo y operación? |
+
+Para cada dimensión indica:
+
+- valoración cualitativa o rango, solo si los datos lo permiten;
+- evidencia, supuesto o incertidumbre que la sustenta;
+- horizonte temporal relevante;
+- consecuencias para el equipo, la operación y la evolución del sistema.
+
+En el análisis del TCO considera, cuando sean relevantes, infraestructura, licencias, tráfico, almacenamiento, observabilidad, soporte, incidentes, formación, contratación, migración, retirada y coste de cambio. No conviertas estos conceptos en cifras inventadas.
+
+Presenta el resultado en este orden:
+
+1. Resumen ejecutivo sin decisión automática.
+2. Hechos, supuestos e incertidumbres.
+3. Tabla comparativa por dimensión y alternativa.
+4. Costes y riesgos que suelen quedar ocultos.
+5. Dependencias organizativas y de conocimiento.
+6. Alternativas más reversibles y más difíciles de abandonar.
+7. Información adicional que podría cambiar la decisión.
+8. Conclusión condicionada: qué alternativa parece encajar mejor bajo cada conjunto de supuestos.
+
+Reglas:
+
+- No confundas coste inicial con TCO.
+- No trates el coste como únicamente infraestructura: incluye tiempo de personas y coste de oportunidad.
+- No confundas complejidad accidental con complejidad necesaria del dominio.
+- Explica los trade-offs entre calidad técnica, velocidad de entrega, operación, organización y coste.
+- Si faltan datos, formula preguntas concretas y marca la confianza de la evaluación.
+- No recomiendes una alternativa solo porque sea más moderna, distribuida o sofisticada.`,
+    language: "es",
+    module: "software-development",
+    categories: ["software-architecture"],
+    subcategories: ["quality-attributes"],
+    tags: ["analysis", "checklist", "template"],
+    useCases: [
+      "Evaluar una decisión técnica con responsables de negocio y tecnología",
+      "Comparar el coste total de alternativas arquitectónicas",
+      "Hacer visibles los riesgos de lock-in y de capacidad operativa",
+    ],
+    notes:
+      "Úsalo después de generar alternativas reales. Valida las estimaciones de esfuerzo, operación y TCO con las personas que poseen esos datos.",
+    createdAt: "2026-08-12",
+    updatedAt: "2026-08-12",
+  },
+  {
+    id: "build-c4-system-model",
+    slug: "construir-modelo-c4",
+    title: "Construir un modelo C4 de un sistema",
+    description:
+      "Construcción progresiva de los niveles System Context, Containers y Components de un modelo C4, señalando ambigüedades y evitando inventar elementos no deducibles.",
+    content: `Actúa como un arquitecto de software que documenta un sistema para personas que necesitan entenderlo y evolucionarlo.
+
+A partir de la siguiente descripción del sistema, construye su modelo C4. Antes de construirlo, identifica la información ambigua, contradictoria o ausente.
+
+Descripción del sistema:
+{{system}}
+
+Genera los siguientes niveles:
+
+## Nivel 1 — System Context
+
+Incluye:
+
+- personas;
+- sistema principal;
+- sistemas externos;
+- relaciones entre ellos y el propósito de cada relación.
+
+## Nivel 2 — Containers
+
+Incluye, cuando puedan deducirse razonablemente:
+
+- aplicaciones;
+- servicios;
+- bases de datos;
+- colas o brokers;
+- caches;
+- responsabilidades;
+- dependencias y dirección de las relaciones;
+- datos que posee cada elemento.
+
+En C4, interpreta "container" como una aplicación, servicio, almacén de datos o unidad ejecutable relevante, no necesariamente como un contenedor Docker. Menciona tecnologías solo cuando sean arquitectónicamente relevantes para comprender una relación, una responsabilidad o una restricción.
+
+## Nivel 3 — Components
+
+Genera este nivel solo para los containers donde aporte información útil para entender sus responsabilidades, dependencias o evolución. No lo generes mecánicamente para todos.
+
+Para cada elemento de cualquier nivel incluye:
+
+- nombre;
+- tipo;
+- responsabilidad;
+- dependencias;
+- datos que posee;
+- relaciones relevantes;
+- nivel de confianza: deducido, supuesto o desconocido.
+
+Presenta primero:
+
+1. Ambigüedades, contradicciones y ausencias de información.
+2. Supuestos mínimos utilizados.
+3. Modelo C4 por niveles.
+4. Elementos que no pueden modelarse con confianza y preguntas para confirmarlos.
+
+Reglas:
+
+- Evita inventar componentes, bases de datos, colas, caches, usuarios o integraciones que no puedan deducirse razonablemente del contexto.
+- Si dos elementos podrían ser uno solo o estar separados, marca la incertidumbre en lugar de decidir sin evidencia.
+- Mantén separadas las responsabilidades, la propiedad de los datos y las dependencias.
+- No mezcles detalles de implementación con decisiones arquitectónicas relevantes.
+- Usa relaciones dirigidas y explica el sentido de cada una.
+- No presentes una tecnología como hecho si solo es una posibilidad.
+- Si un nivel no aporta información suficiente, indícalo y explica qué falta.
+
+Puedes incluir una representación textual o diagramable, pero la claridad y la trazabilidad tienen prioridad sobre el formato.`,
+    language: "es",
+    module: "software-development",
+    categories: ["software-architecture"],
+    subcategories: ["c4-model"],
+    tags: ["analysis", "template"],
+    useCases: [
+      "Documentar la arquitectura de un sistema existente",
+      "Preparar una sesión de onboarding técnico",
+      "Crear una primera versión de un modelo C4 antes de revisarlo con el equipo",
+    ],
+    notes:
+      "Empieza con una descripción del sistema suficientemente concreta. Valida el ownership de datos y las relaciones con las personas responsables de cada parte.",
+    createdAt: "2026-08-12",
+    updatedAt: "2026-08-12",
+  },
+  {
+    id: "review-c4-system-model",
+    slug: "revisar-modelo-c4",
+    title: "Revisar un modelo C4",
+    description:
+      "Revisión externa de un modelo C4 para detectar responsabilidades ambiguas, ownership de datos, dependencias ocultas y niveles de detalle inadecuados.",
+    content: `Actúa como un arquitecto externo que acaba de incorporarse al proyecto y necesita entender el sistema a partir de su modelo C4.
+
+Modelo C4:
+{{model}}
+
+Contexto adicional conocido:
+{{context}}
+
+Revisa el modelo y busca específicamente:
+
+- responsabilidades ambiguas o solapadas;
+- ownership de datos poco claro;
+- dependencias ocultas o relaciones sin dirección clara;
+- relaciones bidireccionales que puedan indicar acoplamiento;
+- componentes, containers o sistemas externos demasiado genéricos;
+- detalles de implementación innecesarios para el nivel C4 mostrado;
+- elementos importantes que falten;
+- relaciones o niveles que parezcan inconsistentes entre sí.
+
+Prioriza los problemas que dificultarían:
+
+- comprender el sistema;
+- localizar el ownership de una capacidad o dato;
+- anticipar el impacto de un cambio;
+- incorporar a nuevas personas al proyecto;
+- evolucionar los límites y las dependencias.
+
+Presenta el resultado en este orden:
+
+1. Resumen de la comprensibilidad y utilidad del modelo.
+2. Hallazgos priorizados con esta estructura:
+   - nivel C4 y elemento afectado;
+   - severidad (alta, media o baja);
+   - problema observado;
+   - evidencia en el modelo;
+   - impacto sobre comprensión o evolución;
+   - información necesaria para confirmar el hallazgo;
+   - corrección recomendada para el modelo.
+3. Elementos que parecen correctos y ayudan a entender el sistema.
+4. Preguntas que harías al equipo durante una revisión.
+5. Lista breve de cambios de documentación ordenados por impacto.
+
+Reglas:
+
+- Distingue un defecto del modelo de una ausencia de información del sistema.
+- No inventes la arquitectura real que debería existir.
+- No conviertas automáticamente una ambigüedad documental en un problema de diseño.
+- Señala por separado los detalles de implementación que sobran y los elementos arquitectónicos que faltan.
+- No propongas una reescritura ni una arquitectura alternativa salvo que sea imprescindible para explicar un hallazgo.
+- Si el modelo no permite confirmar algo, formula la pregunta correspondiente y marca la conclusión como provisional.
+
+Evalúa el modelo como herramienta de comunicación y evolución, no como una prueba de que la arquitectura sea técnicamente correcta.`,
+    language: "es",
+    module: "software-development",
+    categories: ["software-architecture"],
+    subcategories: ["c4-model"],
+    tags: ["analysis", "checklist"],
+    useCases: [
+      "Revisar un modelo C4 antes de compartirlo con otros equipos",
+      "Detectar problemas de ownership y dependencias en documentación arquitectónica",
+      "Mejorar un modelo C4 para onboarding y evolución del sistema",
+    ],
+    notes:
+      "Pasa primero el modelo C4 y después contrasta los hallazgos con las personas responsables de los datos, containers y relaciones señaladas.",
+    createdAt: "2026-08-12",
+    updatedAt: "2026-08-12",
+  },
+  {
     id: "recommend-software-architecture",
     slug: "recomendar-arquitectura-software",
     title: "Recomendar una arquitectura de software según el contexto",
