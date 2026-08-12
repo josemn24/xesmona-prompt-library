@@ -1621,12 +1621,12 @@ Reglas:
   {
     id: "define-architecture-fitness-functions",
     slug: "definir-fitness-functions-arquitectura",
-    title: "Definir fitness functions para una arquitectura",
+    title: "Definir tests arquitectónicos y fitness functions",
     description:
-      "Conversión de decisiones y principios arquitectónicos en fitness functions automatizables: reglas, verificaciones, herramientas y frecuencia de evaluación.",
+      "Conversión de decisiones y principios arquitectónicos en tests automatizables: dependencias prohibidas y permitidas, verificaciones, herramientas, excepciones e integración en CI.",
     content: `Actúa como un arquitecto de software especializado en gobernanza arquitectónica automatizada.
 
-Convierte las siguientes decisiones y principios arquitectónicos en fitness functions automatizables.
+Convierte las siguientes decisiones y principios arquitectónicos en tests arquitectónicos o fitness functions automatizables.
 
 Arquitectura:
 {{architecture}}
@@ -1634,14 +1634,21 @@ Arquitectura:
 Decisiones y principios a convertir:
 {{decisions}}
 
+Stack tecnológico y herramientas disponibles:
+{{stack}}
+
 Para cada regla devuelve:
 
 - Regla arquitectónica.
 - Riesgo que evita.
-- Cómo verificarla.
-- Herramienta o técnica posible.
+- Dependencia que debe estar prohibida, si aplica.
+- Dependencia que debe permitirse, si aplica.
+- Cómo detectarla estáticamente o durante la ejecución.
+- Herramienta o técnica posible, con un ejemplo adecuado al stack cuando sea posible.
+- Cómo integrarla en CI: comando, etapa, condición de fallo y artefacto de diagnóstico.
 - Dónde ejecutarla: local, CI, staging o producción.
 - Frecuencia de evaluación.
+- Excepciones legítimas y cómo documentarlas o acotarlas.
 
 Prioriza mecanismos automáticos sobre revisiones manuales.
 
@@ -1650,6 +1657,9 @@ Reglas:
 - Prefiere verificaciones que puedan ejecutarse en CI sobre revisiones humanas.
 - Distingue entre reglas que pueden automatizarse por completo y las que requieren juicio humano.
 - Para cada regla manual, explica por qué no puede automatizarse y qué reduciría la fricción.
+- Distingue dependencias prohibidas, dependencias permitidas y dependencias permitidas solo mediante un puerto, adaptador o interfaz explícita.
+- No propongas una excepción global: indica su alcance, responsable, fecha de revisión y condición de retirada cuando sea relevante.
+- Incluye ejemplos de herramientas adecuadas al stack, como analizadores de imports, reglas de lint, tests de arquitectura, análisis estático, compilación por módulos o validaciones de paquetes.
 - Incluye al menos una fitness function de producción cuando el principio dependa de comportamiento en runtime (latencia, tasa de error, disponibilidad).
 - No propongas herramientas propietarias sin mencionar alternativas abiertas.`,
     language: "es",
@@ -1721,6 +1731,119 @@ Reglas:
       "Revisar una arquitectura antes de comprometer recursos",
       "Descubrir supuestos y riesgos ocultos en un diseño",
       "Preparar una revisión con un arquitecto externo",
+    ],
+    createdAt: "2026-08-12",
+    updatedAt: "2026-08-12",
+  },
+  {
+    id: "analyze-hexagonal-architecture",
+    slug: "analizar-arquitectura-hexagonal",
+    title: "Analizar una aplicación desde la perspectiva de arquitectura hexagonal",
+    description:
+      "Análisis estructural de una aplicación según Hexagonal / Onion / Clean Architecture: núcleo, puertos, adaptadores y dirección de dependencias.",
+    content: `Actúa como un arquitecto de software especializado en arquitectura hexagonal, onion y clean architecture.
+
+Analiza esta aplicación desde el punto de vista de Hexagonal / Onion / Clean Architecture.
+
+Código o estructura de la aplicación:
+{{code}}
+
+Contexto (propósito del sistema, stack, restricciones):
+{{context}}
+
+Identifica:
+
+Núcleo:
+- Dominio.
+- Reglas de negocio.
+- Casos de uso.
+
+Puertos:
+- Capacidades requeridas por el núcleo.
+- Capacidades expuestas al exterior.
+
+Adaptadores:
+- HTTP.
+- Persistencia.
+- Mensajería.
+- Servicios externos.
+- UI.
+- Infraestructura.
+
+Después comprueba si las dependencias apuntan hacia el núcleo.
+
+Señala cualquier dependencia donde una regla de negocio dependa de detalles de infraestructura.
+
+Reglas:
+
+- Sé específico: cita archivos, módulos o clases concretas.
+- Distingue entre dependencias directas e indirectas.
+- Si el código no sigue arquitectura hexagonal, analiza qué partes podrían beneficiarse de ella y cuáles no.
+- No propongas una reescritura completa: señala violaciones concretas y su impacto.`,
+    language: "es",
+    module: "software-development",
+    categories: ["software-architecture"],
+    subcategories: ["hexagonal-architecture"],
+    tags: ["analysis", "checklist"],
+    useCases: [
+      "Evaluar si una aplicación sigue principios de arquitectura hexagonal",
+      "Identificar violaciones de dependencias antes de un refactor",
+      "Preparar una migración incremental hacia arquitectura limpia",
+    ],
+    createdAt: "2026-08-12",
+    updatedAt: "2026-08-12",
+  },
+  {
+    id: "detect-domain-contamination",
+    slug: "detectar-contaminacion-dominio",
+    title: "Detectar contaminación del núcleo de dominio por detalles externos",
+    description:
+      "Búsqueda de fugas de detalles de infraestructura hacia el dominio: ORM, HTTP, frameworks, serialización, SDKs, logging, configuración y formatos de transporte.",
+    content: `Actúa como un arquitecto de software especializado en detección de acoplamiento indebido en arquitecturas limpias.
+
+Busca contaminación del núcleo de dominio por detalles externos.
+
+Código del núcleo de dominio (entidades, casos de uso, reglas de negocio):
+{{code}}
+
+Contexto (arquitectura general, frameworks en uso, restricciones):
+{{context}}
+
+Considera especialmente:
+
+- ORM.
+- HTTP.
+- Frameworks.
+- Serialización.
+- SDKs externos.
+- Logging.
+- Configuración.
+- Infraestructura.
+- Formatos de transporte.
+
+Para cada fuga indica:
+
+- Dónde ocurre (archivo, clase o función concreta).
+- Qué conocimiento externo introduce.
+- Qué problema genera.
+- Si merece corregirse.
+- Cuál sería la corrección mínima.
+
+Reglas:
+
+- Distingue entre contaminación real y uso pragmático justificado.
+- No todas las dependencias externas son contaminación: señala solo las que acoplan el dominio a detalles que podrían cambiar.
+- Prioriza las fugas por impacto: empieza por las que dificultan más la evolución o las pruebas.
+- Si una fuga es deliberada (por ejemplo, un entity con anotaciones de ORM), explica el trade-off y si existe alternativa sin coste significativo.`,
+    language: "es",
+    module: "software-development",
+    categories: ["software-architecture"],
+    subcategories: ["clean-architecture"],
+    tags: ["analysis", "checklist"],
+    useCases: [
+      "Auditar la pureza del dominio antes de un refactor",
+      "Identificar acoplamiento oculto en entidades y casos de uso",
+      "Preparar la extracción de un módulo de dominio reutilizable",
     ],
     createdAt: "2026-08-12",
     updatedAt: "2026-08-12",
