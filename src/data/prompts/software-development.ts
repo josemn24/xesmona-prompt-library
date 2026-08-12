@@ -560,6 +560,91 @@ Prioriza la capacidad de localizar cambios y mantener límites comprensibles sob
     updatedAt: "2026-08-12",
   },
   {
+    id: "migrate-layers-to-vertical-slices",
+    slug: "migrar-de-capas-a-vertical-slices",
+    title: "Migrar progresivamente de capas a vertical slices",
+    description:
+      "Planificación de una migración incremental desde Controller, Service y Repository hacia vertical slices, manteniendo el comportamiento y permitiendo la convivencia temporal.",
+    content: `Actúa como un arquitecto de software especializado en migraciones incrementales y evolución de código existente.
+
+Propón una estrategia incremental para evolucionar esta organización:
+
+Controller → Service → Repository
+
+Descripción de la aplicación y estructura actual:
+{{application}}
+
+Restricciones:
+
+- no realizar una reescritura big-bang;
+- mantener el comportamiento observable;
+- permitir la convivencia temporal de ambas organizaciones;
+- minimizar cambios transversales.
+
+Antes de proponer pasos, identifica:
+
+1. Los casos de uso actuales y sus fronteras.
+2. Las dependencias compartidas entre controllers, services y repositories.
+3. Los efectos laterales, contratos públicos y puntos de entrada que deben preservarse.
+4. La cobertura de tests y las zonas donde habría que crear caracterización o tests de contrato.
+5. Los candidatos de migración ordenados por riesgo, independencia, frecuencia de cambio y facilidad de verificación.
+
+Para cada caso de uso candidato indica:
+
+- por qué es un buen o mal candidato inicial;
+- qué código se movería o encapsularía;
+- qué dependencias quedarían dentro del slice;
+- qué dependencias seguirían apuntando temporalmente a la organización antigua;
+- cómo se mantiene la compatibilidad;
+- cómo se verifica que el comportamiento no ha cambiado;
+- cuál sería el criterio de terminado;
+- cómo se revierte el paso si aparece una regresión.
+
+Diseña una secuencia de migración por fases que incluya:
+
+- preparación e instrumentación;
+- primer slice de bajo riesgo;
+- reglas de convivencia;
+- migración progresiva de casos de uso;
+- tratamiento de código compartido;
+- prevención de nuevas dependencias hacia capas antiguas;
+- retirada de adapters o fachadas temporales;
+- criterios para detener, revisar o cancelar la migración.
+
+Presenta el resultado en este orden:
+
+1. Supuestos e incertidumbres.
+2. Mapa de la organización actual.
+3. Tabla de candidatos priorizados.
+4. Estrategia de convivencia entre capas y vertical slices.
+5. Plan incremental paso a paso.
+6. Riesgos, regresiones posibles y señales de alerta.
+7. Criterios de éxito y de abandono.
+
+Reglas:
+
+- No propongas una reescritura completa.
+- No cambies comportamiento y estructura sin indicar cómo se verifica cada uno por separado.
+- No muevas primero abstracciones compartidas sin demostrar que su ownership está claro.
+- No fuerces todos los casos de uso a la misma forma si sus dependencias o ritmos de cambio son distintos.
+- No inventes límites de dominio, cobertura de tests ni dependencias que no aparezcan en el contexto.
+- La migración debe poder detenerse después de cualquier fase dejando el sistema funcionando.`,
+    language: "es",
+    module: "software-development",
+    categories: ["software-architecture"],
+    subcategories: ["application-structure"],
+    tags: ["analysis", "migration", "checklist"],
+    useCases: [
+      "Evolucionar una aplicación por capas sin una reescritura completa",
+      "Migrar casos de uso de Controller-Service-Repository a vertical slices",
+      "Planificar la convivencia temporal entre una estructura antigua y otra nueva",
+    ],
+    notes:
+      "Acompáñalo con tests de caracterización y migra primero un caso de uso con límites claros, pocas dependencias compartidas y una verificación sencilla.",
+    createdAt: "2026-08-12",
+    updatedAt: "2026-08-12",
+  },
+  {
     id: "generate-architectural-alternatives",
     slug: "generar-alternativas-arquitectonicas",
     title: "Generar alternativas para una decisión arquitectónica",
@@ -1366,6 +1451,183 @@ Closes: #412`,
     updatedAt: "2026-01-25",
   },
   {
+    id: "evaluate-rendering-strategies",
+    slug: "evaluar-estrategias-de-renderizado",
+    title: "Evaluar estrategias de renderizado para una aplicación",
+    description:
+      "Evaluación por página y componente de estrategias de renderizado según SEO, personalización, actualización, interactividad, caché, latencia, coste y complejidad.",
+    content: `Actúa como un arquitecto frontend especializado en renderizado web y rendimiento.
+
+Para cada página o componente de esta aplicación determina la estrategia de rendering más apropiada:
+
+- client-side rendering;
+- server-side rendering;
+- static generation;
+- incremental regeneration;
+- islands;
+- híbrido.
+
+Descripción de la aplicación, páginas y componentes:
+{{application}}
+
+Contexto técnico y de negocio:
+{{context}}
+
+Si se conoce, framework, infraestructura y estrategia actual:
+{{stack}}
+
+Antes de elegir una estrategia:
+
+1. Identifica las páginas y componentes relevantes.
+2. Separa hechos, supuestos e incertidumbres.
+3. Distingue contenido público de contenido personalizado.
+4. Identifica datos remotos, frecuencia de actualización, dependencias de sesión y necesidades de interacción.
+5. Señala restricciones del framework o de la infraestructura que limiten las opciones.
+
+Evalúa cada página o componente según:
+
+- SEO;
+- personalización;
+- frecuencia de actualización;
+- interactividad;
+- caché e invalidación;
+- latencia percibida;
+- coste de servidor;
+- coste de cliente;
+- complejidad operativa y de desarrollo.
+
+Para cada elemento entrega:
+
+- estrategia recomendada, o combinación de estrategias;
+- razones basadas en el contexto;
+- datos que se generan o cargan en cada frontera;
+- estrategia de caché y revalidación;
+- impacto sobre SEO y latencia;
+- riesgos y trade-offs;
+- nivel de confianza;
+- información que podría cambiar la decisión.
+
+Presenta el resultado en este orden:
+
+1. Mapa de páginas y componentes.
+2. Tabla de decisión por elemento.
+3. Fronteras de renderizado y flujo de datos.
+4. Estrategia de caché, invalidación y actualización.
+5. Riesgos, complejidad y preguntas pendientes.
+
+Reglas:
+
+- No elijas una única estrategia global si diferentes partes tienen necesidades distintas.
+- No confundas server-side rendering con una garantía automática de buen rendimiento.
+- No supongas que static generation o incremental regeneration son adecuadas si hay personalización por usuario.
+- Considera el coste de invalidar contenido y mantener coherencia con las fuentes de datos.
+- Menciona tecnologías concretas solo si el stack proporcionado las justifica.
+- No inventes requisitos de SEO, tráfico, frecuencia de cambios ni necesidades de sesión.
+- Si una estrategia depende de una capacidad concreta del framework, márcala como supuesto verificable.`,
+    language: "es",
+    module: "software-development",
+    categories: ["frontend-development", "web-development"],
+    subcategories: ["rendering-strategies"],
+    tags: ["analysis", "checklist", "template"],
+    useCases: [
+      "Elegir rendering por página en una aplicación web",
+      "Equilibrar SEO, interactividad y coste de servidor",
+      "Revisar una estrategia de caché y revalidación frontend",
+    ],
+    notes:
+      "Proporciona el framework y la infraestructura si quieres recomendaciones concretas sobre SSR, generación estática, revalidación o islands.",
+    createdAt: "2026-08-12",
+    updatedAt: "2026-08-12",
+  },
+  {
+    id: "classify-frontend-state",
+    slug: "clasificar-estado-frontend",
+    title: "Clasificar y simplificar el estado frontend",
+    description:
+      "Clasificación del estado frontend entre estado remoto, UI local, estado compartido, URL, persistencia local y estado derivado, detectando duplicaciones innecesarias.",
+    content: `Actúa como un arquitecto frontend especializado en gestión de estado y límites de responsabilidad.
+
+Clasifica el estado utilizado por esta aplicación frontend en:
+
+- server state;
+- local UI state;
+- shared client state;
+- URL state;
+- persisted local state;
+- derived state.
+
+Descripción de la aplicación, componentes y flujos:
+{{application}}
+
+Estado y mecanismos actuales (stores, cachés, props, URL, almacenamiento local y fetching):
+{{state}}
+
+Contexto técnico y restricciones:
+{{context}}
+
+Para cada pieza de estado identifica:
+
+- nombre y ubicación;
+- quién la produce;
+- quién la consume;
+- fuente de verdad;
+- alcance;
+- duración;
+- mecanismo actual;
+- categoría adecuada;
+- si está duplicada o derivada de otra fuente;
+- riesgo de desincronización;
+- justificación de la clasificación.
+
+Detecta especialmente datos remotos que estén siendo copiados innecesariamente a un store global. Distingue entre:
+
+- caché de datos remotos;
+- estado de sesión;
+- preferencias persistentes;
+- estado efímero de interfaz;
+- estado compartido entre componentes;
+- estado derivado.
+
+Para cada problema encontrado explica:
+
+1. qué fuente debería ser la autoridad;
+2. qué mecanismo debería gestionar el estado;
+3. qué duplicación o sincronización podría eliminarse;
+4. qué componentes y tests se verían afectados;
+5. qué riesgo tendría cambiarlo.
+
+Presenta el resultado en este orden:
+
+1. Inventario de estado y fuentes de verdad.
+2. Tabla de clasificación.
+3. Duplicaciones, estados derivados almacenados y datos remotos mal ubicados.
+4. Fronteras recomendadas entre server state, UI state y estado del cliente.
+5. Preguntas y decisiones pendientes.
+
+Reglas:
+
+- No asumas una librería concreta ni recomiendes un store global por defecto.
+- No trates todo dato compartido como shared client state: comprueba si es remoto, derivado o representable en la URL.
+- No almacenes como estado aquello que pueda calcularse de forma barata y fiable a partir de una fuente existente.
+- Distingue persistencia local de cache de datos remotos.
+- Si no se conoce el ciclo de vida o la fuente de verdad, marca la conclusión como provisional.
+- No propongas una reescritura completa de la gestión de estado: prioriza problemas y cambios localizados.`,
+    language: "es",
+    module: "software-development",
+    categories: ["frontend-development"],
+    subcategories: ["frontend-state"],
+    tags: ["analysis", "checklist"],
+    useCases: [
+      "Auditar el estado de una aplicación frontend",
+      "Detectar datos remotos duplicados en stores globales",
+      "Simplificar la gestión de estado antes de añadir una nueva funcionalidad",
+    ],
+    notes:
+      "Incluye la fuente de datos remotos y el ciclo de vida de cada store; sin esa información no puede distinguirse un cache legítimo de una duplicación accidental.",
+    createdAt: "2026-08-12",
+    updatedAt: "2026-08-12",
+  },
+  {
     id: "debug-frontend-issue",
     slug: "depurar-error-frontend",
     title: "Depurar un error de frontend sistemáticamente",
@@ -1844,6 +2106,212 @@ Reglas:
       "Auditar la pureza del dominio antes de un refactor",
       "Identificar acoplamiento oculto en entidades y casos de uso",
       "Preparar la extracción de un módulo de dominio reutilizable",
+    ],
+    createdAt: "2026-08-12",
+    updatedAt: "2026-08-12",
+  },
+  {
+    id: "choose-communication-style",
+    slug: "elegir-estilo-comunicacion",
+    title: "Elegir el estilo de comunicación entre componentes",
+    description:
+      "Análisis de alternativas de comunicación entre componentes: local, síncrono, asíncrono, event-driven, streaming, push y pull, evaluadas por acoplamiento, latencia, disponibilidad y complejidad.",
+    content: `Actúa como un arquitecto de software especializado en sistemas distribuidos y comunicación entre componentes.
+
+Analiza la siguiente interacción entre componentes:
+
+Interacción:
+{{interaction}}
+
+Contexto (volumen, latencia requerida, disponibilidad, restricciones):
+{{context}}
+
+Determina qué estilo de comunicación es más apropiado:
+
+- Llamada local.
+- Request-response síncrono.
+- Mensajería asíncrona.
+- Event-driven.
+- Streaming.
+- Push.
+- Pull.
+
+Evalúa cada alternativa según:
+
+- Acoplamiento temporal.
+- Latencia.
+- Throughput.
+- Disponibilidad.
+- Backpressure.
+- Consistencia.
+- Complejidad operacional.
+- Observabilidad.
+- Tolerancia a fallos.
+
+Reglas:
+
+- No elijas una tecnología concreta hasta determinar primero qué propiedades necesita la interacción.
+- Justifica por qué descartas cada alternativa, no solo por qué recomiendas una.
+- Si el contexto no proporciona datos suficientes para evaluar alguna propiedad, indícalo y formula la pregunta necesaria.
+- Distingue entre comunicación dentro de un proceso, entre procesos en la misma máquina y entre servicios distribuidos.`,
+    language: "es",
+    module: "software-development",
+    categories: ["software-architecture"],
+    subcategories: ["distributed-systems"],
+    tags: ["analysis", "checklist"],
+    useCases: [
+      "Decidir cómo comunicar dos módulos antes de implementar",
+      "Evaluar si una llamada síncrona debería ser asíncrona",
+      "Preparar una decisión arquitectónica sobre mensajería o eventos",
+    ],
+    createdAt: "2026-08-12",
+    updatedAt: "2026-08-12",
+  },
+  {
+    id: "analyze-remote-call-chain",
+    slug: "analizar-cadena-llamadas-remotas",
+    title: "Analizar una cadena de llamadas remotas",
+    description:
+      "Identificación de profundidad, dependencias síncronas, puntos de fallo, amplificación de latencia, propagación de timeouts y blast radius en una cadena de llamadas.",
+    content: `Actúa como un arquitecto de software especializado en análisis de sistemas distribuidos.
+
+Analiza esta cadena de llamadas remotas:
+
+Cadena de llamadas:
+{{chain}}
+
+Contexto (SLAs, timeouts configurados, volumen de tráfico):
+{{context}}
+
+Identifica:
+
+- Profundidad de la cadena.
+- Dependencias síncronas.
+- Puntos de fallo.
+- Amplificación de latencia.
+- Propagación de timeouts.
+- Retries acumulativos.
+- Blast radius.
+
+Construye el escenario de fallo cuando cada dependencia deja de responder.
+
+Determina qué llamadas realmente necesitan ser síncronas y cuáles podrían desacoplarse.
+
+Reglas:
+
+- Sé cuantitativo cuando sea posible: estima latencias acumuladas, no solo las nombres.
+- Distingue entre fallos que degradan el servicio y fallos que lo interrumpen por completo.
+- Señala explícitamente si la cadena tiene un single point of failure.
+- No asumas que todas las llamadas de la cadena tienen el mismo SLA: pregunta o estima según el contexto.`,
+    language: "es",
+    module: "software-development",
+    categories: ["software-architecture"],
+    subcategories: ["distributed-systems"],
+    tags: ["analysis", "checklist"],
+    useCases: [
+      "Evaluar la fragilidad de una cadena de servicios antes de salir a producción",
+      "Identificar cuellos de botella en una arquitectura de microservicios",
+      "Preparar un plan de desacoplamiento para llamadas síncronas innecesarias",
+    ],
+    createdAt: "2026-08-12",
+    updatedAt: "2026-08-12",
+  },
+  {
+    id: "analyze-distributed-failure-scenarios",
+    slug: "analizar-escenarios-fallo-distribuido",
+    title: "Analizar escenarios de fallo en comunicación distribuida",
+    description:
+      "Evaluación sistemática de qué ocurre cuando una comunicación distribuida falla: destino caído, respuestas perdidas, duplicados, desorden y procesamiento parcial.",
+    content: `Actúa como un arquitecto de software especializado en tolerancia a fallos en sistemas distribuidos.
+
+Para esta comunicación distribuida:
+
+Flujo:
+{{flow}}
+
+Contexto (protocolo, garantías del transporte, idempotencia de operaciones):
+{{context}}
+
+Analiza qué ocurre si:
+
+1. El destino está caído.
+2. Responde lentamente.
+3. La petición llega pero la respuesta se pierde.
+4. El emisor reintenta.
+5. Llegan mensajes duplicados.
+6. Llegan fuera de orden.
+7. El consumidor procesa parcialmente la operación.
+
+Para cada escenario determina:
+
+- Estado del emisor.
+- Estado del receptor.
+- Riesgo de inconsistencia.
+- Mecanismo de recuperación necesario.
+
+Reglas:
+
+- No asumas que el transporte garantiza orden o entrega exactamente una vez: analiza según las garantías reales del protocolo.
+- Distingue entre fallos que el emisor puede detectar y fallos que solo el receptor conoce.
+- Para cada mecanismo de recuperación, indica si es preventivo (evita el fallo) o reactivo (lo corrige después).
+- Si un escenario no aplica al protocolo o contexto descrito, indícalo y explica por qué.`,
+    language: "es",
+    module: "software-development",
+    categories: ["software-architecture"],
+    subcategories: ["distributed-systems"],
+    tags: ["analysis", "checklist"],
+    useCases: [
+      "Diseñar la estrategia de consistencia de un flujo asíncrono",
+      "Evaluar si un sistema tolera los fallos reales de la red",
+      "Preparar pruebas de caos para un servicio distribuido",
+    ],
+    createdAt: "2026-08-12",
+    updatedAt: "2026-08-12",
+  },
+  {
+    id: "design-remote-call-resilience",
+    slug: "disenar-resiliencia-llamada-remota",
+    title: "Diseñar la estrategia de resiliencia para una llamada remota",
+    description:
+      "Diseño de timeout, retries, backoff, jitter, circuit breaker y fallback para una llamada remota, con análisis de retry storms y protección de idempotencia.",
+    content: `Actúa como un ingeniero de software especializado en resiliencia de sistemas distribuidos.
+
+Diseña la estrategia de resiliencia para esta llamada remota:
+
+Llamada:
+{{call}}
+
+Contexto (SLA del servicio destino, criticidad para el usuario, idempotencia de la operación):
+{{context}}
+
+Propón:
+
+- Timeout.
+- Número máximo de retries.
+- Exponential backoff.
+- Jitter.
+- Circuit breaker si procede.
+- Fallback si procede.
+
+Analiza también el riesgo de retry storm.
+
+Reglas:
+
+- No recomiendes retries para operaciones no idempotentes sin explicar cómo evitar efectos duplicados.
+- Justifica cada valor numérico con el contexto: no uses valores por defecto genéricos.
+- Distingue entre timeouts de conexión y timeouts de lectura/escritura.
+- Para el circuit breaker, indica los umbrales de apertura, el tiempo de espera en estado abierto y el número de peticiones de prueba para cerrar.
+- Si propones un fallback, explica qué garantiza y qué pierde el usuario frente al caso ideal.
+- Evalúa explícitamente si los retries podrían empeorar un fallo del destino (retry storm) y cómo mitigarlo.`,
+    language: "es",
+    module: "software-development",
+    categories: ["software-architecture"],
+    subcategories: ["distributed-systems"],
+    tags: ["analysis", "checklist"],
+    useCases: [
+      "Configurar retries y circuit breakers para una integración externa",
+      "Prevenir retry storms en un sistema con muchas dependencias",
+      "Definir la política de timeouts de un servicio con múltiples llamadas salientes",
     ],
     createdAt: "2026-08-12",
     updatedAt: "2026-08-12",

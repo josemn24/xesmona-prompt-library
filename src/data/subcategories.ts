@@ -11,6 +11,10 @@ export const subcategories: Subcategory[] = [
   { id: "c4-model", label: "Modelo C4", category: "software-architecture" },
   { id: "application-structure", label: "Organización interna", category: "software-architecture" },
 
+  // Desarrollo frontend
+  { id: "rendering-strategies", label: "Estrategias de renderizado", category: "frontend-development" },
+  { id: "frontend-state", label: "Estado frontend", category: "frontend-development" },
+
   // Control de versiones
   { id: "git", label: "Git", category: "version-control" },
   { id: "pull-requests", label: "Pull requests", category: "version-control" },
