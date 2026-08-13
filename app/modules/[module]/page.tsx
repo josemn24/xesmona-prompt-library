@@ -2,7 +2,6 @@ import { ArrowRight } from "lucide-react";
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { PromptCard } from "@/src/components/prompt-card";
 import { CategoryCard } from "@/src/components/category-card";
 import { Illustration } from "@/src/components/illustrations";
 import { modules } from "@/src/data";
@@ -11,10 +10,9 @@ import { promptsUrl } from "@/src/lib/query-params";
 import {
   getCategoriesForModule,
   getCategoryById,
+  countPromptsForModule,
   getModuleById,
   getModuleNavigation,
-  getPromptsForModule,
-  sortByUpdatedAtDesc,
 } from "@/src/lib/taxonomy";
 
 type PageProps = {
@@ -52,7 +50,7 @@ export default async function ModulePage({ params }: PageProps) {
 
   const moduleCategories = getCategoriesForModule(moduleData.id);
   const moduleNavigation = getModuleNavigation(moduleData.id);
-  const modulePrompts = sortByUpdatedAtDesc(getPromptsForModule(moduleData.id));
+  const promptCount = countPromptsForModule(moduleData.id);
 
   return (
     <div className="mx-auto max-w-6xl px-4 py-10 sm:px-6">
@@ -64,8 +62,8 @@ export default async function ModulePage({ params }: PageProps) {
           </h1>
           <p className="mt-3 text-brand-slate">{moduleData.description}</p>
           <p className="mt-4 text-sm text-brand-slate">
-          {modulePrompts.length}{" "}
-          {modulePrompts.length === 1
+          {promptCount}{" "}
+          {promptCount === 1
             ? "prompt en este módulo"
             : "prompts en este módulo"}
           {" · "}
@@ -82,15 +80,6 @@ export default async function ModulePage({ params }: PageProps) {
 
       {moduleNavigation ? (
         <section aria-labelledby="recorrido-del-modulo" className="mt-10">
-          <h2
-            id="recorrido-del-modulo"
-            className="text-xl font-semibold tracking-tight text-neutral-900"
-          >
-            Explorar por recorrido
-          </h2>
-          <p className="mt-2 text-sm text-brand-slate">
-            Una forma orientativa de recorrer las categorías de este módulo.
-          </p>
           <div className="mt-6 space-y-8">
             {moduleNavigation.groups.map((group) => {
               const groupCategories = group.categories
@@ -144,19 +133,6 @@ export default async function ModulePage({ params }: PageProps) {
         </section>
       )}
 
-      <section aria-labelledby="prompts-del-modulo" className="mt-10">
-        <h2
-          id="prompts-del-modulo"
-          className="text-xl font-semibold tracking-tight text-neutral-900"
-        >
-          Prompts de {moduleData.label}
-        </h2>
-        <div className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-          {modulePrompts.map((prompt) => (
-            <PromptCard key={prompt.id} prompt={prompt} />
-          ))}
-        </div>
-      </section>
     </div>
   );
 }
