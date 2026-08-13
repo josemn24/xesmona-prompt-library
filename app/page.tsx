@@ -1,4 +1,3 @@
-import { ArrowRight } from "lucide-react";
 import Link from "next/link";
 import { HomeSearchForm } from "@/src/components/home-search-form";
 import { ModuleCard } from "@/src/components/module-card";
@@ -17,30 +16,21 @@ export default function HomePage() {
 
   return (
     <div className="mx-auto max-w-6xl px-4 sm:px-6">
-      <section className="relative overflow-hidden rounded-b-3xl border-x border-b border-brand-blue/10 bg-linear-to-br from-brand-violet-soft via-brand-cream to-brand-yellow-soft py-14 sm:py-20">
+      <section className="relative overflow-hidden rounded-b-3xl border-x border-b border-brand-blue/10 bg-linear-to-br from-brand-violet-soft via-brand-cream to-brand-yellow-soft px-6 py-10 sm:px-10 sm:py-14 lg:px-12">
         <div className="pointer-events-none absolute -top-24 -right-20 size-64 rounded-full bg-brand-turquoise-soft/70 blur-3xl" />
         <div className="relative">
-        <p className="mb-4 text-sm font-semibold uppercase tracking-[0.18em] text-brand-coral">
-          Explora · crea · aprende
-        </p>
-        <h1 className="max-w-2xl text-3xl font-bold tracking-tight text-brand-ink sm:text-4xl">
-          Biblioteca de prompts de inteligencia artificial
-        </h1>
-        <p className="mt-4 max-w-2xl text-lg text-brand-slate">
-          {SITE_DESCRIPTION}
-        </p>
-        <div className="mt-8">
-          <HomeSearchForm />
-        </div>
-        <p className="mt-6 text-sm text-brand-slate">
-          <Link
-            href="/prompts"
-            className="inline-flex items-center gap-1.5 font-medium text-brand-violet underline-offset-4 hover:text-brand-coral hover:underline"
-          >
-            Explorar los {allPrompts.length} prompts
-            <ArrowRight className="size-4" aria-hidden />
-          </Link>
-        </p>
+          <p className="mb-3 text-sm font-semibold uppercase tracking-[0.18em] text-brand-coral">
+            Explora · crea · aprende
+          </p>
+          <h1 className="max-w-2xl text-3xl font-bold tracking-tight text-brand-ink sm:text-4xl">
+            Biblioteca de prompts de inteligencia artificial
+          </h1>
+          <p className="mt-3 max-w-2xl text-lg text-brand-slate">
+            {SITE_DESCRIPTION}
+          </p>
+          <div className="mt-6">
+            <HomeSearchForm />
+          </div>
         </div>
       </section>
 

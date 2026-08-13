@@ -6,11 +6,11 @@ import { Search } from "lucide-react";
  */
 export function HomeSearchForm() {
   return (
-    <form action="/prompts" role="search" className="w-full max-w-xl">
+    <form action="/prompts" role="search" className="w-full max-w-2xl">
       <label htmlFor="home-search" className="sr-only">
         Buscar prompts
       </label>
-      <div className="flex gap-2">
+      <div className="flex flex-col gap-2 sm:flex-row">
         <div className="relative flex-1">
           <Search
             className="pointer-events-none absolute top-1/2 left-3 size-4 -translate-y-1/2 text-brand-turquoise"
@@ -27,7 +27,7 @@ export function HomeSearchForm() {
         </div>
         <button
           type="submit"
-          className="rounded-xl bg-brand-violet px-4 py-2.5 text-sm font-medium text-white shadow-sm transition-colors hover:bg-brand-coral"
+          className="w-full rounded-xl bg-brand-violet px-4 py-2.5 text-sm font-medium text-white shadow-sm transition-colors hover:bg-brand-coral sm:w-auto sm:shrink-0"
         >
           Buscar
         </button>
