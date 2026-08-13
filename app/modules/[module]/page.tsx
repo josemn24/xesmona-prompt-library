@@ -3,10 +3,11 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { PromptCard } from "@/src/components/prompt-card";
+import { CategoryCard } from "@/src/components/category-card";
+import { Illustration } from "@/src/components/illustrations";
 import { modules } from "@/src/data";
 import { promptsUrl } from "@/src/lib/query-params";
 import {
-  countPromptsForCategory,
   getCategoriesForModule,
   getModuleById,
   getPromptsForModule,
@@ -51,12 +52,14 @@ export default async function ModulePage({ params }: PageProps) {
 
   return (
     <div className="mx-auto max-w-6xl px-4 py-10 sm:px-6">
-      <header className="max-w-3xl">
-        <h1 className="text-2xl font-bold tracking-tight text-neutral-900 sm:text-3xl">
-          {moduleData.label}
-        </h1>
-        <p className="mt-3 text-neutral-600">{moduleData.description}</p>
-        <p className="mt-4 text-sm text-neutral-600">
+      <header className="flex max-w-4xl flex-col gap-6 rounded-3xl border border-brand-blue/10 bg-linear-to-br from-brand-violet-soft via-white to-brand-yellow-soft p-6 sm:flex-row sm:items-center sm:p-8">
+        <Illustration iconId={moduleData.iconId} size="lg" />
+        <div>
+          <h1 className="text-2xl font-bold tracking-tight text-brand-ink sm:text-3xl">
+            {moduleData.label}
+          </h1>
+          <p className="mt-3 text-brand-slate">{moduleData.description}</p>
+          <p className="mt-4 text-sm text-brand-slate">
           {modulePrompts.length}{" "}
           {modulePrompts.length === 1
             ? "prompt en este módulo"
@@ -64,12 +67,13 @@ export default async function ModulePage({ params }: PageProps) {
           {" · "}
           <Link
             href={promptsUrl({ module: moduleData.id })}
-            className="inline-flex items-center gap-1 font-medium text-blue-800 underline-offset-4 hover:underline"
+            className="inline-flex items-center gap-1 font-medium text-brand-violet underline-offset-4 hover:text-brand-coral hover:underline"
           >
             Abrir en el explorador con este filtro aplicado
             <ArrowRight className="size-4" aria-hidden />
           </Link>
-        </p>
+          </p>
+        </div>
       </header>
 
       <section aria-labelledby="categorias" className="mt-10">
@@ -79,24 +83,12 @@ export default async function ModulePage({ params }: PageProps) {
         >
           Categorías
         </h2>
-        <ul className="mt-4 flex flex-wrap gap-2">
-          {moduleCategories.map((category) => {
-            const count = countPromptsForCategory(category.id);
-            return (
-              <li key={category.id}>
-                <Link
-                  href={promptsUrl({
-                    module: moduleData.id,
-                    categories: [category.id],
-                  })}
-                  className="inline-flex items-center gap-1.5 rounded-full border border-neutral-200 bg-white px-3 py-1.5 text-sm font-medium text-neutral-700 transition-colors hover:border-neutral-400"
-                >
-                  {category.label}
-                  <span className="text-xs text-neutral-500">({count})</span>
-                </Link>
-              </li>
-            );
-          })}
+        <ul className="mt-4 grid list-none gap-3 p-0 sm:grid-cols-2 lg:grid-cols-3">
+          {moduleCategories.map((category) => (
+            <li key={category.id}>
+              <CategoryCard category={category} />
+            </li>
+          ))}
         </ul>
       </section>
 

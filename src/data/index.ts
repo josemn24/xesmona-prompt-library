@@ -17,6 +17,7 @@ export { tags } from "./tags";
 export type {
   Category,
   CategoryId,
+  IllustrationId,
   Module,
   ModuleId,
   Prompt,

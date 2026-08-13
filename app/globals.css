@@ -4,20 +4,58 @@
   --font-sans: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
   --font-mono: var(--font-geist-mono), ui-monospace, SFMono-Regular, Menlo,
     monospace;
+  --color-brand-coral: var(--brand-coral);
+  --color-brand-coral-soft: var(--brand-coral-soft);
+  --color-brand-orange: var(--brand-orange);
+  --color-brand-orange-soft: var(--brand-orange-soft);
+  --color-brand-yellow: var(--brand-yellow);
+  --color-brand-yellow-soft: var(--brand-yellow-soft);
+  --color-brand-turquoise: var(--brand-turquoise);
+  --color-brand-turquoise-soft: var(--brand-turquoise-soft);
+  --color-brand-blue: var(--brand-blue);
+  --color-brand-blue-soft: var(--brand-blue-soft);
+  --color-brand-violet: var(--brand-violet);
+  --color-brand-violet-soft: var(--brand-violet-soft);
+  --color-brand-green: var(--brand-green);
+  --color-brand-green-soft: var(--brand-green-soft);
+  --color-brand-ink: var(--brand-ink);
+  --color-brand-slate: var(--brand-slate);
+  --color-brand-cream: var(--brand-cream);
+}
+
+:root {
+  --brand-coral: #f56565;
+  --brand-coral-soft: #fff0ed;
+  --brand-orange: #f59e0b;
+  --brand-orange-soft: #fff7df;
+  --brand-yellow: #f6c945;
+  --brand-yellow-soft: #fffbea;
+  --brand-turquoise: #14b8a6;
+  --brand-turquoise-soft: #e9fbf7;
+  --brand-blue: #3787e8;
+  --brand-blue-soft: #edf5ff;
+  --brand-violet: #7c5ce8;
+  --brand-violet-soft: #f3efff;
+  --brand-green: #77b255;
+  --brand-green-soft: #f0f8ea;
+  --brand-ink: #253044;
+  --brand-slate: #526176;
+  --brand-cream: #fffdf7;
 }
 
 body {
-  background-color: var(--color-white);
-  color: var(--color-neutral-800);
+  background-color: var(--brand-cream);
+  color: var(--brand-ink);
 }
 
 ::selection {
-  background-color: var(--color-blue-100);
+  background-color: var(--brand-yellow-soft);
+  color: var(--brand-ink);
 }
 
 /* Visible, consistent keyboard focus across all interactive elements. */
 :where(a, button, input, select, textarea, [tabindex]):focus-visible {
-  outline: 2px solid var(--color-blue-700);
+  outline: 3px solid var(--brand-turquoise);
   outline-offset: 2px;
   border-radius: var(--radius-sm);
 }

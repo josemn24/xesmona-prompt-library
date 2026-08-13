@@ -24,7 +24,7 @@ export function BackToPromptsLink() {
   return (
     <Link
       href={href}
-      className="inline-flex items-center gap-1.5 text-sm font-medium text-blue-800 underline-offset-4 hover:underline"
+      className="inline-flex items-center gap-1.5 text-sm font-medium text-brand-violet underline-offset-4 hover:text-brand-coral hover:underline"
     >
       <ArrowLeft className="size-4" aria-hidden />
       {label}

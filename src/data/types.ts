@@ -13,8 +13,57 @@ export type SubcategoryId = string;
 export type TagId = string;
 export type PromptId = string;
 
+export type IllustrationId =
+  | "module-software-development"
+  | "module-artificial-intelligence"
+  | "module-marketing"
+  | "module-business"
+  | "module-productivity"
+  | "architecture-blocks"
+  | "browser-window"
+  | "server-stack"
+  | "globe-window"
+  | "test-check"
+  | "git-branches"
+  | "gear-cycle"
+  | "pipeline"
+  | "chart-radar"
+  | "database-cylinder"
+  | "link-nodes"
+  | "shield-code"
+  | "document-code"
+  | "speedometer"
+  | "code-refresh"
+  | "prompt-wand"
+  | "chat-chip"
+  | "robot-compass"
+  | "document-retrieval"
+  | "model-score"
+  | "automation-spark"
+  | "editorial-calendar"
+  | "search-chart"
+  | "mail-growth"
+  | "social-bubbles"
+  | "pencil-copy"
+  | "market-loupe"
+  | "roadmap-flag"
+  | "analysis-chart"
+  | "canvas-blocks"
+  | "sales-funnel"
+  | "operations-gears"
+  | "kanban-check"
+  | "build-measure-learn"
+  | "organized-files"
+  | "planning-calendar"
+  | "research-loupe"
+  | "decision-branch"
+  | "communication-bubbles"
+  | "learning-book";
+
 export type Module = {
   id: ModuleId;
+  /** Stable visual identifier rendered by the illustration registry. */
+  iconId: IllustrationId;
   /** Spanish label shown in the UI. */
   label: string;
   /** Short Spanish description of the knowledge area. */
@@ -23,6 +72,8 @@ export type Module = {
 
 export type Category = {
   id: CategoryId;
+  /** Stable visual identifier rendered by the illustration registry. */
+  iconId: IllustrationId;
   /** Spanish label shown in the UI. */
   label: string;
   /** Module this category belongs to. A category has exactly one module. */

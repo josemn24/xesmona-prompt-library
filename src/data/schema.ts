@@ -43,6 +43,7 @@ export const promptLanguageSchema = z.enum(["es", "en"], {
 
 export const moduleSchema = z.object({
   id: idSchema,
+  iconId: idSchema,
   label: z.string().min(1, "El nombre del módulo no puede estar vacío"),
   description: z
     .string()
@@ -51,6 +52,7 @@ export const moduleSchema = z.object({
 
 export const categorySchema = z.object({
   id: idSchema,
+  iconId: idSchema,
   label: z.string().min(1, "El nombre de la categoría no puede estar vacío"),
   module: idSchema,
 });

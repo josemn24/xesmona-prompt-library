@@ -17,35 +17,41 @@ export default function HomePage() {
 
   return (
     <div className="mx-auto max-w-6xl px-4 sm:px-6">
-      <section className="border-b border-neutral-200 py-14 sm:py-20">
-        <h1 className="max-w-2xl text-3xl font-bold tracking-tight text-neutral-900 sm:text-4xl">
+      <section className="relative overflow-hidden rounded-b-3xl border-x border-b border-brand-blue/10 bg-linear-to-br from-brand-violet-soft via-brand-cream to-brand-yellow-soft py-14 sm:py-20">
+        <div className="pointer-events-none absolute -top-24 -right-20 size-64 rounded-full bg-brand-turquoise-soft/70 blur-3xl" />
+        <div className="relative">
+        <p className="mb-4 text-sm font-semibold uppercase tracking-[0.18em] text-brand-coral">
+          Explora · crea · aprende
+        </p>
+        <h1 className="max-w-2xl text-3xl font-bold tracking-tight text-brand-ink sm:text-4xl">
           Biblioteca de prompts de inteligencia artificial
         </h1>
-        <p className="mt-4 max-w-2xl text-lg text-neutral-600">
+        <p className="mt-4 max-w-2xl text-lg text-brand-slate">
           {SITE_DESCRIPTION}
         </p>
         <div className="mt-8">
           <HomeSearchForm />
         </div>
-        <p className="mt-6 text-sm text-neutral-600">
+        <p className="mt-6 text-sm text-brand-slate">
           <Link
             href="/prompts"
-            className="inline-flex items-center gap-1.5 font-medium text-blue-800 underline-offset-4 hover:underline"
+            className="inline-flex items-center gap-1.5 font-medium text-brand-violet underline-offset-4 hover:text-brand-coral hover:underline"
           >
             Explorar los {allPrompts.length} prompts
             <ArrowRight className="size-4" aria-hidden />
           </Link>
         </p>
+        </div>
       </section>
 
       <section aria-labelledby="modulos" className="py-12">
         <h2
           id="modulos"
-          className="text-xl font-semibold tracking-tight text-neutral-900"
+          className="text-xl font-semibold tracking-tight text-brand-ink"
         >
           Explorar por módulo
         </h2>
-        <p className="mt-2 text-sm text-neutral-600">
+        <p className="mt-2 text-sm text-brand-slate">
           Cada módulo es una gran área de conocimiento, con sus categorías y
           subcategorías.
         </p>
@@ -60,13 +66,13 @@ export default function HomePage() {
         <div className="flex items-baseline justify-between gap-4">
           <h2
             id="recientes"
-            className="text-xl font-semibold tracking-tight text-neutral-900"
+            className="text-xl font-semibold tracking-tight text-brand-ink"
           >
             Actualizados recientemente
           </h2>
           <Link
             href="/prompts"
-            className="shrink-0 text-sm font-medium text-blue-800 underline-offset-4 hover:underline"
+            className="shrink-0 text-sm font-medium text-brand-violet underline-offset-4 hover:text-brand-coral hover:underline"
           >
             Ver todos
           </Link>

@@ -131,12 +131,14 @@ highlighted on the detail page and copied verbatim.
 
 ## How to add a module, category, subcategory or tag
 
-- **Module**: add it to `src/data/modules.ts`, then create a prompt file
+- **Module**: add it to `src/data/modules.ts` with a valid `iconId` from the
+  illustration registry, then create a prompt file
   `src/data/prompts/<module-id>.ts` and include it in the `allPrompts` array
   in `src/data/index.ts`. The module page and the explorer filters pick it up
   automatically.
 - **Category**: add it to `src/data/categories.ts` with the `module` it
-  belongs to.
+  belongs to and a valid `iconId`. Module and category illustrations are
+  rendered by the shared SVG registry in `src/components/illustrations.tsx`.
 - **Subcategory**: add it to `src/data/subcategories.ts` with the `category`
   it belongs to.
 - **Tag**: add it to `src/data/tags.ts`. Tags are cross-cutting and available
