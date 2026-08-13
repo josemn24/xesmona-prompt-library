@@ -42,7 +42,7 @@ export function applyFilters(
     if (
       filters.categories.length > 0 &&
       !filters.categories.some((categoryId) =>
-        prompt.categories.includes(categoryId),
+        prompt.category === categoryId,
       )
     ) {
       return false;

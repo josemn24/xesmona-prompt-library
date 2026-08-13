@@ -1,5 +1,6 @@
 import { modules } from "@/src/data";
 import { SITE_NAME } from "@/src/lib/i18n";
+import { moduleUrl } from "@/src/lib/query-params";
 import Link from "next/link";
 
 export function SiteFooter() {
@@ -19,7 +20,7 @@ export function SiteFooter() {
             {modules.map((module) => (
               <li key={module.id}>
                 <Link
-                  href={`/modules/${module.id}`}
+                  href={moduleUrl(module.id)}
                   className="text-sm text-brand-slate underline-offset-4 hover:text-brand-violet hover:underline"
                 >
                   {module.label}

@@ -32,7 +32,8 @@ Genera el brief completo:
 No escribas el artículo: solo el brief. Un buen brief hace que el artículo casi se escriba solo.`,
     language: "es",
     module: "marketing",
-    categories: ["seo", "content-strategy"],
+    category: "acquisition-and-distribution",
+    subcategories: ["seo"],
     tags: ["template"],
     useCases: [
       "Encargar artículos SEO a redactores con criterios claros",
@@ -77,7 +78,8 @@ Para cada email entrega:
 Reglas: lenguaje de conversación, párrafos de una o dos frases, nada de adjetivos vacíos ("increíble", "revolucionario"), y cada email debe poder entenderse sin haber leído los anteriores. Si la oferta no tiene urgencia real, no la inventes: propón otro ángulo de cierre.`,
     language: "es",
     module: "marketing",
-    categories: ["email-marketing", "copywriting"],
+    category: "conversion-and-retention",
+    subcategories: ["launch-email-sequence"],
     tags: ["template", "conversion"],
     useCases: [
       "Lanzar una funcionalidad nueva a la lista de usuarios",

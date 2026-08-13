@@ -16,6 +16,7 @@ import {
 } from "@/src/lib/filters";
 import {
   filtersFromSearchParams,
+  promptUrl,
   searchParamsFromFilters,
 } from "@/src/lib/query-params";
 import {
@@ -178,9 +179,7 @@ export function PromptExplorer() {
 
   const currentQueryString = searchParams.toString();
   function promptHref(slug: string): string {
-    return currentQueryString.length > 0
-      ? `/prompts/${slug}?from=${encodeURIComponent(currentQueryString)}`
-      : `/prompts/${slug}`;
+    return promptUrl(slug, currentQueryString);
   }
 
   const moduleLabel = filters.module

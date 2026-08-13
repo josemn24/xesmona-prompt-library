@@ -6,10 +6,13 @@ import { PromptCard } from "@/src/components/prompt-card";
 import { CategoryCard } from "@/src/components/category-card";
 import { Illustration } from "@/src/components/illustrations";
 import { modules } from "@/src/data";
+import type { Category } from "@/src/data";
 import { promptsUrl } from "@/src/lib/query-params";
 import {
   getCategoriesForModule,
+  getCategoryById,
   getModuleById,
+  getModuleNavigation,
   getPromptsForModule,
   sortByUpdatedAtDesc,
 } from "@/src/lib/taxonomy";
@@ -48,6 +51,7 @@ export default async function ModulePage({ params }: PageProps) {
   if (!moduleData) notFound();
 
   const moduleCategories = getCategoriesForModule(moduleData.id);
+  const moduleNavigation = getModuleNavigation(moduleData.id);
   const modulePrompts = sortByUpdatedAtDesc(getPromptsForModule(moduleData.id));
 
   return (
@@ -76,21 +80,69 @@ export default async function ModulePage({ params }: PageProps) {
         </div>
       </header>
 
-      <section aria-labelledby="categorias" className="mt-10">
-        <h2
-          id="categorias"
-          className="text-xl font-semibold tracking-tight text-neutral-900"
-        >
-          Categorías
-        </h2>
-        <ul className="mt-4 grid list-none gap-3 p-0 sm:grid-cols-2 lg:grid-cols-3">
-          {moduleCategories.map((category) => (
-            <li key={category.id}>
-              <CategoryCard category={category} />
-            </li>
-          ))}
-        </ul>
-      </section>
+      {moduleNavigation ? (
+        <section aria-labelledby="recorrido-del-modulo" className="mt-10">
+          <h2
+            id="recorrido-del-modulo"
+            className="text-xl font-semibold tracking-tight text-neutral-900"
+          >
+            Explorar por recorrido
+          </h2>
+          <p className="mt-2 text-sm text-brand-slate">
+            Una forma orientativa de recorrer las categorías de este módulo.
+          </p>
+          <div className="mt-6 space-y-8">
+            {moduleNavigation.groups.map((group) => {
+              const groupCategories = group.categories
+                .map((categoryId) => getCategoryById(categoryId))
+                .filter(
+                  (category): category is Category =>
+                    category !== undefined && category.module === moduleData.id,
+                );
+
+              return (
+                <section
+                  key={group.id}
+                  aria-labelledby={`grupo-${group.id}`}
+                >
+                  <h3
+                    id={`grupo-${group.id}`}
+                    className="text-lg font-semibold tracking-tight text-brand-ink"
+                  >
+                    {group.label}
+                  </h3>
+                  <p className="mt-1 max-w-2xl text-sm text-brand-slate">
+                    {group.description}
+                  </p>
+                  <ul className="mt-4 grid list-none gap-3 p-0 sm:grid-cols-2 lg:grid-cols-3">
+                    {groupCategories.map((category) => (
+                      <li key={category.id}>
+                        <CategoryCard category={category} />
+                      </li>
+                    ))}
+                  </ul>
+                </section>
+              );
+            })}
+          </div>
+        </section>
+      ) : (
+        <section aria-labelledby="categorias" className="mt-10">
+          <h2
+            id="categorias"
+            className="text-xl font-semibold tracking-tight text-neutral-900"
+          >
+            Categorías
+          </h2>
+          <ul className="mt-4 grid list-none gap-3 p-0 sm:grid-cols-2 lg:grid-cols-3">
+            {moduleCategories.map((category) => (
+              <li key={category.id}>
+                <CategoryCard category={category} />
+              </li>
+            ))}
+          </ul>
+        </section>
+      )}
 
       <section aria-labelledby="prompts-del-modulo" className="mt-10">
         <h2

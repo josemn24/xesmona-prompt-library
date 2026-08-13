@@ -34,16 +34,16 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section aria-labelledby="modulos" className="py-12">
+      <section id="modulos" aria-labelledby="modulos-titulo" className="py-12">
         <h2
-          id="modulos"
+          id="modulos-titulo"
           className="text-xl font-semibold tracking-tight text-brand-ink"
         >
-          Explorar por módulo
+          Explorar por áreas
         </h2>
         <p className="mt-2 text-sm text-brand-slate">
-          Cada módulo es una gran área de conocimiento, con sus categorías y
-          subcategorías.
+          Cada área organiza sus prompts por categorías y subcategorías para
+          ayudarte a encontrar el tipo de trabajo que quieres realizar.
         </p>
         <div className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {modules.map((module) => (

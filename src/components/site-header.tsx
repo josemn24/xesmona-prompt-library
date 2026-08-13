@@ -20,7 +20,15 @@ export function SiteHeader() {
               <NavLink href="/" label="Inicio" />
             </li>
             <li>
-              <NavLink href="/prompts" label="Explorar prompts" />
+              <Link
+                href="/#modulos"
+                className="rounded-md px-3 py-2 text-sm font-medium text-brand-slate transition-colors hover:bg-brand-blue-soft/50 hover:text-brand-ink"
+              >
+                Áreas
+              </Link>
+            </li>
+            <li>
+              <NavLink href="/prompts" label="Buscar" />
             </li>
           </ul>
         </nav>

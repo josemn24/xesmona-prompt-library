@@ -33,7 +33,8 @@ Estructura la revisión en bloques con tiempo estimado:
 Cierra con: mi lista de próximas acciones por contexto, las 3 prioridades visibles, y una frase honesta sobre si la semana es realista o estoy sobrecomprometido.`,
     language: "es",
     module: "productivity",
-    categories: ["planning", "organization"],
+    category: "planning",
+    subcategories: ["weekly-review"],
     tags: ["checklist", "template"],
     useCases: [
       "Hacer la revisión semanal de los viernes o domingos",
@@ -74,7 +75,8 @@ Guíame por el proceso:
 Si en algún punto falta información crítica, indícame exactamente qué averiguar antes de decidir y qué opción elegirías si tuviera que decidir hoy.`,
     language: "es",
     module: "productivity",
-    categories: ["decision-making"],
+    category: "decision-making",
+    subcategories: ["decision-matrix"],
     tags: ["analysis", "template"],
     useCases: [
       "Elegir entre varias ofertas, herramientas o candidatos",

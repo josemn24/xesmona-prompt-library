@@ -6,6 +6,7 @@
  */
 
 export type PromptLanguage = "es" | "en";
+export type TagFacet = "technology" | "objective" | "format" | "context";
 
 export type ModuleId = string;
 export type CategoryId = string;
@@ -70,12 +71,28 @@ export type Module = {
   description: string;
 };
 
+/** Optional visual grouping of a module's categories. */
+export type ModuleNavigationGroup = {
+  id: string;
+  label: string;
+  description: string;
+  categories: CategoryId[];
+};
+
+/** Navigation configuration for a module. It is not part of Prompt. */
+export type ModuleNavigation = {
+  module: ModuleId;
+  groups: ModuleNavigationGroup[];
+};
+
 export type Category = {
   id: CategoryId;
   /** Stable visual identifier rendered by the illustration registry. */
   iconId: IllustrationId;
   /** Spanish label shown in the UI. */
   label: string;
+  /** Short Spanish explanation of the kind of work in this category. */
+  description: string;
   /** Module this category belongs to. A category has exactly one module. */
   module: ModuleId;
 };
@@ -92,6 +109,7 @@ export type Tag = {
   id: TagId;
   /** Label shown in the UI (technology names keep their original spelling). */
   label: string;
+  facet: TagFacet;
 };
 
 export type Prompt = {
@@ -106,9 +124,9 @@ export type Prompt = {
 
   /** Exactly one module. */
   module: ModuleId;
-  /** One or more categories, all belonging to `module`. */
-  categories: CategoryId[];
-  /** Optional subcategories, each belonging to one of `categories`. */
+  /** Exactly one canonical category belonging to `module`. */
+  category: CategoryId;
+  /** Optional subcategories, all belonging to `category`. */
   subcategories?: SubcategoryId[];
   /** Zero or more cross-cutting tags. */
   tags: TagId[];

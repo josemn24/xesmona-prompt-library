@@ -2,6 +2,7 @@ import { ArrowRight } from "lucide-react";
 import Link from "next/link";
 import type { Module } from "@/src/data";
 import { countPromptsForModule } from "@/src/lib/taxonomy";
+import { moduleUrl } from "@/src/lib/query-params";
 import { Illustration } from "@/src/components/illustrations";
 
 export function ModuleCard({ module }: { module: Module }) {
@@ -9,7 +10,7 @@ export function ModuleCard({ module }: { module: Module }) {
 
   return (
     <Link
-      href={`/modules/${module.id}`}
+      href={moduleUrl(module.id)}
       className="group flex flex-col overflow-hidden rounded-2xl border border-brand-blue/10 bg-white shadow-sm transition-all hover:-translate-y-1 hover:border-brand-violet/30 hover:shadow-lg"
     >
       <div className="flex min-h-28 items-center justify-between bg-linear-to-br from-brand-violet-soft via-brand-blue-soft to-brand-yellow-soft px-5 py-4">

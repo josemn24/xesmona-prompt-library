@@ -11,11 +11,11 @@ describe("applyFilters", () => {
   it("filtra los prompts Lean Startup por categoría y etiqueta", () => {
     const results = applyFilters(allPrompts, {
       ...emptyFilters,
-      categories: ["lean-startup"],
+      categories: ["validation-and-experimentation"],
       tags: ["experimentation"],
     });
     expect(results.length).toBeGreaterThanOrEqual(5);
-    expect(results.every((prompt) => prompt.categories.includes("lean-startup"))).toBe(true);
+    expect(results.every((prompt) => prompt.category === "validation-and-experimentation")).toBe(true);
     expect(results.every((prompt) => prompt.tags.includes("experimentation"))).toBe(true);
   });
 
@@ -35,17 +35,17 @@ describe("applyFilters", () => {
   it("filtra por varias categorías con lógica OR", () => {
     const results = applyFilters(allPrompts, {
       ...emptyFilters,
-      categories: ["seo", "databases"],
+      categories: ["acquisition-and-distribution", "data"],
     });
     expect(results.length).toBeGreaterThan(0);
     for (const prompt of results) {
       expect(
-        prompt.categories.includes("seo") || prompt.categories.includes("databases"),
+        prompt.category === "acquisition-and-distribution" || prompt.category === "data",
       ).toBe(true);
     }
     // Debe incluir prompts de ambas categorías (OR, no AND).
-    expect(results.some((p) => p.categories.includes("seo"))).toBe(true);
-    expect(results.some((p) => p.categories.includes("databases"))).toBe(true);
+    expect(results.some((p) => p.category === "acquisition-and-distribution")).toBe(true);
+    expect(results.some((p) => p.category === "data")).toBe(true);
   });
 
   it("filtra por varias subcategorías con lógica OR", () => {
@@ -82,7 +82,7 @@ describe("applyFilters", () => {
     const results = applyFilters(allPrompts, {
       query: "",
       module: "software-development",
-      categories: ["databases"],
+      categories: ["data"],
       subcategories: [],
       tags: ["sql"],
       language: "en",
@@ -90,7 +90,7 @@ describe("applyFilters", () => {
     expect(results.length).toBeGreaterThan(0);
     for (const prompt of results) {
       expect(prompt.module).toBe("software-development");
-      expect(prompt.categories).toContain("databases");
+      expect(prompt.category).toBe("data");
       expect(prompt.tags).toContain("sql");
       expect(prompt.language).toBe("en");
     }
@@ -143,7 +143,7 @@ describe("countActiveFilters", () => {
       countActiveFilters({
         query: "sql",
         module: "software-development",
-        categories: ["databases", "performance"],
+        categories: ["data", "quality-security-performance"],
         subcategories: [],
         tags: ["sql"],
         language: "en",

@@ -16,7 +16,7 @@ describe("toSearchablePrompt", () => {
     expect(prompt).toBeDefined();
     if (!prompt) return;
     const searchable = toSearchablePrompt(prompt);
-    expect(searchable.categories).toContain("seguridad del software");
+    expect(searchable.categories).toContain("calidad, seguridad y rendimiento");
     expect(searchable.tags).toContain("checklist");
     expect(searchable.tags).toContain("api");
   });
@@ -44,7 +44,7 @@ describe("searchPrompts", () => {
     const results = searchPrompts(allPrompts, "arquitecura");
     expect(results.length).toBeGreaterThan(0);
     expect(
-      results.some((r) => r.prompt.categories.includes("software-architecture")),
+      results.some((r) => r.prompt.category === "software-architecture"),
     ).toBe(true);
   });
 
@@ -58,7 +58,7 @@ describe("searchPrompts", () => {
     const withAccents = searchPrompts(allPrompts, "observabilidad");
     expect(withAccents.length).toBeGreaterThan(0);
     expect(
-      withAccents.some((r) => r.prompt.categories.includes("observability")),
+      withAccents.some((r) => r.prompt.category === "observability"),
     ).toBe(true);
 
     const upperCase = searchPrompts(allPrompts, "DOCKER");
@@ -67,7 +67,7 @@ describe("searchPrompts", () => {
 
   it("encuentra prompts por nombres de categoría y subcategoría", () => {
     const byCategory = searchPrompts(allPrompts, "copywriting");
-    expect(byCategory.some((r) => r.prompt.categories.includes("copywriting"))).toBe(true);
+    expect(byCategory.some((r) => r.prompt.subcategories?.includes("launch-email-sequence"))).toBe(true);
 
     const bySubcategory = searchPrompts(allPrompts, "contenedores");
     expect(

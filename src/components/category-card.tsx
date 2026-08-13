@@ -2,14 +2,14 @@ import Link from "next/link";
 import type { Category } from "@/src/data";
 import { Illustration } from "@/src/components/illustrations";
 import { countPromptsForCategory } from "@/src/lib/taxonomy";
-import { promptsUrl } from "@/src/lib/query-params";
+import { categoryUrl } from "@/src/lib/query-params";
 
 export function CategoryCard({ category }: { category: Category }) {
   const count = countPromptsForCategory(category.id);
 
   return (
     <Link
-      href={promptsUrl({ module: category.module, categories: [category.id] })}
+      href={categoryUrl(category.module, category.id)}
       className="group flex items-center gap-3 rounded-2xl border border-brand-blue/10 bg-white p-3 shadow-sm transition-all hover:-translate-y-0.5 hover:border-brand-coral/40 hover:shadow-md"
     >
       <span className="flex size-14 shrink-0 items-center justify-center rounded-xl bg-linear-to-br from-brand-orange-soft via-brand-yellow-soft to-brand-turquoise-soft">

@@ -33,8 +33,8 @@ Formato de salida:
 Sé directo y específico. No uses frases genéricas como "podría mejorarse": explica el porqué y muestra el código alternativo cuando propongas un cambio.`,
     language: "es",
     module: "software-development",
-    categories: ["quality-and-testing", "version-control"],
-    subcategories: ["code-review", "pull-requests"],
+    category: "quality-security-performance",
+    subcategories: ["code-review"],
     tags: ["checklist", "git"],
     useCases: [
       "Revisar pull requests de compañeros antes de aprobarlas",
@@ -78,7 +78,8 @@ Rules:
 Do not rewrite the whole module in one go. Incremental, reviewable changes only.`,
     language: "en",
     module: "software-development",
-    categories: ["refactoring"],
+    category: "maintenance-and-evolution",
+    subcategories: ["legacy-code", "refactoring"],
     tags: ["legacy-code", "typescript"],
     useCases: [
       "Modernizing a module nobody dares to touch",
@@ -122,7 +123,8 @@ Cierra con un esqueleto de documento OpenAPI 3 (solo las rutas principales) que 
 Si algún requisito es ambiguo, propón la opción más simple y señala la decisión explícitamente en una lista de "decisiones tomadas".`,
     language: "es",
     module: "software-development",
-    categories: ["apis-and-integrations", "backend-development"],
+    category: "backend-and-apis",
+    subcategories: ["rest-api-design"],
     tags: ["api", "rest"],
     useCases: [
       "Diseñar una API nueva antes de escribir código",
@@ -168,7 +170,7 @@ Output format:
 Do not recommend a full rewrite unless you can justify why incremental change is impossible.`,
     language: "en",
     module: "software-development",
-    categories: ["software-architecture"],
+    category: "software-architecture",
     subcategories: ["clean-architecture"],
     tags: ["checklist"],
     useCases: [
@@ -246,7 +248,7 @@ Reglas:
 - No propongas tecnologías concretas hasta que las respuestas justifiquen una decisión.`,
     language: "es",
     module: "software-development",
-    categories: ["software-architecture"],
+    category: "software-architecture",
     subcategories: ["quality-attributes"],
     tags: ["analysis", "checklist", "template"],
     useCases: [
@@ -309,7 +311,7 @@ Reglas:
 Usa una redacción concreta para que cada escenario pueda convertirse posteriormente en una prueba, una alerta, un objetivo operativo o un criterio de aceptación.`,
     language: "es",
     module: "software-development",
-    categories: ["software-architecture"],
+    category: "software-architecture",
     subcategories: ["quality-attributes"],
     tags: ["analysis", "checklist", "template"],
     useCases: [
@@ -385,7 +387,7 @@ Reglas:
 Termina con una síntesis de las tres tensiones que más deberían influir en la siguiente fase de decisión arquitectónica.`,
     language: "es",
     module: "software-development",
-    categories: ["software-architecture"],
+    category: "software-architecture",
     subcategories: ["quality-attributes"],
     tags: ["analysis", "checklist", "template"],
     useCases: [
@@ -460,7 +462,7 @@ Reglas:
 El objetivo es producir un diagnóstico útil para comparar estrategias de organización en una fase posterior.`,
     language: "es",
     module: "software-development",
-    categories: ["software-architecture"],
+    category: "software-architecture",
     subcategories: ["application-structure"],
     tags: ["analysis", "checklist"],
     useCases: [
@@ -546,7 +548,7 @@ Reglas:
 Prioriza la capacidad de localizar cambios y mantener límites comprensibles sobre la apariencia de una estructura ideal.`,
     language: "es",
     module: "software-development",
-    categories: ["software-architecture"],
+    category: "software-architecture",
     subcategories: ["application-structure"],
     tags: ["analysis", "template"],
     useCases: [
@@ -631,7 +633,7 @@ Reglas:
 - La migración debe poder detenerse después de cualquier fase dejando el sistema funcionando.`,
     language: "es",
     module: "software-development",
-    categories: ["software-architecture"],
+    category: "software-architecture",
     subcategories: ["application-structure"],
     tags: ["analysis", "migration", "checklist"],
     useCases: [
@@ -703,8 +705,8 @@ Reglas:
 Presenta una tabla comparativa final, pero no uses puntuaciones con falsa precisión: justifica cada comparación con hechos, supuestos o incertidumbres.`,
     language: "es",
     module: "software-development",
-    categories: ["software-architecture"],
-    subcategories: ["quality-attributes"],
+    category: "software-architecture",
+    subcategories: ["architecture-decisions"],
     tags: ["analysis", "template"],
     useCases: [
       "Explorar opciones antes de tomar una decisión arquitectónica",
@@ -783,7 +785,7 @@ Reglas:
 - No recomiendes una alternativa solo porque sea más moderna, distribuida o sofisticada.`,
     language: "es",
     module: "software-development",
-    categories: ["software-architecture"],
+    category: "software-architecture",
     subcategories: ["quality-attributes"],
     tags: ["analysis", "checklist", "template"],
     useCases: [
@@ -869,7 +871,7 @@ Reglas:
 Puedes incluir una representación textual o diagramable, pero la claridad y la trazabilidad tienen prioridad sobre el formato.`,
     language: "es",
     module: "software-development",
-    categories: ["software-architecture"],
+    category: "software-architecture",
     subcategories: ["c4-model"],
     tags: ["analysis", "template"],
     useCases: [
@@ -942,7 +944,7 @@ Reglas:
 Evalúa el modelo como herramienta de comunicación y evolución, no como una prueba de que la arquitectura sea técnicamente correcta.`,
     language: "es",
     module: "software-development",
-    categories: ["software-architecture"],
+    category: "software-architecture",
     subcategories: ["c4-model"],
     tags: ["analysis", "checklist"],
     useCases: [
@@ -1096,8 +1098,8 @@ Incluye un diagrama textual sencillo. Si una sección no aplica, indícalo y exp
 No confundas una arquitectura recomendada con una lista de tecnologías. Presenta primero las decisiones y sus razones; menciona tecnologías concretas solo cuando las restricciones y los requisitos las justifiquen.`,
     language: "es",
     module: "software-development",
-    categories: ["software-architecture"],
-    subcategories: ["quality-attributes"],
+    category: "software-architecture",
+    subcategories: ["architecture-decisions"],
     tags: ["analysis", "checklist", "template"],
     useCases: [
       "Elegir una arquitectura antes de iniciar un proyecto nuevo",
@@ -1140,7 +1142,7 @@ Entrega:
 - Una nota final con lo que NO has probado y por qué (integración, rendimiento, concurrencia), para decidir si hacen falta otros niveles de prueba.`,
     language: "es",
     module: "software-development",
-    categories: ["quality-and-testing"],
+    category: "quality-security-performance",
     subcategories: ["unit-testing"],
     tags: ["typescript"],
     useCases: [
@@ -1188,8 +1190,8 @@ Fase 3 — Aprender:
 Reglas: no afirmes una causa raíz sin evidencia; distingue siempre entre "confirmado", "probable" y "por verificar"; prioriza restaurar el servicio sobre entenderlo todo.`,
     language: "es",
     module: "software-development",
-    categories: ["observability"],
-    subcategories: ["logs", "alerts"],
+    category: "observability",
+    subcategories: ["incident-response", "logs", "alerts"],
     tags: ["incident-response", "debugging"],
     useCases: [
       "Guiar a la persona de guardia durante una incidencia real",
@@ -1225,8 +1227,8 @@ Produce an observability improvement plan with these sections:
 Close with a prioritized implementation order: what gives the most debugging value in the first week, the first month, and the first quarter. Prefer open standards (OpenTelemetry) over vendor lock-in.`,
     language: "en",
     module: "software-development",
-    categories: ["observability"],
-    subcategories: ["metrics", "traces", "monitoring"],
+    category: "observability",
+    subcategories: ["observability-improvement", "metrics", "traces", "monitoring"],
     tags: ["checklist"],
     useCases: [
       "Improving a service that is painful to debug in production",
@@ -1268,7 +1270,8 @@ Genera el ADR completo con esta estructura:
 Tono: directo, sin marketing interno. Un ADR bueno permite estar en desacuerdo con la decisión entendiendo por qué se tomó.`,
     language: "es",
     module: "software-development",
-    categories: ["software-architecture", "technical-documentation"],
+    category: "software-architecture",
+    subcategories: ["architecture-decisions"],
     tags: ["template"],
     useCases: [
       "Documentar la elección de una base de datos, framework o patrón",
@@ -1309,8 +1312,8 @@ Entrega el diseño con esta estructura:
 Prioriza la velocidad de feedback: lo que falla más a menudo debe ejecutarse primero.`,
     language: "es",
     module: "software-development",
-    categories: ["ci-cd", "devops"],
-    subcategories: ["automation", "deployments"],
+    category: "delivery-and-deployment",
+    subcategories: ["ci-cd-pipelines", "automation", "deployments"],
     tags: ["docker", "checklist"],
     useCases: [
       "Montar CI/CD desde cero en un proyecto nuevo",
@@ -1353,7 +1356,8 @@ Work through these steps:
 Show me the optimized query and the expected plan change. If you need information I have not provided, list the exact queries or commands I should run to get it.`,
     language: "en",
     module: "software-development",
-    categories: ["databases", "performance"],
+    category: "data",
+    subcategories: ["query-performance"],
     tags: ["sql", "postgresql"],
     useCases: [
       "Fixing a query that times out in production",
@@ -1392,7 +1396,8 @@ Cierra con una tabla resumen: amenaza, categoría STRIDE, riesgo, mitigación, r
 Sé específico para mi sistema: prefiero diez amenazas concretas a cincuenta genéricas de una checklist.`,
     language: "es",
     module: "software-development",
-    categories: ["software-security"],
+    category: "quality-security-performance",
+    subcategories: ["software-security"],
     tags: ["checklist", "api"],
     useCases: [
       "Analizar una funcionalidad nueva antes de implementarla",
@@ -1439,7 +1444,7 @@ Ahora se programa el refresco un minuto antes de la expiración.
 Closes: #412`,
     language: "es",
     module: "software-development",
-    categories: ["version-control"],
+    category: "project-setup-and-workflow",
     subcategories: ["commits", "git"],
     tags: ["git", "template"],
     useCases: [
@@ -1526,7 +1531,7 @@ Reglas:
 - Si una estrategia depende de una capacidad concreta del framework, márcala como supuesto verificable.`,
     language: "es",
     module: "software-development",
-    categories: ["frontend-development", "web-development"],
+    category: "frontend-and-experience",
     subcategories: ["rendering-strategies"],
     tags: ["analysis", "checklist", "template"],
     useCases: [
@@ -1614,7 +1619,7 @@ Reglas:
 - No propongas una reescritura completa de la gestión de estado: prioriza problemas y cambios localizados.`,
     language: "es",
     module: "software-development",
-    categories: ["frontend-development"],
+    category: "frontend-and-experience",
     subcategories: ["frontend-state"],
     tags: ["analysis", "checklist"],
     useCases: [
@@ -1658,7 +1663,8 @@ Guíame por este proceso:
 Regla de oro: cada paso debe reducir el espacio de búsqueda. Nada de "prueba a actualizar las dependencias".`,
     language: "es",
     module: "software-development",
-    categories: ["frontend-development", "web-development"],
+    category: "frontend-and-experience",
+    subcategories: ["frontend-debugging"],
     tags: ["debugging", "react", "typescript"],
     useCases: [
       "Depurar un bug de interfaz difícil de reproducir",
@@ -1706,7 +1712,7 @@ Output: findings ordered by severity, each with the offending lines and the corr
 Base image preference: official, minimal (alpine or distroless when the runtime allows it), pinned by digest for production.`,
     language: "en",
     module: "software-development",
-    categories: ["devops"],
+    category: "delivery-and-deployment",
     subcategories: ["containers"],
     tags: ["docker", "checklist"],
     useCases: [
@@ -1745,7 +1751,8 @@ Diseña un plan completo:
 Entrega el plan como una secuencia numerada de pasos ejecutables, cada uno con su comando o migración concreta y su criterio de "hecho".`,
     language: "es",
     module: "software-development",
-    categories: ["databases"],
+    category: "data",
+    subcategories: ["database-migrations"],
     tags: ["migration", "sql", "postgresql"],
     useCases: [
       "Migrar esquema en producción sin parar el servicio",
@@ -1782,7 +1789,7 @@ Diseña la suite completa:
 Entrega: la estructura de la suite, el código de al menos dos tests completos representativos (uno de caso feliz y uno de error), y la configuración del entorno de pruebas.`,
     language: "es",
     module: "software-development",
-    categories: ["quality-and-testing", "apis-and-integrations"],
+    category: "quality-security-performance",
     subcategories: ["integration-testing"],
     tags: ["api", "typescript"],
     useCases: [
@@ -1821,7 +1828,8 @@ Estructura de la documentación:
 Reglas de estilo: frases cortas, ejemplos antes que explicaciones, nada de documentar lo obvio ("este parámetro es el nombre"), y cada afirmación debe poder comprobarse en el código. Si algo del código es confuso, no lo maquilles en la documentación: señálalo como mejora pendiente.`,
     language: "es",
     module: "software-development",
-    categories: ["technical-documentation"],
+    category: "maintenance-and-evolution",
+    subcategories: ["technical-documentation"],
     tags: ["template"],
     useCases: [
       "Documentar una librería interna antes de compartirla entre equipos",
@@ -1869,7 +1877,7 @@ Reglas:
 - No propongas una arquitectura alternativa: el objetivo es diagnosticar la actual.`,
     language: "es",
     module: "software-development",
-    categories: ["software-architecture"],
+    category: "software-architecture",
     subcategories: ["quality-attributes"],
     tags: ["analysis", "checklist"],
     useCases: [
@@ -1926,7 +1934,7 @@ Reglas:
 - No propongas herramientas propietarias sin mencionar alternativas abiertas.`,
     language: "es",
     module: "software-development",
-    categories: ["software-architecture"],
+    category: "software-architecture",
     subcategories: ["quality-attributes"],
     tags: ["analysis", "checklist"],
     useCases: [
@@ -1986,8 +1994,8 @@ Reglas:
 - Si una dimensión no aplica al contexto, indícalo en lugar de forzar un hallazgo genérico.`,
     language: "es",
     module: "software-development",
-    categories: ["software-architecture"],
-    subcategories: ["quality-attributes"],
+    category: "software-architecture",
+    subcategories: ["architectural-review"],
     tags: ["analysis", "checklist"],
     useCases: [
       "Revisar una arquitectura antes de comprometer recursos",
@@ -2044,7 +2052,7 @@ Reglas:
 - No propongas una reescritura completa: señala violaciones concretas y su impacto.`,
     language: "es",
     module: "software-development",
-    categories: ["software-architecture"],
+    category: "software-architecture",
     subcategories: ["hexagonal-architecture"],
     tags: ["analysis", "checklist"],
     useCases: [
@@ -2099,7 +2107,7 @@ Reglas:
 - Si una fuga es deliberada (por ejemplo, un entity con anotaciones de ORM), explica el trade-off y si existe alternativa sin coste significativo.`,
     language: "es",
     module: "software-development",
-    categories: ["software-architecture"],
+    category: "software-architecture",
     subcategories: ["clean-architecture"],
     tags: ["analysis", "checklist"],
     useCases: [
@@ -2156,7 +2164,7 @@ Reglas:
 - Distingue entre comunicación dentro de un proceso, entre procesos en la misma máquina y entre servicios distribuidos.`,
     language: "es",
     module: "software-development",
-    categories: ["software-architecture"],
+    category: "software-architecture",
     subcategories: ["distributed-systems"],
     tags: ["analysis", "checklist"],
     useCases: [
@@ -2205,7 +2213,7 @@ Reglas:
 - No asumas que todas las llamadas de la cadena tienen el mismo SLA: pregunta o estima según el contexto.`,
     language: "es",
     module: "software-development",
-    categories: ["software-architecture"],
+    category: "software-architecture",
     subcategories: ["distributed-systems"],
     tags: ["analysis", "checklist"],
     useCases: [
@@ -2257,7 +2265,7 @@ Reglas:
 - Si un escenario no aplica al protocolo o contexto descrito, indícalo y explica por qué.`,
     language: "es",
     module: "software-development",
-    categories: ["software-architecture"],
+    category: "software-architecture",
     subcategories: ["distributed-systems"],
     tags: ["analysis", "checklist"],
     useCases: [
@@ -2305,7 +2313,7 @@ Reglas:
 - Evalúa explícitamente si los retries podrían empeorar un fallo del destino (retry storm) y cómo mitigarlo.`,
     language: "es",
     module: "software-development",
-    categories: ["software-architecture"],
+    category: "software-architecture",
     subcategories: ["distributed-systems"],
     tags: ["analysis", "checklist"],
     useCases: [
@@ -2357,7 +2365,8 @@ Reglas:
 - Considera la madurez del equipo y el ecosistema disponible.`,
     language: "es",
     module: "software-development",
-    categories: ["apis-and-integrations"],
+    category: "backend-and-apis",
+    subcategories: ["rest-api-design"],
     tags: ["analysis", "api"],
     useCases: [
       "Elegir el estilo de API para un nuevo servicio",
@@ -2404,7 +2413,8 @@ Reglas:
 - No propongas un rediseño completo: señala problemas concretos y su impacto en la evolución.`,
     language: "es",
     module: "software-development",
-    categories: ["apis-and-integrations"],
+    category: "backend-and-apis",
+    subcategories: ["api-contracts"],
     tags: ["analysis", "api", "checklist"],
     useCases: [
       "Revisar una API antes de publicarla para clientes externos",
@@ -2459,7 +2469,8 @@ Reglas:
 - Si la API tiene operaciones asíncronas, especifica cómo se comunican los errores en ese contexto.`,
     language: "es",
     module: "software-development",
-    categories: ["apis-and-integrations"],
+    category: "backend-and-apis",
+    subcategories: ["api-error-model"],
     tags: ["api", "template"],
     useCases: [
       "Diseñar el modelo de errores de una API nueva antes de implementarla",

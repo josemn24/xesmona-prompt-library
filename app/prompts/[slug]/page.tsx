@@ -4,15 +4,18 @@ import { notFound } from "next/navigation";
 import { Suspense } from "react";
 import { BackToPromptsLink } from "@/src/components/back-to-prompts-link";
 import { LanguageBadge } from "@/src/components/badges";
+import { Breadcrumbs } from "@/src/components/breadcrumbs";
 import { CopyPromptButton } from "@/src/components/copy-prompt-button";
+import { PromptCard } from "@/src/components/prompt-card";
 import { PromptContent } from "@/src/components/prompt-content";
 import { allPrompts } from "@/src/data";
 import { formatDate } from "@/src/lib/i18n";
-import { promptsUrl } from "@/src/lib/query-params";
+import { categoryUrl, moduleUrl, promptsUrl } from "@/src/lib/query-params";
 import {
   getCategoryById,
   getModuleById,
   getPromptBySlug,
+  getRelatedPrompts,
   getSubcategoryById,
   getTagById,
 } from "@/src/lib/taxonomy";
@@ -54,15 +57,14 @@ export default async function PromptDetailPage({ params }: PageProps) {
   if (!prompt) notFound();
 
   const promptModule = getModuleById(prompt.module);
-  const promptCategories = prompt.categories
-    .map((id) => getCategoryById(id))
-    .filter((category) => category !== undefined);
+  const promptCategory = getCategoryById(prompt.category);
   const promptSubcategories = (prompt.subcategories ?? [])
     .map((id) => getSubcategoryById(id))
     .filter((subcategory) => subcategory !== undefined);
   const promptTags = prompt.tags
     .map((id) => getTagById(id))
     .filter((tag) => tag !== undefined);
+  const relatedPrompts = getRelatedPrompts(prompt);
 
   return (
     <div className="mx-auto max-w-3xl px-4 py-10 sm:px-6">
@@ -75,6 +77,26 @@ export default async function PromptDetailPage({ params }: PageProps) {
       >
         <BackToPromptsLink />
       </Suspense>
+
+      <div className="mt-5">
+        <Breadcrumbs
+          items={[
+            { label: "Inicio", href: "/" },
+            ...(promptModule
+              ? [{ label: promptModule.label, href: moduleUrl(promptModule.id) }]
+              : []),
+            ...(promptCategory
+              ? [
+                  {
+                    label: promptCategory.label,
+                    href: categoryUrl(prompt.module, promptCategory.id),
+                  },
+                ]
+              : []),
+            { label: prompt.title },
+          ]}
+        />
+      </div>
 
       <article className="mt-6">
         <header>
@@ -90,7 +112,7 @@ export default async function PromptDetailPage({ params }: PageProps) {
             <dd className="mt-1 text-sm">
               {promptModule ? (
                 <Link
-                  href={`/modules/${promptModule.id}`}
+                  href={moduleUrl(promptModule.id)}
                   className="font-medium text-brand-violet underline-offset-4 hover:text-brand-coral hover:underline"
                 >
                   {promptModule.label}
@@ -109,18 +131,16 @@ export default async function PromptDetailPage({ params }: PageProps) {
           <div>
             <dt className={metadataLabelClass}>Categorías</dt>
             <dd className="mt-1 flex flex-wrap gap-1.5">
-              {promptCategories.map((category) => (
+              {promptCategory ? (
                 <Link
-                  key={category.id}
-                  href={promptsUrl({
-                    module: prompt.module,
-                    categories: [category.id],
-                  })}
+                  href={categoryUrl(prompt.module, promptCategory.id)}
                   className="inline-flex items-center rounded-full border border-brand-orange/30 bg-brand-orange-soft px-2 py-0.5 text-xs font-medium text-brand-ink transition-colors hover:border-brand-coral"
                 >
-                  {category.label}
+                  {promptCategory.label}
                 </Link>
-              ))}
+              ) : (
+                prompt.category
+              )}
             </dd>
           </div>
           {promptSubcategories.length > 0 && (
@@ -132,7 +152,7 @@ export default async function PromptDetailPage({ params }: PageProps) {
                     key={subcategory.id}
                     href={promptsUrl({
                       module: prompt.module,
-                      categories: [subcategory.category],
+                      categories: [prompt.category],
                       subcategories: [subcategory.id],
                     })}
                     className="inline-flex items-center rounded-full border border-brand-turquoise/30 bg-brand-turquoise-soft px-2 py-0.5 text-xs font-medium text-brand-ink transition-colors hover:border-brand-violet"
@@ -230,6 +250,24 @@ export default async function PromptDetailPage({ params }: PageProps) {
             <CopyPromptButton content={prompt.content} />
           </div>
         </section>
+
+        {relatedPrompts.length > 0 && (
+          <section aria-labelledby="prompts-relacionados" className="mt-10">
+            <h2
+              id="prompts-relacionados"
+              className="text-lg font-semibold text-brand-ink"
+            >
+              Prompts relacionados
+            </h2>
+            <ul className="mt-4 grid list-none gap-4 p-0 sm:grid-cols-2">
+              {relatedPrompts.map((relatedPrompt) => (
+                <li key={relatedPrompt.id}>
+                  <PromptCard prompt={relatedPrompt} />
+                </li>
+              ))}
+            </ul>
+          </section>
+        )}
       </article>
     </div>
   );

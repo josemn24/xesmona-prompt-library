@@ -45,7 +45,8 @@ Después entrega:
 No avances a una fase posterior si falta información que pueda cambiar la decisión. No confundas actividad con aprendizaje ni interés declarado con comportamiento validado. Termina con una única acción inmediata y la condición que permitirá evaluar si el ciclo funcionó.`,
     language: "es",
     module: "business",
-    categories: ["lean-startup", "business-strategy", "project-management"],
+    category: "validation-and-experimentation",
+    subcategories: ["lean-cycle"],
     tags: ["lean-startup", "validated-learning", "experimentation", "checklist"],
     useCases: [
       "Guiar un proyecto nuevo desde la idea hasta el primer experimento",
@@ -91,7 +92,8 @@ Formula las tres primeras hipótesis falsables con este formato:
 No diseñes todavía el producto completo. Termina indicando cuál es la decisión que estas hipótesis deben ayudar a tomar, qué no sabemos todavía y cuál debería ser el primer aprendizaje buscado.`,
     language: "es",
     module: "business",
-    categories: ["lean-startup", "business-analysis", "business-strategy"],
+    category: "validation-and-experimentation",
+    subcategories: ["project-definition"],
     tags: ["lean-startup", "validated-learning", "template", "analysis"],
     useCases: [
       "Convertir una idea difusa en un problema comprobable",
@@ -140,7 +142,8 @@ Para cada hipótesis entrega:
 Reescribe cualquier hipótesis vaga como "los usuarios lo quieren" o "el mercado es grande". No aceptes métricas de vanidad como prueba suficiente. Termina con las cinco hipótesis de mayor riesgo y una recomendación sobre cuál debe probarse primero.`,
     language: "es",
     module: "business",
-    categories: ["lean-startup", "business-analysis", "business-strategy"],
+    category: "validation-and-experimentation",
+    subcategories: ["hypotheses"],
     tags: ["lean-startup", "validated-learning", "growth-engine", "analysis"],
     useCases: [
       "Hacer explícitos los supuestos detrás de una idea",
@@ -188,7 +191,8 @@ Calcula una prioridad razonada y crea una tabla con:
 No priorices la hipótesis más fácil de probar si una hipótesis más arriesgada puede invalidar todo el proyecto. Selecciona una única hipótesis para el próximo ciclo y define la pregunta exacta que debemos responder.`,
     language: "es",
     module: "business",
-    categories: ["lean-startup", "business-analysis", "project-management"],
+    category: "validation-and-experimentation",
+    subcategories: ["hypothesis-prioritization"],
     tags: ["lean-startup", "experimentation", "analysis", "checklist"],
     useCases: [
       "Decidir qué supuesto probar primero",
@@ -238,7 +242,8 @@ Entrega:
 Da prioridad a acciones, pagos, retención, uso repetido o compromisos reales frente a opiniones declaradas. No llames aprendizaje validado a una señal débil. Termina con un protocolo breve para ejecutar y registrar el experimento.`,
     language: "es",
     module: "business",
-    categories: ["lean-startup", "business-analysis", "project-management"],
+    category: "validation-and-experimentation",
+    subcategories: ["experiment-design"],
     tags: ["lean-startup", "validated-learning", "experimentation", "checklist"],
     useCases: [
       "Convertir una hipótesis en un experimento ejecutable",
@@ -297,7 +302,8 @@ Recomienda una alternativa y descompón su alcance en:
 Incluye el flujo completo del experimento, la métrica primaria, el umbral y la decisión asociada. Termina con una lista explícita de funcionalidades que no deben construirse todavía.`,
     language: "es",
     module: "business",
-    categories: ["lean-startup", "business-strategy", "project-management"],
+    category: "validation-and-experimentation",
+    subcategories: ["experimental-mvp"],
     tags: ["lean-startup", "mvp", "experimentation", "validated-learning"],
     useCases: [
       "Definir el primer MVP sin inflar su alcance",
@@ -354,7 +360,8 @@ Termina con:
 - actualización concreta del estado del proyecto.`,
     language: "es",
     module: "business",
-    categories: ["lean-startup", "business-analysis"],
+    category: "validation-and-experimentation",
+    subcategories: ["validated-learning"],
     tags: ["lean-startup", "validated-learning", "experimentation", "analysis"],
     useCases: [
       "Revisar los resultados de un MVP o piloto",
@@ -410,7 +417,8 @@ Si recomiendas PARAR, explica si la causa es una hipótesis invalidada, un exper
 No recomiendes pivotar solo por una observación aislada ni perseverar por apego a la idea. Termina con la decisión, la evidencia principal, el nivel de confianza y la acción inmediata.`,
     language: "es",
     module: "business",
-    categories: ["lean-startup", "business-strategy", "business-analysis"],
+    category: "validation-and-experimentation",
+    subcategories: ["pivot-or-persevere"],
     tags: ["lean-startup", "pivot", "validated-learning", "growth-engine"],
     useCases: [
       "Revisar una iniciativa después de varios experimentos",
@@ -467,7 +475,8 @@ Aplica estas reglas:
 Incluye dependencias, riesgos de calendario y un protocolo breve de revisión semanal. Termina con el primer ciclo ejecutable en menos tiempo y con la acción concreta que debe realizarse hoy.`,
     language: "es",
     module: "business",
-    categories: ["lean-startup", "project-management", "business-strategy"],
+    category: "validation-and-experimentation",
+    subcategories: ["learning-cadence"],
     tags: ["lean-startup", "experimentation", "validated-learning", "checklist"],
     useCases: [
       "Organizar ciclos semanales de experimentación",
