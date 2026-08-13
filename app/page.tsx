@@ -16,7 +16,7 @@ export default function HomePage() {
 
   return (
     <div className="mx-auto max-w-6xl px-4 sm:px-6">
-      <section className="relative overflow-hidden rounded-b-3xl border-x border-b border-brand-blue/10 bg-linear-to-br from-brand-violet-soft via-brand-cream to-brand-yellow-soft px-6 py-10 sm:px-10 sm:py-14 lg:px-12">
+      <section className="relative overflow-hidden rounded-b-3xl border-x border-b border-brand-blue/10 bg-linear-to-br from-brand-violet-soft/70 via-white to-brand-turquoise-soft/60 px-6 py-10 sm:px-10 sm:py-14 lg:px-12">
         <div className="pointer-events-none absolute -top-24 -right-20 size-64 rounded-full bg-brand-turquoise-soft/70 blur-3xl" />
         <div className="relative">
           <p className="mb-3 text-sm font-semibold uppercase tracking-[0.18em] text-brand-coral">
