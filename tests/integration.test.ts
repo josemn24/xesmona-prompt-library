@@ -45,7 +45,7 @@ describe("integración final de la arquitectura", () => {
     );
     const tagIds = new Set(tags.map((tag) => tag.id));
 
-    expect(allPrompts).toHaveLength(67);
+    expect(allPrompts).toHaveLength(72);
     for (const prompt of allPrompts) {
       const category = categoryById.get(prompt.category);
       expect(moduleIds.has(prompt.module)).toBe(true);

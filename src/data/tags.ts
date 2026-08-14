@@ -9,6 +9,8 @@ export const tags: Tag[] = [
   { id: "postgresql", label: "PostgreSQL", facet: "technology" },
   { id: "docker", label: "Docker", facet: "technology" },
   { id: "supabase", label: "Supabase", facet: "technology" },
+  { id: "shadcn", label: "shadcn/ui", facet: "technology" },
+  { id: "storybook", label: "Storybook", facet: "technology" },
   { id: "api", label: "API", facet: "technology" },
   { id: "rest", label: "REST", facet: "technology" },
   { id: "git", label: "Git", facet: "technology" },

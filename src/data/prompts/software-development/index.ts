@@ -52,6 +52,11 @@ const promptOrder = [
   "add-supabase-package-scripts",
   "configure-supabase-environment-secrets",
   "create-supabase-seed-data",
+  "recommend-shadcn-preset",
+  "configure-shadcn-theme",
+  "install-shadcn-core-components",
+  "create-shadcn-component-gallery",
+  "evaluate-configure-storybook",
   "write-git-commit-messages",
   "evaluate-rendering-strategies",
   "classify-frontend-state",
@@ -86,4 +91,3 @@ function getPrompt(id: string): Prompt {
 
 // Conserva el orden histórico del catálogo aunque los datos estén separados por tema.
 export const softwareDevelopmentPrompts: Prompt[] = promptOrder.map(getPrompt);
-

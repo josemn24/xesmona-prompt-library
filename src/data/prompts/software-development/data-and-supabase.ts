@@ -241,6 +241,320 @@ Entrega:
   },
 
   {
+    id: "recommend-shadcn-preset",
+    slug: "recomendar-preset-visual-shadcn",
+    title: "Recomendar un preset visual de shadcn/create",
+    description:
+      "Compara presets visuales de shadcn/create y recomienda una configuración para probar antes de inicializar una web app.",
+    content: `Actúa como un diseñador de sistemas UI especializado en shadcn/ui.
+
+Quiero elegir un preset visual en https://ui.shadcn.com/create antes de configurar shadcn en este proyecto. Consulta la documentación oficial actual:
+
+- https://ui.shadcn.com/docs.md
+- https://ui.shadcn.com/docs/theming.md
+- https://ui.shadcn.com/docs/installation.md
+
+Contexto del producto:
+{{product}}
+
+Público objetivo y tono de marca:
+{{audience}}
+
+Tipo de aplicación y densidad de información:
+{{application}}
+
+Framework y package manager:
+{{stack}}
+
+Propón tres presets visuales para probar en shadcn/create. Para cada uno indica:
+
+- estilo;
+- color base y tema;
+- tipografías;
+- iconos;
+- radio de bordes;
+- configuración de dark mode;
+- ventajas y riesgos para este producto.
+
+Recomienda uno para probar primero y explica qué decisiones deberíamos comparar visualmente en la herramienta.
+
+No modifiques todavía el repositorio ni inventes un comando de setup. El objetivo es obtener una configuración visual concreta para probarla en shadcn/create. Cuando se elija un preset, indica qué información necesitas para generar el comando final de instalación.
+
+Entrega:
+
+1. resumen de los tres presets propuestos;
+2. recomendación principal y motivo;
+3. lista de decisiones que deben probarse visualmente;
+4. información pendiente para generar el setup final.`,
+    language: "es",
+    module: "software-development",
+    category: "project-setup-and-workflow",
+    subcategories: ["shadcn-presets"],
+    tags: ["shadcn", "checklist", "analysis"],
+    useCases: [
+      "Elegir la dirección visual de una web app nueva",
+      "Comparar presets de shadcn/create antes de inicializar el proyecto",
+      "Traducir requisitos de marca y producto a decisiones de UI",
+    ],
+    notes:
+      "Este prompt decide qué preset probar; la instalación y la configuración detallada del tema deben hacerse en prompts posteriores.",
+    createdAt: "2026-08-14",
+    updatedAt: "2026-08-14",
+  },
+
+  {
+    id: "configure-shadcn-theme",
+    slug: "configurar-tema-shadcn-ui",
+    title: "Configurar el tema de shadcn/ui",
+    description:
+      "Configura un sistema de tema coherente para shadcn/ui mediante tokens semánticos, variables CSS y modos claro y oscuro.",
+    content: `Actúa como un diseñador de sistemas UI especializado en shadcn/ui.
+
+Configura el tema de shadcn/ui en este repositorio. Antes de actuar, consulta la documentación oficial actual:
+
+- https://ui.shadcn.com/docs/theming.md
+- https://ui.shadcn.com/docs/components-json.md
+- https://ui.shadcn.com/docs/dark-mode.md
+
+Inspecciona \`components.json\`, los archivos CSS globales, la configuración de Tailwind, los aliases y cualquier proveedor de tema existente.
+
+Dirección visual elegida:
+{{visualDirection}}
+
+Requisitos de marca y producto:
+{{brand}}
+
+Requisitos de light mode, dark mode y accesibilidad:
+{{requirements}}
+
+Configura, cuando corresponda:
+
+- tokens semánticos para superficies, texto, acciones, estados, bordes y focus;
+- valores para \`:root\` y \`.dark\`;
+- tipografía, escala de radius y colores de gráficos;
+- integración con \`components.json\` y las variables CSS de Tailwind;
+- dark mode sin duplicar estilos ni romper componentes existentes.
+
+Conserva las convenciones actuales y no cambies \`cssVariables\`, el estilo base o el color base sin explicar el impacto y la posible necesidad de reinstalar componentes. No rediseñes componentes concretos ni inventes una identidad visual sin basarte en el contexto proporcionado.
+
+Entrega:
+
+1. resumen de los cambios realizados y archivos afectados;
+2. tabla de tokens definidos o modificados;
+3. comprobaciones visuales y técnicas que deben ejecutarse;
+4. decisiones pendientes y riesgos de compatibilidad.`,
+    language: "es",
+    module: "software-development",
+    category: "project-setup-and-workflow",
+    subcategories: ["shadcn-theming"],
+    tags: ["shadcn", "checklist", "analysis"],
+    useCases: [
+      "Aplicar un preset visual de shadcn a una web app",
+      "Configurar una identidad visual con light mode y dark mode",
+      "Detectar inconsistencias entre tokens, CSS y components.json",
+    ],
+    notes:
+      "Debe ejecutarse después de elegir el preset visual y antes de realizar una personalización extensa de componentes.",
+    createdAt: "2026-08-14",
+    updatedAt: "2026-08-14",
+  },
+
+  {
+    id: "install-shadcn-core-components",
+    slug: "configurar-componentes-core-shadcn-ui",
+    title: "Configurar componentes core de shadcn/ui",
+    description:
+      "Selecciona e instala un conjunto mínimo de componentes reutilizables de shadcn/ui, adaptado a las necesidades reales de la aplicación.",
+    content: `Actúa como un arquitecto frontend experto en shadcn/ui.
+
+Selecciona e instala los componentes esenciales de shadcn/ui para esta web app. Antes de actuar, consulta la documentación oficial actual:
+
+- https://ui.shadcn.com/docs/components.md
+- https://ui.shadcn.com/docs/cli.md
+
+Inspecciona el framework, el package manager, components.json, los componentes ya instalados y la estructura del proyecto.
+
+Contexto de la aplicación:
+{{application}}
+
+Pantallas y funcionalidades principales:
+{{features}}
+
+Usuarios y principales interacciones:
+{{users}}
+
+Instala como core universal únicamente estos componentes, salvo que ya existan:
+
+- button, card, input, label y textarea;
+- badge, alert, dialog y dropdown-menu;
+- separator, skeleton y tooltip.
+
+Añade componentes condicionales solo si el contexto los justifica, por ejemplo:
+
+- formularios: field, select, combobox, checkbox, radio-group o switch;
+- navegación: sidebar, breadcrumb, tabs o sheet;
+- datos: table, pagination o empty.
+
+No uses --all, no sobrescribas componentes personalizados y no instales componentes especializados sin una necesidad clara. Usa la CLI de shadcn/ui y conserva las convenciones del repositorio.
+
+Después verifica imports, TypeScript, lint y build.
+
+Entrega:
+
+1. resumen de los cambios realizados y archivos afectados;
+2. componentes instalados y motivo de cada uno;
+3. componentes descartados o aplazados y motivo;
+4. comprobaciones realizadas y cuestiones pendientes.`,
+    language: "es",
+    module: "software-development",
+    category: "project-setup-and-workflow",
+    subcategories: ["shadcn-components"],
+    tags: ["shadcn", "checklist", "analysis"],
+    useCases: [
+      "Preparar la base de componentes de una web app nueva",
+      "Evitar instalar componentes de shadcn/ui sin una necesidad clara",
+      "Adaptar la selección de componentes al tipo de aplicación",
+    ],
+    notes:
+      "El core es intencionadamente mínimo; los componentes de formularios, navegación y datos se añaden según las funcionalidades del proyecto.",
+    createdAt: "2026-08-14",
+    updatedAt: "2026-08-14",
+  },
+
+  {
+    id: "create-shadcn-component-gallery",
+    slug: "crear-galeria-componentes-shadcn-ui",
+    title: "Crear una galería interna de componentes shadcn/ui",
+    description:
+      "Crea una ruta de desarrollo para visualizar e interactuar con los componentes instalados de shadcn/ui usando ejemplos y estados locales.",
+    content: `Actúa como un ingeniero frontend especializado en shadcn/ui y sistemas de diseño.
+
+Crea una galería interna de componentes shadcn/ui en este repositorio. Antes de actuar, consulta la documentación oficial actual:
+
+- https://ui.shadcn.com/docs/components.md
+- https://ui.shadcn.com/docs/installation.md
+
+Inspecciona el framework y router, la estructura de rutas, el tema, los componentes instalados y cualquier galería o Storybook existente.
+
+Contexto de la aplicación:
+{{application}}
+
+Componentes que deben mostrarse:
+{{components}}
+
+Crea una ruta de desarrollo, siguiendo las convenciones del proyecto, para mostrar los componentes instalados agrupados como mínimo en:
+
+- fundamentos;
+- formularios;
+- feedback y overlays;
+- navegación;
+- tablas y visualización de datos.
+
+Para cada componente relevante incluye ejemplos interactivos y, cuando corresponda, estados de loading, disabled, error, empty, focus, dark mode y responsive. Usa datos locales y sintéticos. No conectes la galería con Supabase, APIs ni datos reales.
+
+Por defecto, la ruta debe estar disponible solo durante el desarrollo o quedar protegida mediante el mecanismo de acceso ya existente. No inventes un sistema de autenticación nuevo. Si el proyecto ya usa Storybook u otra herramienta equivalente, amplía esa solución en lugar de duplicarla.
+
+Reutiliza los componentes existentes, no copies su implementación dentro de la galería y no instales componentes adicionales salvo que sean necesarios y estén justificados.
+
+Después verifica navegación, interacción por teclado, light mode, dark mode, responsive, TypeScript, lint y build.
+
+Entrega:
+
+1. resumen de los cambios realizados y archivos afectados;
+2. ruta y categorías disponibles;
+3. componentes y estados demostrados;
+4. estrategia usada para limitar el acceso en producción;
+5. comprobaciones realizadas y cuestiones pendientes.`,
+    language: "es",
+    module: "software-development",
+    category: "project-setup-and-workflow",
+    subcategories: ["shadcn-component-gallery"],
+    tags: ["shadcn", "checklist", "analysis"],
+    useCases: [
+      "Validar visualmente los componentes tras configurar shadcn/ui",
+      "Crear una referencia interna para diseñadores y desarrolladores",
+      "Probar estados y variantes antes de usarlos en pantallas reales",
+    ],
+    notes:
+      "La galería es una herramienta de desarrollo y validación; no sustituye a Storybook cuando se necesitan pruebas visuales, documentación publicada o integración avanzada con un design system.",
+    createdAt: "2026-08-14",
+    updatedAt: "2026-08-14",
+  },
+
+  {
+    id: "evaluate-configure-storybook",
+    slug: "evaluar-configurar-storybook-web-app",
+    title: "Evaluar y configurar Storybook para una web app",
+    description:
+      "Decide si Storybook aporta valor al proyecto y, si procede, lo configura para documentar y probar componentes de forma aislada.",
+    content: `Actúa como un arquitecto frontend especializado en sistemas de diseño y calidad de UI.
+
+Evalúa si conviene configurar Storybook en este repositorio y hazlo solo si aporta valor claro. Antes de actuar, consulta la documentación oficial actual:
+
+- https://storybook.js.org/docs.md
+- https://storybook.js.org/docs/get-started/install.md
+- https://storybook.js.org/docs/writing-docs/index.md
+- https://storybook.js.org/docs/writing-tests/index.md
+
+Inspecciona el framework, el package manager, los componentes existentes, la galería interna, cualquier configuración de Storybook y los scripts del proyecto.
+
+Contexto del producto:
+{{application}}
+
+Equipo y horizonte del proyecto:
+{{team}}
+
+Componentes, design system y requisitos de calidad:
+{{uiRequirements}}
+
+Evalúa estos factores:
+
+- número y complejidad de componentes reutilizables;
+- necesidad de documentación compartida;
+- pruebas de interacción, accesibilidad y regresión visual;
+- existencia de un design system o intención de construirlo;
+- tamaño y experiencia del equipo;
+- coste de mantener stories, configuración y CI.
+
+Entrega primero una recomendación: configurar Storybook ahora, posponerlo o no usarlo. Si recomiendas posponerlo, no modifiques el repositorio y define las condiciones que justificarían retomarlo.
+
+Si recomiendas configurarlo:
+
+- usa la CLI oficial y adapta la instalación al framework y package manager;
+- habilita documentación, testing y accesibilidad solo cuando estén justificadas;
+- crea stories iniciales para los componentes core realmente existentes;
+- conserva los componentes y ejemplos personalizados del repositorio;
+- no añadas Chromatic, servicios externos ni regresión visual en la nube sin pedirlo explícitamente;
+- no dupliques una solución de Storybook ya existente.
+
+Mantén la galería interna si ayuda a validar la integración real con el layout, los providers y la navegación. Storybook debe cubrir el desarrollo y la documentación aislada, no sustituir necesariamente esa galería.
+
+Verifica la ejecución local, la generación de documentación, las stories, TypeScript, lint y build según los scripts disponibles.
+
+Entrega:
+
+1. recomendación y criterios utilizados;
+2. resumen de los cambios realizados y archivos afectados;
+3. capacidades de Storybook configuradas y stories creadas;
+4. relación entre Storybook y la galería interna;
+5. comprobaciones realizadas, costes asumidos y cuestiones pendientes.`,
+    language: "es",
+    module: "software-development",
+    category: "project-setup-and-workflow",
+    subcategories: ["storybook"],
+    tags: ["storybook", "checklist", "analysis"],
+    useCases: [
+      "Decidir si una web app necesita Storybook desde el inicio",
+      "Configurar documentación y testing de componentes reutilizables",
+      "Separar la validación aislada de componentes de la integración en la aplicación",
+    ],
+    notes:
+      "Storybook no debe instalarse automáticamente en proyectos pequeños; su valor aumenta cuando crecen los componentes reutilizables, el equipo o las necesidades de calidad visual.",
+    createdAt: "2026-08-14",
+    updatedAt: "2026-08-14",
+  },
+
+  {
     id: "write-git-commit-messages",
     slug: "escribir-mensajes-de-commit",
     title: "Escribir mensajes de commit útiles",
@@ -435,4 +749,3 @@ Entrega el plan como una secuencia numerada de pasos ejecutables, cada uno con s
   },
 
 ];
-

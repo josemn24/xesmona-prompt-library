@@ -22,10 +22,10 @@ describe("validación de los datos estáticos", () => {
     expect(libraryData.categories.every((category) => category.description.trim().length > 0)).toBe(true);
   });
 
-  it("conserva los 67 prompts y sus identificadores únicos", () => {
-    expect(libraryData.prompts).toHaveLength(67);
-    expect(new Set(libraryData.prompts.map((prompt) => prompt.id)).size).toBe(67);
-    expect(new Set(libraryData.prompts.map((prompt) => prompt.slug)).size).toBe(67);
+  it("conserva los 72 prompts y sus identificadores únicos", () => {
+    expect(libraryData.prompts).toHaveLength(72);
+    expect(new Set(libraryData.prompts.map((prompt) => prompt.id)).size).toBe(72);
+    expect(new Set(libraryData.prompts.map((prompt) => prompt.slug)).size).toBe(72);
     expect(libraryData.prompts.every((prompt) => prompt.category.length > 0)).toBe(true);
   });
 
