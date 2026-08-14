@@ -1408,6 +1408,137 @@ Sé específico para mi sistema: prefiero diez amenazas concretas a cincuenta ge
     updatedAt: "2026-02-20",
   },
   {
+    id: "setup-supabase-local-project",
+    slug: "configurar-supabase-local-desde-cero",
+    title: "Configurar Supabase local desde cero",
+    description:
+      "Plan breve y adaptado al repositorio para preparar y arrancar Supabase local desde cero.",
+    content: `Actúa como un ingeniero experto en desarrollo local.
+
+Configura y arranca Supabase local desde cero en este repositorio. Antes de actuar, consulta la documentación oficial actual:
+
+- https://supabase.com/docs/guides/local-development
+- https://supabase.com/docs/guides/local-development/cli/getting-started
+- https://supabase.com/docs/guides/local-development/cli-workflows
+
+Inspecciona el repositorio y adapta la solución al framework, package manager y convenciones existentes.
+
+Realiza únicamente estas tareas:
+
+- comprueba que exista un runtime compatible con Docker;
+- instala la CLI como dependencia de desarrollo si falta;
+- inicializa \`supabase/\`;
+- arranca el stack local y muestra cómo comprobar su estado.
+
+No añadas todavía scripts de \`package.json\`, esquema, migraciones, seed, tipos ni variables de entorno. No ejecutes acciones remotas como \`login\`, \`link\` o \`db push\`. No sobrescribas cambios existentes.
+
+Entrega:
+
+1. decisiones tomadas;
+2. archivos creados o modificados;
+3. comandos para verificar el setup;
+4. cuestiones pendientes o decisiones que deba tomar.`,
+    language: "es",
+    module: "software-development",
+    category: "project-setup-and-workflow",
+    subcategories: ["local-development"],
+    tags: ["supabase", "docker", "checklist"],
+    useCases: [
+      "Preparar Supabase local al comenzar un proyecto nuevo",
+      "Adaptar el setup de Supabase a un repositorio existente",
+      "Estandarizar el onboarding local de un equipo",
+    ],
+    notes:
+      "El prompt cubre únicamente el arranque local; los scripts, la configuración de datos y la verificación avanzada se tratan en prompts separados.",
+    createdAt: "2026-08-14",
+    updatedAt: "2026-08-14",
+  },
+  {
+    id: "add-supabase-package-scripts",
+    slug: "anadir-scripts-de-supabase-al-package-json",
+    title: "Añadir scripts de Supabase al package.json",
+    description:
+      "Añade comandos npm claros y seguros para manejar el entorno local de Supabase y las tareas habituales del proyecto.",
+    content: `Actúa como un ingeniero de desarrollo local.
+
+Quiero añadir scripts de Supabase al \`package.json\` de este repositorio. Consulta la documentación oficial actual antes de proponer cambios:
+
+- https://supabase.com/docs/guides/local-development/cli/getting-started
+- https://supabase.com/docs/guides/local-development/cli-workflows
+
+Inspecciona el package manager, los scripts existentes y si la CLI está instalada localmente.
+
+Incluye como mínimo scripts para:
+
+- iniciar Supabase;
+- consultar su estado;
+- detenerlo;
+- resetear la base de datos local.
+
+Propón solo otros scripts claramente útiles para este proyecto, por ejemplo para crear migraciones, generar tipos, ejecutar lint o lanzar tests. Conserva los scripts existentes y marca explícitamente cualquier comando destructivo.
+
+Entrega el cambio en formato diff, explica brevemente cada script y muestra los comandos de uso con sus argumentos cuando corresponda.`,
+    language: "es",
+    module: "software-development",
+    category: "project-setup-and-workflow",
+    subcategories: ["local-development"],
+    tags: ["supabase", "checklist", "template"],
+    useCases: [
+      "Estandarizar los comandos locales de Supabase en un proyecto",
+      "Facilitar el onboarding de nuevos colaboradores",
+      "Evitar comandos largos o inconsistentes durante el desarrollo",
+    ],
+    notes:
+      "El script de reset debe mantenerse explícito porque elimina y reconstruye la base de datos local.",
+    createdAt: "2026-08-14",
+    updatedAt: "2026-08-14",
+  },
+  {
+    id: "configure-supabase-environment-secrets",
+    slug: "configurar-variables-entorno-secretos-supabase",
+    title: "Configurar variables de entorno y secretos de Supabase",
+    description:
+      "Organiza la configuración local de Supabase y separa las variables públicas de los secretos sin exponer credenciales.",
+    content: `Actúa como un ingeniero experto en configuración segura de aplicaciones.
+
+Configura las variables de entorno y los secretos de Supabase en este repositorio. Antes de actuar, consulta la documentación oficial actual:
+
+- https://supabase.com/docs/guides/local-development/managing-config
+- https://supabase.com/docs/guides/local-development/cli-workflows
+
+Inspecciona el framework, los archivos de entorno existentes, el \`.gitignore\`, \`supabase/config.toml\` y cómo la aplicación lee sus variables.
+
+Realiza solo los cambios necesarios para:
+
+- crear o actualizar un archivo de ejemplo sin valores secretos;
+- excluir del control de versiones los archivos de entorno locales;
+- configurar la URL local y la clave pública de Supabase según las convenciones del proyecto;
+- mantener cualquier clave secreta o de administración únicamente en el servidor;
+- usar referencias \`env(...)\` en \`config.toml\` cuando la configuración local necesite secretos.
+
+No inventes credenciales, no expongas secretos al cliente y no ejecutes acciones remotas. Conserva la configuración existente y señala cualquier variable cuyo origen o ámbito no esté claro.
+
+Entrega:
+
+1. el diff de los archivos modificados;
+2. una tabla de variables con nombre, ámbito y archivo donde deben definirse;
+3. los pasos para completar la configuración local sin compartir secretos.`,
+    language: "es",
+    module: "software-development",
+    category: "project-setup-and-workflow",
+    subcategories: ["environment-configuration"],
+    tags: ["supabase", "checklist", "template"],
+    useCases: [
+      "Preparar las variables de entorno al configurar Supabase local",
+      "Revisar si una clave de Supabase puede llegar al cliente",
+      "Documentar la configuración necesaria para nuevos colaboradores",
+    ],
+    notes:
+      "El prompt no crea credenciales reales: genera configuración segura y deja al desarrollador completar los valores locales.",
+    createdAt: "2026-08-14",
+    updatedAt: "2026-08-14",
+  },
+  {
     id: "write-git-commit-messages",
     slug: "escribir-mensajes-de-commit",
     title: "Escribir mensajes de commit útiles",

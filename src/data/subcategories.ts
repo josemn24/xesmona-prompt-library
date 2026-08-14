@@ -47,6 +47,8 @@ export const subcategories: Subcategory[] = [
   { id: "database-migrations", label: "Migraciones de base de datos", category: "data" },
 
   // Desarrollo de software: setup y mantenimiento
+  { id: "local-development", label: "Desarrollo local", category: "project-setup-and-workflow" },
+  { id: "environment-configuration", label: "Configuración del entorno", category: "project-setup-and-workflow" },
   { id: "commits", label: "Commits", category: "project-setup-and-workflow" },
   { id: "git", label: "Git", category: "project-setup-and-workflow" },
   { id: "legacy-code", label: "Código legado", category: "maintenance-and-evolution" },
