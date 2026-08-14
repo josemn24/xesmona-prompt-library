@@ -1855,6 +1855,109 @@ Base image preference: official, minimal (alpine or distroless when the runtime 
     updatedAt: "2026-03-20",
   },
   {
+    id: "configure-supabase-migration-workflow",
+    slug: "configurar-workflow-migraciones-supabase",
+    title: "Elegir y configurar el workflow de migraciones de Supabase",
+    description:
+      "Define la fuente de verdad del esquema y establece un flujo reproducible para generar, revisar y aplicar migraciones de Supabase.",
+    content: `Actúa como un ingeniero experto en PostgreSQL y Supabase.
+
+Define y configura el workflow de migraciones de este repositorio. Antes de actuar, consulta la documentación oficial actual:
+
+- https://supabase.com/docs/guides/local-development/declarative-database-schemas
+- https://supabase.com/docs/guides/local-development/cli-workflows
+
+Inspecciona la estructura actual de \`supabase/\`, sus migraciones, esquemas y configuración.
+
+Si es un proyecto nuevo o todavía no tiene un workflow establecido, recomienda por defecto el enfoque declarativo usando \`supabase/schemas/\`. Solo recomienda migraciones imperativas si existe una razón concreta.
+
+Define:
+
+- la fuente de verdad del esquema;
+- la estructura de carpetas;
+- el flujo para crear cambios y generar migraciones;
+- cómo revisar y aplicar las migraciones localmente;
+- qué cambios requieren migraciones SQL manuales;
+- qué archivos deben versionarse.
+
+No diseñes tablas ni políticas RLS. No mezcles ambos enfoques ni ejecutes acciones remotas como \`login\`, \`link\` o \`db push\`.
+
+Entrega:
+
+1. enfoque recomendado y motivo;
+2. archivos que deben crearse o modificarse;
+3. comandos del workflow diario;
+4. excepciones y precauciones importantes.`,
+    language: "es",
+    module: "software-development",
+    category: "project-setup-and-workflow",
+    subcategories: ["supabase-migrations"],
+    tags: ["supabase", "postgresql", "migration", "checklist"],
+    useCases: [
+      "Establecer un workflow de base de datos en un proyecto nuevo",
+      "Decidir entre esquemas declarativos y migraciones imperativas",
+      "Evitar cambios de esquema fuera de la fuente de verdad versionada",
+    ],
+    notes:
+      "Para proyectos nuevos recomienda el enfoque declarativo; los cambios de datos y ciertas excepciones deben tratarse mediante migraciones SQL explícitas.",
+    createdAt: "2026-08-14",
+    updatedAt: "2026-08-14",
+  },
+  {
+    id: "design-supabase-schema-rls",
+    slug: "disenar-esquema-inicial-y-rls-supabase",
+    title: "Diseñar el esquema inicial y las políticas RLS de Supabase",
+    description:
+      "Convierte los requisitos del dominio y las reglas de acceso en un esquema declarativo de Supabase con RLS explícito y verificable.",
+    content: `Actúa como un arquitecto de bases de datos PostgreSQL experto en Supabase.
+
+Diseña el esquema inicial y las políticas Row Level Security (RLS) para este proyecto. Consulta la documentación oficial actual:
+
+- https://supabase.com/docs/guides/local-development/declarative-database-schemas
+- https://supabase.com/docs/guides/database/postgres/row-level-security
+
+Requisitos del dominio:
+{{requirements}}
+
+Usuarios, roles y reglas de acceso:
+{{access}}
+
+Contexto técnico y restricciones:
+{{context}}
+
+Genera una propuesta para \`supabase/schemas/\` que incluya:
+
+- tablas, columnas, tipos, relaciones y restricciones;
+- índices justificados;
+- RLS activado en las tablas expuestas;
+- políticas explícitas de \`select\`, \`insert\`, \`update\` y \`delete\` cuando correspondan;
+- separación entre \`anon\`, \`authenticated\` y cualquier rol administrativo;
+- casos permitidos y denegados que deberían probarse.
+
+No generes migraciones, seed data ni configuración remota. No inventes reglas de negocio: señala las ambigüedades y propone decisiones provisionales.
+
+Entrega:
+
+1. decisiones y supuestos;
+2. archivos SQL organizados para \`supabase/schemas/\`;
+3. matriz de permisos por rol y tabla;
+4. riesgos de seguridad y casos de prueba RLS.`,
+    language: "es",
+    module: "software-development",
+    category: "project-setup-and-workflow",
+    subcategories: ["supabase-schema-design"],
+    tags: ["supabase", "postgresql", "sql", "checklist"],
+    useCases: [
+      "Diseñar la primera versión de la base de datos de una aplicación Supabase",
+      "Traducir roles y reglas de negocio a políticas RLS",
+      "Revisar si un esquema expuesto mediante la API está correctamente protegido",
+    ],
+    notes:
+      "Está pensado para usarse después de definir el workflow declarativo y antes de generar la migración inicial o los datos seed.",
+    createdAt: "2026-08-14",
+    updatedAt: "2026-08-14",
+  },
+  {
     id: "plan-database-migration",
     slug: "planificar-migracion-base-de-datos",
     title: "Planificar una migración de base de datos",
