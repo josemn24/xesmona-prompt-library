@@ -31,7 +31,8 @@ Diseña la evaluación completa:
 Termina con una plantilla de informe de resultados que pueda reutilizar en cada iteración.`,
     language: "es",
     module: "artificial-intelligence",
-    categories: ["prompt-engineering", "model-evaluation"],
+    category: "model-evaluation",
+    subcategories: ["prompt-evaluation"],
     tags: ["llm", "template"],
     useCases: [
       "Validar un prompt antes de llevarlo a producción",
@@ -73,7 +74,8 @@ Design the full pipeline:
 Be concrete: name specific approaches and defaults I can start with this week, and mark clearly what to tune later with real usage data.`,
     language: "en",
     module: "artificial-intelligence",
-    categories: ["rag", "llm-applications"],
+    category: "knowledge-and-rag",
+    subcategories: ["rag-pipeline-design"],
     tags: ["llm", "python"],
     useCases: [
       "Building a question-answering feature over internal documentation",

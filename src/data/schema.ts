@@ -43,29 +43,48 @@ export const promptLanguageSchema = z.enum(["es", "en"], {
 
 export const moduleSchema = z.object({
   id: idSchema,
+  iconId: idSchema,
   label: z.string().min(1, "El nombre del módulo no puede estar vacío"),
   description: z
     .string()
     .min(1, "La descripción del módulo no puede estar vacía"),
 });
 
+export const moduleNavigationGroupSchema = z.object({
+  id: idSchema,
+  label: z.string().min(1, "El nombre del grupo no puede estar vacío"),
+  description: z.string().min(1, "La descripción del grupo no puede estar vacía"),
+  categories: z.array(idSchema).min(1, "El grupo debe incluir al menos una categoría"),
+});
+
+export const moduleNavigationSchema = z.object({
+  module: idSchema,
+  groups: z.array(moduleNavigationGroupSchema).min(1, "El módulo debe incluir al menos un grupo"),
+});
+
 export const categorySchema = z.object({
   id: idSchema,
+  iconId: idSchema,
   label: z.string().min(1, "El nombre de la categoría no puede estar vacío"),
+  description: z.string().min(1, "La descripción de la categoría no puede estar vacía"),
   module: idSchema,
 });
 
 export const subcategorySchema = z.object({
   id: idSchema,
+  iconId: idSchema.optional(),
   label: z
     .string()
     .min(1, "El nombre de la subcategoría no puede estar vacío"),
   category: idSchema,
+  description: z.string().min(1).optional(),
+  isNavigable: z.boolean().optional(),
 });
 
 export const tagSchema = z.object({
   id: idSchema,
   label: z.string().min(1, "El nombre de la etiqueta no puede estar vacío"),
+  facet: z.enum(["technology", "objective", "format", "context"]),
 });
 
 export const promptSchema = z.object({
@@ -76,9 +95,7 @@ export const promptSchema = z.object({
   content: z.string().min(1, "El contenido del prompt no puede estar vacío"),
   language: promptLanguageSchema,
   module: idSchema,
-  categories: z
-    .array(idSchema)
-    .min(1, "El prompt debe pertenecer al menos a una categoría"),
+  category: idSchema,
   subcategories: z.array(idSchema).optional(),
   tags: z.array(idSchema),
   useCases: z.array(z.string().min(1)).optional(),

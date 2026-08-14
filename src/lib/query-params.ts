@@ -1,4 +1,4 @@
-import type { PromptLanguage } from "@/src/data";
+import type { CategoryId, ModuleId, PromptLanguage } from "@/src/data";
 import { emptyFilters, type PromptFilters } from "@/src/lib/filters";
 
 /**
@@ -23,9 +23,9 @@ export function filtersFromSearchParams(
   return {
     query: params.get(QUERY_PARAM_KEYS.query) ?? "",
     module: params.get(QUERY_PARAM_KEYS.module) ?? undefined,
-    categories: params.getAll(QUERY_PARAM_KEYS.category),
-    subcategories: params.getAll(QUERY_PARAM_KEYS.subcategory),
-    tags: params.getAll(QUERY_PARAM_KEYS.tag),
+    categories: [...new Set(params.getAll(QUERY_PARAM_KEYS.category))],
+    subcategories: [...new Set(params.getAll(QUERY_PARAM_KEYS.subcategory))],
+    tags: [...new Set(params.getAll(QUERY_PARAM_KEYS.tag))],
     language:
       language === "es" || language === "en"
         ? (language as PromptLanguage)
@@ -62,4 +62,51 @@ export function promptsUrl(filters: Partial<PromptFilters>): string {
   const params = searchParamsFromFilters({ ...emptyFilters, ...filters });
   const queryString = params.toString();
   return queryString.length > 0 ? `/prompts?${queryString}` : "/prompts";
+}
+
+/** Full URL for a prompt detail page, optionally preserving explorer filters. */
+export function promptUrl(slug: string, fromQuery?: string): string {
+  const query = fromQuery?.replace(/^\?/, "") ?? "";
+  return query.length > 0
+    ? `/prompts/${slug}?from=${encodeURIComponent(query)}`
+    : `/prompts/${slug}`;
+}
+
+const MAX_RETURN_QUERY_LENGTH = 1000;
+
+function isSafeReturnQuery(fromQuery: string | null): fromQuery is string {
+  return (
+    fromQuery !== null &&
+    fromQuery.length > 0 &&
+    fromQuery.length < MAX_RETURN_QUERY_LENGTH &&
+    !fromQuery.includes("://")
+  );
+}
+
+/** Restores an explorer URL only for a bounded, relative query string. */
+export function promptsReturnUrl(fromQuery: string | null): string {
+  return isSafeReturnQuery(fromQuery) ? `/prompts?${fromQuery}` : "/prompts";
+}
+
+export function hasPromptsReturnQuery(fromQuery: string | null): boolean {
+  return isSafeReturnQuery(fromQuery);
+}
+
+export function moduleUrl(moduleId: ModuleId): string {
+  return `/modules/${moduleId}`;
+}
+
+export function categoryUrl(
+  moduleId: ModuleId,
+  categoryId: CategoryId,
+): string {
+  return `${moduleUrl(moduleId)}/${categoryId}`;
+}
+
+export function subcategoryUrl(
+  moduleId: ModuleId,
+  categoryId: CategoryId,
+  subcategoryId: string,
+): string {
+  return `${categoryUrl(moduleId, categoryId)}/${subcategoryId}`;
 }

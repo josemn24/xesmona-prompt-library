@@ -38,7 +38,8 @@ Desarrolla el análisis:
 Cierra con una advertencia honesta: qué información me falta para que este análisis deje de ser una hipótesis razonable y se convierta en un diagnóstico sólido.`,
     language: "es",
     module: "business",
-    categories: ["business-analysis", "business-strategy"],
+    category: "opportunities-and-discovery",
+    subcategories: ["strategic-analysis"],
     tags: ["analysis", "template"],
     useCases: [
       "Preparar la planificación estratégica anual",
@@ -82,7 +83,8 @@ Prepare the call:
 End with a one-page cheat sheet I can keep open during the call: hypotheses, key questions, and qualification checklist.`,
     language: "en",
     module: "business",
-    categories: ["sales"],
+    category: "sales-and-growth",
+    subcategories: ["sales-discovery"],
     tags: ["checklist"],
     useCases: [
       "Preparing a first call with an inbound lead",
@@ -125,7 +127,8 @@ After the canvas, add the part most teams skip:
 Be direct: if a block is weak or vague, say so and propose the strongest honest version of it.`,
     language: "en",
     module: "business",
-    categories: ["business-models", "business-strategy"],
+    category: "strategy-and-business-model",
+    subcategories: ["business-model-canvas"],
     tags: ["analysis", "template"],
     useCases: [
       "Sketching the model of a new product or side project",

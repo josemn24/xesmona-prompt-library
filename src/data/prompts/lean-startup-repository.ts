@@ -941,7 +941,8 @@ export const repositoryLeanStartupPrompts: Prompt[] = [
     content: repositoryLeanStartupContent,
     language: "es",
     module: "business",
-    categories: ["lean-startup", "business-analysis", "project-management"],
+    category: "validation-and-experimentation",
+    subcategories: ["lean-documentation"],
     tags: [
       "lean-startup",
       "validated-learning",

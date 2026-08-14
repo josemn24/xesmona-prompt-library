@@ -16,7 +16,7 @@ describe("toSearchablePrompt", () => {
     expect(prompt).toBeDefined();
     if (!prompt) return;
     const searchable = toSearchablePrompt(prompt);
-    expect(searchable.categories).toContain("seguridad del software");
+    expect(searchable.categories).toContain("calidad, seguridad y rendimiento");
     expect(searchable.tags).toContain("checklist");
     expect(searchable.tags).toContain("api");
   });
@@ -44,7 +44,7 @@ describe("searchPrompts", () => {
     const results = searchPrompts(allPrompts, "arquitecura");
     expect(results.length).toBeGreaterThan(0);
     expect(
-      results.some((r) => r.prompt.categories.includes("software-architecture")),
+      results.some((r) => r.prompt.category === "software-architecture"),
     ).toBe(true);
   });
 
@@ -58,7 +58,7 @@ describe("searchPrompts", () => {
     const withAccents = searchPrompts(allPrompts, "observabilidad");
     expect(withAccents.length).toBeGreaterThan(0);
     expect(
-      withAccents.some((r) => r.prompt.categories.includes("observability")),
+      withAccents.some((r) => r.prompt.category === "observability"),
     ).toBe(true);
 
     const upperCase = searchPrompts(allPrompts, "DOCKER");
@@ -67,11 +67,60 @@ describe("searchPrompts", () => {
 
   it("encuentra prompts por nombres de categoría y subcategoría", () => {
     const byCategory = searchPrompts(allPrompts, "copywriting");
-    expect(byCategory.some((r) => r.prompt.categories.includes("copywriting"))).toBe(true);
+    expect(byCategory.some((r) => r.prompt.subcategories?.includes("launch-email-sequence"))).toBe(true);
 
     const bySubcategory = searchPrompts(allPrompts, "contenedores");
     expect(
       bySubcategory.some((r) => (r.prompt.subcategories ?? []).includes("containers")),
+    ).toBe(true);
+  });
+
+  it("encuentra los prompts de onboarding por sus temas", () => {
+    expect(
+      searchPrompts(allPrompts, "onboarding").some(
+        (result) => result.prompt.id === "prepare-project-onboarding-checklist",
+      ),
+    ).toBe(true);
+    expect(
+      searchPrompts(allPrompts, "CONTRIBUTING").some(
+        (result) => result.prompt.id === "create-contributing-guide",
+      ),
+    ).toBe(true);
+    expect(
+      searchPrompts(allPrompts, "commits").some(
+        (result) => result.prompt.id === "define-branch-and-commit-conventions",
+      ),
+    ).toBe(true);
+  });
+
+  it("encuentra los prompts del proceso de revisión de código", () => {
+    expect(
+      searchPrompts(allPrompts, "proceso de revisión").some(
+        (result) => result.prompt.id === "define-code-review-process",
+      ),
+    ).toBe(true);
+    expect(
+      searchPrompts(allPrompts, "checklist revisión").some(
+        (result) => result.prompt.id === "create-project-code-review-checklist",
+      ),
+    ).toBe(true);
+  });
+
+  it("encuentra los prompts de releases y cambios por sus temas", () => {
+    expect(
+      searchPrompts(allPrompts, "release").some(
+        (result) => result.prompt.id === "generate-release-notes-from-commits",
+      ),
+    ).toBe(true);
+    expect(
+      searchPrompts(allPrompts, "migración").some(
+        (result) => result.prompt.id === "turn-pull-request-into-release-note",
+      ),
+    ).toBe(true);
+    expect(
+      searchPrompts(allPrompts, "rollback").some(
+        (result) => result.prompt.id === "prepare-release-checklist",
+      ),
     ).toBe(true);
   });
 

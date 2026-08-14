@@ -26,10 +26,11 @@ type FilterPanelProps = {
   onSetLanguage: (language: PromptLanguage | undefined) => void;
 };
 
-const legendClass = "text-sm font-semibold text-neutral-900";
+const legendClass = "text-sm font-semibold text-brand-ink";
 const groupClass = "mt-3 space-y-1.5";
 const optionClass =
-  "flex cursor-pointer items-center gap-2 rounded-md px-1.5 py-1 text-sm text-neutral-700 transition-colors hover:bg-neutral-100";
+  "flex cursor-pointer items-center gap-2 rounded-lg px-1.5 py-1 text-sm text-brand-slate transition-colors hover:bg-brand-yellow-soft hover:text-brand-ink";
+const inputClass = "size-4 accent-brand-violet";
 
 export function FilterPanel({
   idPrefix,
@@ -54,7 +55,7 @@ export function FilterPanel({
               name={`${idPrefix}-module`}
               checked={filters.module === undefined}
               onChange={() => onSetModule(undefined)}
-              className="size-4 accent-blue-800"
+              className={inputClass}
             />
             Todos los módulos
           </label>
@@ -65,7 +66,7 @@ export function FilterPanel({
                 name={`${idPrefix}-module`}
                 checked={filters.module === module.id}
                 onChange={() => onSetModule(module.id)}
-                className="size-4 accent-blue-800"
+                className={inputClass}
               />
               {module.label}
             </label>
@@ -76,7 +77,7 @@ export function FilterPanel({
       <fieldset>
         <legend className={legendClass}>Categorías</legend>
         {filters.module === undefined ? (
-          <p className="mt-3 text-sm text-neutral-500">
+          <p className="mt-3 text-sm text-brand-slate">
             Selecciona un módulo para ver sus categorías.
           </p>
         ) : (
@@ -87,7 +88,7 @@ export function FilterPanel({
                   type="checkbox"
                   checked={filters.categories.includes(category.id)}
                   onChange={() => onToggleCategory(category.id)}
-                  className="size-4 accent-blue-800"
+                  className={inputClass}
                 />
                 {category.label}
               </label>
@@ -106,7 +107,7 @@ export function FilterPanel({
                   type="checkbox"
                   checked={filters.subcategories.includes(subcategory.id)}
                   onChange={() => onToggleSubcategory(subcategory.id)}
-                  className="size-4 accent-blue-800"
+                  className={inputClass}
                 />
                 {subcategory.label}
               </label>
@@ -124,7 +125,7 @@ export function FilterPanel({
               name={`${idPrefix}-language`}
               checked={filters.language === undefined}
               onChange={() => onSetLanguage(undefined)}
-              className="size-4 accent-blue-800"
+              className={inputClass}
             />
             Todos los idiomas
           </label>
@@ -135,7 +136,7 @@ export function FilterPanel({
                 name={`${idPrefix}-language`}
                 checked={filters.language === language}
                 onChange={() => onSetLanguage(language)}
-                className="size-4 accent-blue-800"
+                className={inputClass}
               />
               {LANGUAGE_LABELS[language]}
             </label>
@@ -152,7 +153,7 @@ export function FilterPanel({
                 type="checkbox"
                 checked={filters.tags.includes(tag.id)}
                 onChange={() => onToggleTag(tag.id)}
-                className="size-4 accent-blue-800"
+                className={inputClass}
               />
               {tag.label}
             </label>

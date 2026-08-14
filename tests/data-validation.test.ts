@@ -18,6 +18,17 @@ describe("validación de los datos estáticos", () => {
     expect(validateLibraryData(libraryData)).toEqual([]);
   });
 
+  it("todas las categorías tienen una descripción editorial", () => {
+    expect(libraryData.categories.every((category) => category.description.trim().length > 0)).toBe(true);
+  });
+
+  it("conserva los 80 prompts y sus identificadores únicos", () => {
+    expect(libraryData.prompts).toHaveLength(80);
+    expect(new Set(libraryData.prompts.map((prompt) => prompt.id)).size).toBe(80);
+    expect(new Set(libraryData.prompts.map((prompt) => prompt.slug)).size).toBe(80);
+    expect(libraryData.prompts.every((prompt) => prompt.category.length > 0)).toBe(true);
+  });
+
   it("detecta identificadores de prompt duplicados", () => {
     const data = cloneLibrary();
     const duplicated = { ...firstPrompt(data), slug: "slug-unico-de-prueba" };
@@ -66,7 +77,7 @@ describe("validación de los datos estáticos", () => {
     const data = cloneLibrary();
     const prompt = firstPrompt(data);
     prompt.module = "modulo-inexistente";
-    prompt.categories = ["categoria-inexistente"];
+    prompt.category = "categoria-inexistente";
     prompt.subcategories = ["subcategoria-inexistente"];
     prompt.tags = ["etiqueta-inexistente"];
     const errors = validateLibraryData(data);
@@ -81,14 +92,14 @@ describe("validación de los datos estáticos", () => {
   it("detecta categorías que no pertenecen al módulo del prompt", () => {
     const data = cloneLibrary();
     const prompt = firstPrompt(data);
-    // "seo" pertenece al módulo "marketing", no a "software-development".
-    prompt.categories = [...prompt.categories, "seo"];
+    // "audience-and-market" pertenece al módulo "marketing", no a "software-development".
+    prompt.category = "audience-and-market";
     const errors = validateLibraryData(data);
     expect(
       errors.some(
         (e) =>
           e.includes(prompt.id) &&
-          e.includes('"seo"') &&
+          e.includes('"audience-and-market"') &&
           e.includes('pertenece al módulo "marketing"'),
       ),
     ).toBe(true);
@@ -97,13 +108,13 @@ describe("validación de los datos estáticos", () => {
   it("detecta subcategorías que no pertenecen a las categorías del prompt", () => {
     const data = cloneLibrary();
     const prompt = firstPrompt(data);
-    // "git" pertenece a "version-control"; forzamos una categoría distinta.
-    prompt.categories = ["databases"];
-    prompt.subcategories = ["git"];
+    // "database" pertenece a "project-setup-and-workflow"; forzamos una categoría distinta.
+    prompt.category = "data";
+    prompt.subcategories = ["database"];
     const errors = validateLibraryData(data);
     expect(
       errors.some(
-        (e) => e.includes(prompt.id) && e.includes('la subcategoría "git"'),
+        (e) => e.includes(prompt.id) && e.includes('la subcategoría "database"'),
       ),
     ).toBe(true);
   });
@@ -126,6 +137,57 @@ describe("validación de los datos estáticos", () => {
     expect(errors.some((e) => e.includes('El idioma debe ser "es" o "en"'))).toBe(true);
   });
 
+  it("detecta una faceta de etiqueta inválida", () => {
+    const data = cloneLibrary();
+    const tag = data.tags[0];
+    if (!tag) throw new Error("Taxonomía vacía");
+    // @ts-expect-error forzamos un valor inválido para la prueba
+    tag.facet = "other";
+    const errors = validateLibraryData(data);
+    expect(errors.some((e) => e.includes("Invalid option"))).toBe(true);
+  });
+
+  it("detecta categorías de otro módulo dentro de un grupo de navegación", () => {
+    const data = cloneLibrary();
+    const navigation = data.moduleNavigation[0];
+    const group = navigation?.groups[0];
+    if (!group) throw new Error("No hay grupos de navegación");
+    group.categories.push("audience-and-market");
+    const errors = validateLibraryData(data);
+    expect(
+      errors.some((e) =>
+        e.includes('la categoría "audience-and-market" pertenece al módulo "marketing"'),
+      ),
+    ).toBe(true);
+  });
+
+  it("detecta categorías de un módulo que no están agrupadas", () => {
+    const data = cloneLibrary();
+    const navigation = data.moduleNavigation[0];
+    const group = navigation?.groups[0];
+    if (!group) throw new Error("No hay grupos de navegación");
+    group.categories = group.categories.filter(
+      (categoryId) => categoryId !== "discovery-and-scope",
+    );
+    const errors = validateLibraryData(data);
+    expect(
+      errors.some((e) =>
+        e.includes('la categoría "discovery-and-scope" no pertenece a ningún grupo'),
+      ),
+    ).toBe(true);
+  });
+
+  it("detecta subcategorías materializadas sin prompts", () => {
+    const data = cloneLibrary();
+    data.subcategories.push({
+      id: "unused-subcategory",
+      label: "Sin uso",
+      category: "planning",
+    });
+    const errors = validateLibraryData(data);
+    expect(errors.some((e) => e.includes('Subcategoría "unused-subcategory"'))).toBe(true);
+  });
+
   it("detecta título, descripción y contenido vacíos", () => {
     const data = cloneLibrary();
     const prompt = firstPrompt(data);
@@ -140,13 +202,13 @@ describe("validación de los datos estáticos", () => {
     ).toBe(true);
   });
 
-  it("detecta prompts sin categorías", () => {
+  it("detecta prompts sin categoría", () => {
     const data = cloneLibrary();
-    firstPrompt(data).categories = [];
+    firstPrompt(data).category = "";
     const errors = validateLibraryData(data);
     expect(
       errors.some((e) =>
-        e.includes("El prompt debe pertenecer al menos a una categoría"),
+        e.includes("El identificador no puede estar vacío"),
       ),
     ).toBe(true);
   });

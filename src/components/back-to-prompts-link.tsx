@@ -3,6 +3,10 @@
 import { ArrowLeft } from "lucide-react";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
+import {
+  hasPromptsReturnQuery,
+  promptsReturnUrl,
+} from "@/src/lib/query-params";
 
 /**
  * Back link that restores the listing URL the user came from. The explorer
@@ -13,18 +17,16 @@ export function BackToPromptsLink() {
   const searchParams = useSearchParams();
   const from = searchParams.get("from");
 
-  const isSafeQueryString =
-    from !== null && from.length > 0 && from.length < 1000 && !from.includes("://");
-
-  const href = isSafeQueryString ? `/prompts?${from}` : "/prompts";
-  const label = isSafeQueryString
+  const hasReturnQuery = hasPromptsReturnQuery(from);
+  const href = promptsReturnUrl(from);
+  const label = hasReturnQuery
     ? "Volver a los resultados"
     : "Volver a todos los prompts";
 
   return (
     <Link
       href={href}
-      className="inline-flex items-center gap-1.5 text-sm font-medium text-blue-800 underline-offset-4 hover:underline"
+      className="inline-flex items-center gap-1.5 text-sm font-medium text-brand-violet underline-offset-4 hover:text-brand-coral hover:underline"
     >
       <ArrowLeft className="size-4" aria-hidden />
       {label}

@@ -16,6 +16,7 @@ import {
 } from "@/src/lib/filters";
 import {
   filtersFromSearchParams,
+  promptUrl,
   searchParamsFromFilters,
 } from "@/src/lib/query-params";
 import {
@@ -178,9 +179,7 @@ export function PromptExplorer() {
 
   const currentQueryString = searchParams.toString();
   function promptHref(slug: string): string {
-    return currentQueryString.length > 0
-      ? `/prompts/${slug}?from=${encodeURIComponent(currentQueryString)}`
-      : `/prompts/${slug}`;
+    return promptUrl(slug, currentQueryString);
   }
 
   const moduleLabel = filters.module
@@ -214,14 +213,14 @@ export function PromptExplorer() {
         />
 
         <div className="mt-4 flex items-center justify-between gap-3">
-          <p aria-live="polite" className="text-sm text-neutral-600">
+          <p aria-live="polite" className="text-sm text-brand-slate">
             {results.length}{" "}
             {results.length === 1 ? "prompt encontrado" : "prompts encontrados"}
           </p>
           <button
             type="button"
             onClick={() => setDrawerOpen(true)}
-            className="inline-flex items-center gap-2 rounded-md border border-neutral-300 bg-white px-3 py-1.5 text-sm font-medium text-neutral-700 transition-colors hover:border-neutral-400 lg:hidden"
+            className="inline-flex items-center gap-2 rounded-xl border border-brand-blue/20 bg-white px-3 py-1.5 text-sm font-medium text-brand-slate transition-colors hover:border-brand-turquoise lg:hidden"
           >
             <SlidersHorizontal className="size-4" aria-hidden />
             Filtros
@@ -275,7 +274,7 @@ export function PromptExplorer() {
             <button
               type="button"
               onClick={clearAllFilters}
-              className="rounded-md px-2 py-1 text-xs font-medium text-blue-800 underline-offset-4 hover:underline"
+              className="rounded-md px-2 py-1 text-xs font-medium text-brand-violet underline-offset-4 hover:text-brand-coral hover:underline"
             >
               Limpiar todos los filtros
             </button>
@@ -292,7 +291,7 @@ export function PromptExplorer() {
                   <button
                     type="button"
                     onClick={clearAllFilters}
-                    className="rounded-md bg-blue-800 px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-blue-900"
+                    className="rounded-xl bg-brand-violet px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-brand-coral"
                   >
                     Limpiar todos los filtros
                   </button>
@@ -322,18 +321,18 @@ export function PromptExplorer() {
             type="button"
             aria-label="Cerrar filtros"
             onClick={() => setDrawerOpen(false)}
-            className="absolute inset-0 h-full w-full cursor-default bg-neutral-900/40"
+            className="absolute inset-0 h-full w-full cursor-default bg-brand-ink/40"
             tabIndex={-1}
           />
-          <div className="absolute inset-y-0 right-0 flex w-full max-w-sm flex-col bg-white shadow-xl">
-            <div className="flex items-center justify-between border-b border-neutral-200 px-4 py-3">
-              <h2 className="font-semibold text-neutral-900">Filtros</h2>
+          <div className="absolute inset-y-0 right-0 flex w-full max-w-sm flex-col bg-brand-cream shadow-xl">
+            <div className="flex items-center justify-between border-b border-brand-blue/10 px-4 py-3">
+              <h2 className="font-semibold text-brand-ink">Filtros</h2>
               <button
                 type="button"
                 onClick={() => setDrawerOpen(false)}
                 aria-label="Cerrar panel de filtros"
                 autoFocus
-                className="rounded-md p-1.5 text-neutral-600 transition-colors hover:bg-neutral-100"
+                className="rounded-md p-1.5 text-brand-slate transition-colors hover:bg-brand-yellow-soft"
               >
                 <X className="size-5" aria-hidden />
               </button>
@@ -341,11 +340,11 @@ export function PromptExplorer() {
             <div className="flex-1 overflow-y-auto px-4 py-5">
               <FilterPanel idPrefix="drawer" {...filterPanelProps} />
             </div>
-            <div className="border-t border-neutral-200 px-4 py-3">
+            <div className="border-t border-brand-blue/10 px-4 py-3">
               <button
                 type="button"
                 onClick={() => setDrawerOpen(false)}
-                className="w-full rounded-md bg-blue-800 px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-blue-900"
+                className="w-full rounded-xl bg-brand-violet px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-brand-coral"
               >
                 Ver {results.length}{" "}
                 {results.length === 1 ? "resultado" : "resultados"}

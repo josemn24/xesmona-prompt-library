@@ -36,7 +36,7 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: "#ffffff",
+  themeColor: "#fffdf7",
 };
 
 export default function RootLayout({
@@ -52,7 +52,7 @@ export default function RootLayout({
       <body className="flex min-h-full flex-col">
         <a
           href="#contenido"
-          className="sr-only focus:not-sr-only focus:absolute focus:z-50 focus:bg-blue-800 focus:px-4 focus:py-2 focus:text-white"
+          className="sr-only focus:not-sr-only focus:absolute focus:z-50 focus:bg-brand-violet focus:px-4 focus:py-2 focus:text-white"
         >
           Saltar al contenido principal
         </a>

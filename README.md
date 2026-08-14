@@ -7,7 +7,8 @@ productivity.
 The application lets visitors browse prompts by module, category and
 subcategory, search them with fuzzy matching, filter by module, category,
 subcategory, language and tags, open any prompt's detail page and copy its
-content to the clipboard.
+content to the clipboard. Each prompt has one canonical category; URL filters
+can still select multiple categories.
 
 There is no authentication, database, CMS, admin panel or backend of any kind:
 all content lives in TypeScript files inside this repository and the site is
@@ -47,11 +48,13 @@ app/                              # Next.js App Router
   prompts/page.tsx                # Prompt explorer (search + filters)
   prompts/[slug]/page.tsx         # Static prompt detail pages
   modules/[module]/page.tsx       # Static module pages
+  modules/[module]/[category]/page.tsx # Static category pages
 src/
   data/
     types.ts                      # Domain models (Module, Category, Prompt, …)
     modules.ts                    # Module taxonomy data
     categories.ts                 # Category taxonomy data
+    module-navigation.ts          # Optional visual groupings by module
     subcategories.ts              # Subcategory taxonomy data
     tags.ts                       # Tag data
     prompts/                      # Prompt content, one file per module
@@ -111,8 +114,8 @@ npm run test:watch  # run the tests in watch mode
   content: `…`,                           // the full prompt; may include {{placeholders}}
   language: "es",                         // "es" or "en"
   module: "software-development",         // must exist in modules.ts
-  categories: ["quality-and-testing"],    // one or more, must belong to the module
-  subcategories: ["unit-testing"],        // optional, must belong to a chosen category
+  category: "quality-security-performance", // one canonical category
+  subcategories: ["unit-testing"],          // optional, must belong to category
   tags: ["typescript"],                   // zero or more, must exist in tags.ts
   useCases: ["…"],                        // optional
   notes: "…",                             // optional
@@ -131,16 +134,20 @@ highlighted on the detail page and copied verbatim.
 
 ## How to add a module, category, subcategory or tag
 
-- **Module**: add it to `src/data/modules.ts`, then create a prompt file
+- **Module**: add it to `src/data/modules.ts` with a valid `iconId` from the
+  illustration registry, then create a prompt file
   `src/data/prompts/<module-id>.ts` and include it in the `allPrompts` array
   in `src/data/index.ts`. The module page and the explorer filters pick it up
   automatically.
 - **Category**: add it to `src/data/categories.ts` with the `module` it
-  belongs to.
+  belongs to, an editorial `description` and a valid `iconId`. Categories are
+  available at `/modules/[module]/[category]`; their illustrations are
+  rendered by the shared SVG registry in `src/components/illustrations.tsx`.
 - **Subcategory**: add it to `src/data/subcategories.ts` with the `category`
   it belongs to.
-- **Tag**: add it to `src/data/tags.ts`. Tags are cross-cutting and available
-  to every module.
+- **Tag**: add it to `src/data/tags.ts` with a facet (`technology`,
+  `objective`, `format` or `context`). Tags are cross-cutting and available to
+  every module.
 
 All identifiers must be stable, unique, URL-safe English strings
 (`kebab-case`); the Spanish name goes in `label`.
@@ -154,8 +161,9 @@ All identifiers must be stable, unique, URL-safe English strings
    `YYYY-MM-DD` dates that are real calendar dates, and `es`/`en` languages.
 2. **Cross-reference validation**: duplicate ids and slugs in every
    collection, references to nonexistent modules/categories/subcategories/
-   tags, categories that do not belong to the prompt's module, and
-   subcategories that do not belong to one of the prompt's categories.
+   tags, categories that do not belong to the prompt's module, subcategories
+   that do not belong to the prompt's canonical category, invalid tag facets,
+   and incompatible module navigation groups.
 
 `validateLibrary()` is called from the root layout module, so **development
 and production builds fail with a detailed, itemized error message** when any
@@ -184,8 +192,11 @@ Unit tests live in `tests/` and cover:
 - Duplicate id and slug detection.
 - Search weighting (title matches rank above content-only matches).
 - Typo tolerance and accent/case insensitivity.
-- Module, multi-category, subcategory, tag and language filtering.
+- Module, multi-category filter, subcategory, tag and language filtering.
 - Combined search + filters and empty-result behavior.
+- Canonical module/category URLs, category-page taxonomy helpers and
+  related-prompt ordering.
+- Preservation of the 80 prompt records and their stable identifiers.
 
 Run them with `npm run test`.
 

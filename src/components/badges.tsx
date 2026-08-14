@@ -7,7 +7,7 @@ const baseClass =
 export function LanguageBadge({ language }: { language: PromptLanguage }) {
   return (
     <span
-      className={`${baseClass} border-blue-200 bg-blue-50 text-blue-900`}
+      className={`${baseClass} border-brand-turquoise/30 bg-brand-turquoise-soft text-brand-ink`}
       title="Idioma del prompt"
     >
       {languageLabel(language)}
@@ -18,7 +18,7 @@ export function LanguageBadge({ language }: { language: PromptLanguage }) {
 export function CategoryBadge({ label }: { label: string }) {
   return (
     <span
-      className={`${baseClass} border-neutral-200 bg-neutral-50 text-neutral-700`}
+      className={`${baseClass} border-brand-orange/30 bg-brand-orange-soft text-brand-ink`}
     >
       {label}
     </span>
@@ -28,7 +28,7 @@ export function CategoryBadge({ label }: { label: string }) {
 export function TagBadge({ label }: { label: string }) {
   return (
     <span
-      className={`${baseClass} border-neutral-200 bg-white text-neutral-600`}
+      className={`${baseClass} border-brand-blue/15 bg-brand-blue-soft/50 text-brand-slate`}
     >
       {label}
     </span>
@@ -38,7 +38,7 @@ export function TagBadge({ label }: { label: string }) {
 export function ModuleBadge({ label }: { label: string }) {
   return (
     <span
-      className={`${baseClass} border-emerald-200 bg-emerald-50 text-emerald-900`}
+      className={`${baseClass} border-brand-violet/25 bg-brand-violet-soft text-brand-ink`}
     >
       {label}
     </span>
