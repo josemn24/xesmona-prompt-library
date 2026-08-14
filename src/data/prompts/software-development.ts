@@ -1435,7 +1435,7 @@ No añadas todavía scripts de \`package.json\`, esquema, migraciones, seed, tip
 Entrega:
 
 1. decisiones tomadas;
-2. archivos creados o modificados;
+2. resumen de los cambios realizados y archivos afectados;
 3. comandos para verificar el setup;
 4. cuestiones pendientes o decisiones que deba tomar.`,
     language: "es",
@@ -1477,7 +1477,7 @@ Incluye como mínimo scripts para:
 
 Propón solo otros scripts claramente útiles para este proyecto, por ejemplo para crear migraciones, generar tipos, ejecutar lint o lanzar tests. Conserva los scripts existentes y marca explícitamente cualquier comando destructivo.
 
-Entrega el cambio en formato diff, explica brevemente cada script y muestra los comandos de uso con sus argumentos cuando corresponda.`,
+Explica los cambios realizados en \`package.json\`, justifica brevemente cada script y muestra los comandos de uso con sus argumentos cuando corresponda.`,
     language: "es",
     module: "software-development",
     category: "project-setup-and-workflow",
@@ -1520,7 +1520,7 @@ No inventes credenciales, no expongas secretos al cliente y no ejecutes acciones
 
 Entrega:
 
-1. el diff de los archivos modificados;
+1. resumen de los cambios realizados y archivos afectados;
 2. una tabla de variables con nombre, ámbito y archivo donde deben definirse;
 3. los pasos para completar la configuración local sin compartir secretos.`,
     language: "es",
@@ -1885,7 +1885,7 @@ No diseñes tablas ni políticas RLS. No mezcles ambos enfoques ni ejecutes acci
 Entrega:
 
 1. enfoque recomendado y motivo;
-2. archivos que deben crearse o modificarse;
+2. resumen de los cambios realizados y archivos afectados;
 3. comandos del workflow diario;
 4. excepciones y precauciones importantes.`,
     language: "es",
@@ -1939,7 +1939,7 @@ No generes migraciones, seed data ni configuración remota. No inventes reglas d
 Entrega:
 
 1. decisiones y supuestos;
-2. archivos SQL organizados para \`supabase/schemas/\`;
+2. resumen de los archivos SQL creados o modificados y su propósito;
 3. matriz de permisos por rol y tabla;
 4. riesgos de seguridad y casos de prueba RLS.`,
     language: "es",
