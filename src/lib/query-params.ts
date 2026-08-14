@@ -1,6 +1,4 @@
 import type { CategoryId, ModuleId, PromptLanguage } from "@/src/data";
-import { resolveCategoryAlias } from "@/src/data/category-aliases";
-import { resolveSubcategoryAlias } from "@/src/data/subcategory-aliases";
 import { emptyFilters, type PromptFilters } from "@/src/lib/filters";
 
 /**
@@ -22,21 +20,12 @@ export function filtersFromSearchParams(
   params: URLSearchParams,
 ): PromptFilters {
   const language = params.get(QUERY_PARAM_KEYS.language);
-  const resolvedSubcategories = params
-    .getAll(QUERY_PARAM_KEYS.subcategory)
-    .map(resolveSubcategoryAlias);
-  const resolvedTags = [
-    ...params.getAll(QUERY_PARAM_KEYS.tag),
-    ...resolvedSubcategories.flatMap((alias) => alias.tagIds ?? []),
-  ];
   return {
     query: params.get(QUERY_PARAM_KEYS.query) ?? "",
     module: params.get(QUERY_PARAM_KEYS.module) ?? undefined,
-    categories: params
-      .getAll(QUERY_PARAM_KEYS.category)
-      .flatMap(resolveCategoryAlias),
-    subcategories: [...new Set(resolvedSubcategories.map((alias) => alias.canonicalId))],
-    tags: [...new Set(resolvedTags)],
+    categories: [...new Set(params.getAll(QUERY_PARAM_KEYS.category))],
+    subcategories: [...new Set(params.getAll(QUERY_PARAM_KEYS.subcategory))],
+    tags: [...new Set(params.getAll(QUERY_PARAM_KEYS.tag))],
     language:
       language === "es" || language === "en"
         ? (language as PromptLanguage)

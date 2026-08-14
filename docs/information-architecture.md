@@ -96,15 +96,13 @@ y relaciones entre prompts.
 Los breadcrumbs solo reflejan la jerarquía canónica. Nunca incluyen las
 agrupaciones visuales del módulo.
 
-## Compatibilidad
+## Identificadores y URLs
 
 - Los IDs de módulos, categorías, subcategorías, etiquetas y prompts son
   identificadores estables en inglés con formato `kebab-case`.
 - Los slugs de prompts no se cambian durante una reorganización editorial.
-- Los aliases de categorías antiguas se conservan únicamente al leer filtros
-  del explorador para no romper URLs compartidas.
-- Los datos canónicos, enlaces internos y nuevas URLs usan solo los IDs
-  actuales.
+- Los datos, enlaces internos, filtros y URLs usan únicamente los IDs
+  canónicos actuales.
 - No se añade una etapa ni otro parámetro de navegación al modelo `Prompt` o
   a los filtros globales.
 
@@ -118,7 +116,6 @@ El contenido y las reglas técnicas se separan de este documento:
 - `src/data/tags.ts`: etiquetas y facetas.
 - `src/data/prompts/`: prompts y metadatos de contenido.
 - `src/data/module-navigation.ts`: agrupaciones visuales opcionales por módulo.
-- `src/data/category-aliases.ts`: compatibilidad con categorías antiguas.
 - `src/data/types.ts`, `schema.ts` y `validation.ts`: contratos y validación.
 
 Este archivo documenta el criterio que relaciona esas fuentes, pero no duplica

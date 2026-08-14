@@ -147,36 +147,6 @@ describe("validación de los datos estáticos", () => {
     expect(errors.some((e) => e.includes("Invalid option"))).toBe(true);
   });
 
-  it("detecta aliases que apuntan a categorías inexistentes", () => {
-    const data = cloneLibrary();
-    const alias = data.categoryAliases[0];
-    if (!alias) throw new Error("No hay aliases");
-    alias.canonicalIds = ["categoria-inexistente"];
-    const errors = validateLibraryData(data);
-    expect(
-      errors.some((e) => e.includes('referencia a la categoría inexistente "categoria-inexistente"')),
-    ).toBe(true);
-  });
-
-  it("detecta aliases de subcategoría que apuntan a referencias inexistentes", () => {
-    const data = cloneLibrary();
-    const alias = data.subcategoryAliases[0];
-    if (!alias) throw new Error("No hay aliases de subcategoría");
-    alias.canonicalId = "subcategoria-inexistente";
-    alias.tagIds = ["etiqueta-inexistente"];
-    const errors = validateLibraryData(data);
-    expect(
-      errors.some((e) =>
-        e.includes('referencia a la subcategoría inexistente "subcategoria-inexistente"'),
-      ),
-    ).toBe(true);
-    expect(
-      errors.some((e) =>
-        e.includes('referencia a la etiqueta inexistente "etiqueta-inexistente"'),
-      ),
-    ).toBe(true);
-  });
-
   it("detecta categorías de otro módulo dentro de un grupo de navegación", () => {
     const data = cloneLibrary();
     const navigation = data.moduleNavigation[0];

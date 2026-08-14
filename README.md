@@ -163,7 +163,7 @@ All identifiers must be stable, unique, URL-safe English strings
    collection, references to nonexistent modules/categories/subcategories/
    tags, categories that do not belong to the prompt's module, subcategories
    that do not belong to the prompt's canonical category, invalid tag facets,
-   incompatible module navigation groups and invalid category aliases.
+   and incompatible module navigation groups.
 
 `validateLibrary()` is called from the root layout module, so **development
 and production builds fail with a detailed, itemized error message** when any
@@ -194,9 +194,9 @@ Unit tests live in `tests/` and cover:
 - Typo tolerance and accent/case insensitivity.
 - Module, multi-category filter, subcategory, tag and language filtering.
 - Combined search + filters and empty-result behavior.
-- Canonical module/category URLs, category-page taxonomy helpers, aliases and
+- Canonical module/category URLs, category-page taxonomy helpers and
   related-prompt ordering.
-- Preservation of the 61 prompt records and their stable identifiers.
+- Preservation of the 80 prompt records and their stable identifiers.
 
 Run them with `npm run test`.
 

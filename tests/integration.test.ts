@@ -3,10 +3,8 @@ import { generateStaticParams as generateSubcategoryStaticParams } from "@/app/m
 import {
   allPrompts,
   categories,
-  categoryAliases,
   modules,
   subcategories,
-  subcategoryAliases,
   tags,
 } from "@/src/data";
 import {
@@ -97,27 +95,27 @@ describe("integración final de la arquitectura", () => {
     }
   });
 
-  it("mantiene facetas válidas y aliases fuera de la taxonomía canónica", () => {
-    const categoryIds = new Set(categories.map((category) => category.id));
+  it("mantiene facetas válidas y filtros canónicos", () => {
     const validFacets = new Set(["technology", "objective", "format", "context"]);
 
     expect(tags.every((tag) => validFacets.has(tag.facet))).toBe(true);
-    for (const alias of categoryAliases) {
-      expect(categoryIds.has(alias.legacyId)).toBe(false);
-      expect(alias.canonicalIds.every((categoryId) => categoryIds.has(categoryId))).toBe(true);
+    const resolved = filtersFromSearchParams(
+      new URLSearchParams(
+        "category=delivery-and-deployment&subcategory=releases-and-changes&tag=git",
+      ),
+    );
+    expect(resolved.categories).toEqual(["delivery-and-deployment"]);
+    expect(resolved.subcategories).toEqual(["releases-and-changes"]);
+    expect(resolved.tags).toEqual(["git"]);
+  });
 
-      const resolved = filtersFromSearchParams(
-        new URLSearchParams(`category=${alias.legacyId}`),
-      );
-      expect(resolved.categories).toEqual([alias.canonicalIds[0]]);
-    }
-    for (const alias of subcategoryAliases) {
-      const resolved = filtersFromSearchParams(
-        new URLSearchParams(`subcategory=${alias.legacyId}`),
-      );
-      expect(resolved.subcategories).toEqual([alias.canonicalId]);
-      expect(resolved.tags).toEqual(alias.tagIds ?? []);
-    }
+  it("no transforma identificadores antiguos en filtros canónicos", () => {
+    const resolved = filtersFromSearchParams(
+      new URLSearchParams("category=devops&subcategory=supabase-migrations"),
+    );
+    expect(resolved.categories).toEqual(["devops"]);
+    expect(resolved.subcategories).toEqual(["supabase-migrations"]);
+    expect(resolved.tags).toEqual([]);
   });
 
   it("valida el contexto módulo-categoría de las rutas canónicas", () => {

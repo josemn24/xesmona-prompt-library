@@ -9,7 +9,6 @@ import {
   subcategorySchema,
   tagSchema,
 } from "./schema";
-import { idSchema } from "./schema";
 
 function formatZodIssues(
   context: string,
@@ -112,12 +111,6 @@ export function validateLibraryData(data: LibraryData): string[] {
   for (const id of findDuplicates(data.moduleNavigation.map((navigation) => navigation.module))) {
     errors.push(`Configuración de navegación duplicada para el módulo: "${id}".`);
   }
-  for (const id of findDuplicates(data.categoryAliases.map((alias) => alias.legacyId))) {
-    errors.push(`Alias de categoría duplicado: "${id}".`);
-  }
-  for (const id of findDuplicates(data.subcategoryAliases.map((alias) => alias.legacyId))) {
-    errors.push(`Alias de subcategoría duplicado: "${id}".`);
-  }
   for (const id of findDuplicates(data.subcategories.map((s) => s.id))) {
     errors.push(`Identificador de subcategoría duplicado: "${id}".`);
   }
@@ -134,80 +127,11 @@ export function validateLibraryData(data: LibraryData): string[] {
   // 3. Referential integrity of the taxonomy itself.
   const moduleIds = new Set(data.modules.map((m) => m.id));
   const categoryIds = new Set(data.categories.map((c) => c.id));
-  const subcategoryIds = new Set(data.subcategories.map((s) => s.id));
   const tagIds = new Set(data.tags.map((t) => t.id));
   const categoryById = new Map(data.categories.map((c) => [c.id, c]));
   const subcategoryById = new Map(data.subcategories.map((s) => [s.id, s]));
   const referencedSubcategoryIds = new Set<string>();
 
-  for (const alias of data.categoryAliases) {
-    const legacyResult = idSchema.safeParse(alias.legacyId);
-    if (!legacyResult.success) {
-      errors.push(
-        ...formatZodIssues(
-          `Alias de categoría "${alias.legacyId}"`,
-          legacyResult.error.issues,
-        ),
-      );
-    }
-    if (alias.canonicalIds.length === 0) {
-      errors.push(
-        `Alias de categoría "${alias.legacyId}": debe apuntar al menos a una categoría canónica.`,
-      );
-    }
-    for (const canonicalId of alias.canonicalIds) {
-      if (!categoryIds.has(canonicalId)) {
-        errors.push(
-          `Alias de categoría "${alias.legacyId}": referencia a la categoría inexistente "${canonicalId}".`,
-        );
-      }
-    }
-  }
-
-  const legacyCategoryIds = new Set(
-    data.categoryAliases.map((alias) => alias.legacyId),
-  );
-  for (const category of data.categories) {
-    if (legacyCategoryIds.has(category.id)) {
-      errors.push(
-        `Categoría "${category.id}": el ID antiguo no puede aparecer en la taxonomía canónica.`,
-      );
-    }
-  }
-
-  const legacySubcategoryIds = new Set(
-    data.subcategoryAliases.map((alias) => alias.legacyId),
-  );
-  for (const alias of data.subcategoryAliases) {
-    const legacyResult = idSchema.safeParse(alias.legacyId);
-    if (!legacyResult.success) {
-      errors.push(
-        ...formatZodIssues(
-          `Alias de subcategoría "${alias.legacyId}"`,
-          legacyResult.error.issues,
-        ),
-      );
-    }
-    if (!subcategoryIds.has(alias.canonicalId)) {
-      errors.push(
-        `Alias de subcategoría "${alias.legacyId}": referencia a la subcategoría inexistente "${alias.canonicalId}".`,
-      );
-    }
-    for (const tagId of alias.tagIds ?? []) {
-      if (!tagIds.has(tagId)) {
-        errors.push(
-          `Alias de subcategoría "${alias.legacyId}": referencia a la etiqueta inexistente "${tagId}".`,
-        );
-      }
-    }
-  }
-  for (const subcategory of data.subcategories) {
-    if (legacySubcategoryIds.has(subcategory.id)) {
-      errors.push(
-        `Subcategoría "${subcategory.id}": el ID antiguo no puede aparecer en la taxonomía canónica.`,
-      );
-    }
-  }
   for (const navigation of data.moduleNavigation) {
     if (!moduleIds.has(navigation.module)) {
       errors.push(

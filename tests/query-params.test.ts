@@ -41,19 +41,24 @@ describe("promptsUrl", () => {
     ).toBe("/prompts?q=RAG+y+agentes&module=artificial-intelligence");
   });
 
-  it("resuelve un alias antiguo a la primera categoría canónica", () => {
+  it("conserva los identificadores canónicos de categoría, subcategoría y etiqueta", () => {
     const filters = filtersFromSearchParams(
-      new URLSearchParams("category=apis-and-integrations"),
+      new URLSearchParams(
+        "category=delivery-and-deployment&subcategory=releases-and-changes&tag=git",
+      ),
     );
-    expect(filters.categories).toEqual(["backend-and-apis"]);
+    expect(filters.categories).toEqual(["delivery-and-deployment"]);
+    expect(filters.subcategories).toEqual(["releases-and-changes"]);
+    expect(filters.tags).toEqual(["git"]);
   });
 
-  it("resuelve un alias antiguo de subcategoría y conserva su etiqueta tecnológica", () => {
+  it("no resuelve parámetros antiguos mediante aliases", () => {
     const filters = filtersFromSearchParams(
-      new URLSearchParams("subcategory=supabase-migrations"),
+      new URLSearchParams("category=devops&subcategory=supabase-migrations"),
     );
-    expect(filters.subcategories).toEqual(["database"]);
-    expect(filters.tags).toEqual(["supabase"]);
+    expect(filters.categories).toEqual(["devops"]);
+    expect(filters.subcategories).toEqual(["supabase-migrations"]);
+    expect(filters.tags).toEqual([]);
   });
 });
 
