@@ -51,6 +51,7 @@ export const subcategories: Subcategory[] = [
   { id: "environment-configuration", label: "Configuración del entorno", category: "project-setup-and-workflow" },
   { id: "supabase-migrations", label: "Migraciones con Supabase", category: "project-setup-and-workflow" },
   { id: "supabase-schema-design", label: "Diseño de esquema con Supabase", category: "project-setup-and-workflow" },
+  { id: "supabase-seed-data", label: "Datos seed con Supabase", category: "project-setup-and-workflow" },
   { id: "commits", label: "Commits", category: "project-setup-and-workflow" },
   { id: "git", label: "Git", category: "project-setup-and-workflow" },
   { id: "legacy-code", label: "Código legado", category: "maintenance-and-evolution" },

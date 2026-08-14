@@ -1539,6 +1539,63 @@ Entrega:
     updatedAt: "2026-08-14",
   },
   {
+    id: "create-supabase-seed-data",
+    slug: "crear-datos-seed-para-desarrollo-supabase",
+    title: "Crear datos seed para desarrollo con Supabase",
+    description:
+      "Prepara datos sintéticos, deterministas y reproducibles para desarrollar y probar una aplicación Supabase en local.",
+    content: `Actúa como un ingeniero experto en PostgreSQL y Supabase.
+
+Crea los datos seed para el entorno local de este proyecto. Antes de actuar, consulta:
+
+- https://supabase.com/docs/guides/local-development/seeding-your-database
+- https://supabase.com/docs/guides/local-development/cli-workflows
+
+Inspecciona \`supabase/schemas/\`, \`supabase/migrations/\`, \`supabase/config.toml\` y cualquier seed existente.
+
+Requisitos de los datos:
+{{requirements}}
+
+Escenarios que deben poder probarse:
+{{scenarios}}
+
+Crea o actualiza \`supabase/seed.sql\`. Si el volumen lo justifica, divide los datos en varios archivos y configura su orden en \`config.toml\`.
+
+Sigue estas reglas:
+
+- utiliza únicamente datos sintéticos;
+- respeta el orden de las relaciones y las claves foráneas;
+- usa identificadores y fechas deterministas cuando facilite las pruebas;
+- incluye usuarios o roles de prueba solo cuando sean necesarios;
+- distingue entre usuarios de Auth de referencia y usuarios capaces de iniciar sesión;
+- no incluyas contraseñas, secretos, datos reales ni información personal;
+- incluye únicamente datos, no definiciones de esquema ni migraciones;
+- no ejecutes acciones remotas.
+
+Si no existe todavía un esquema compatible, no inventes tablas: explica qué debe completarse antes de crear el seed.
+
+Entrega:
+
+1. resumen de los cambios realizados y archivos afectados;
+2. escenarios cubiertos por los datos;
+3. comando para reconstruir el entorno local;
+4. supuestos, limitaciones y datos que falten.`,
+    language: "es",
+    module: "software-development",
+    category: "project-setup-and-workflow",
+    subcategories: ["supabase-seed-data"],
+    tags: ["supabase", "postgresql", "sql", "checklist"],
+    useCases: [
+      "Preparar datos de prueba al comenzar un proyecto Supabase",
+      "Crear un entorno local reproducible para todo el equipo",
+      "Cubrir escenarios de desarrollo sin utilizar datos reales",
+    ],
+    notes:
+      "El prompt trata el seed como datos posteriores al esquema y las migraciones; los usuarios capaces de iniciar sesión requieren un flujo específico de Auth.",
+    createdAt: "2026-08-14",
+    updatedAt: "2026-08-14",
+  },
+  {
     id: "write-git-commit-messages",
     slug: "escribir-mensajes-de-commit",
     title: "Escribir mensajes de commit útiles",
