@@ -148,7 +148,7 @@ export default async function PromptDetailPage({ params }: PageProps) {
   );
 
   return (
-    <div className="mx-auto max-w-6xl px-4 py-10 sm:px-6 lg:px-8">
+    <div className="mx-auto max-w-7xl px-4 py-10 sm:px-6 lg:px-8">
       <Suspense
         fallback={
           <span className="text-sm text-brand-slate">

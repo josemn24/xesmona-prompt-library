@@ -6,7 +6,7 @@ import Link from "next/link";
 export function SiteFooter() {
   return (
     <footer className="mt-16 border-t border-brand-blue/10 bg-brand-blue-soft/50">
-      <div className="mx-auto grid max-w-6xl gap-8 px-4 py-10 sm:grid-cols-2 sm:px-6 lg:grid-cols-3">
+      <div className="mx-auto grid max-w-7xl gap-8 px-4 py-10 sm:grid-cols-2 sm:px-6 lg:grid-cols-3">
         <div>
           <p className="font-semibold text-brand-ink">{SITE_NAME}</p>
           <p className="mt-2 text-sm text-brand-slate">

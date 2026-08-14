@@ -6,7 +6,7 @@ import { SITE_NAME } from "@/src/lib/i18n";
 export function SiteHeader() {
   return (
     <header className="border-b border-brand-blue/10 bg-brand-cream/95 backdrop-blur">
-      <div className="mx-auto flex h-14 max-w-6xl items-center justify-between gap-4 px-4 sm:px-6">
+      <div className="mx-auto flex h-14 max-w-7xl items-center justify-between gap-4 px-4 sm:px-6">
         <Link
           href="/"
           className="flex min-w-0 items-center gap-2 rounded-md font-semibold text-brand-ink"

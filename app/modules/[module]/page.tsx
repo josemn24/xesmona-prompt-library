@@ -53,7 +53,7 @@ export default async function ModulePage({ params }: PageProps) {
   const promptCount = countPromptsForModule(moduleData.id);
 
   return (
-    <div className="mx-auto max-w-6xl px-4 py-10 sm:px-6">
+    <div className="mx-auto max-w-7xl px-4 py-10 sm:px-6">
       <header className="flex max-w-4xl flex-col gap-6 rounded-3xl border border-brand-blue/10 bg-linear-to-br from-brand-violet-soft/70 via-white to-brand-turquoise-soft/60 p-6 sm:flex-row sm:items-center sm:p-8">
         <Illustration iconId={moduleData.iconId} size="lg" />
         <div>

@@ -60,7 +60,7 @@ export default async function CategoryPage({ params }: PageProps) {
   const fromQuery = explorerUrl.split("?")[1] ?? "";
 
   return (
-    <div className="mx-auto max-w-6xl px-4 py-10 sm:px-6">
+    <div className="mx-auto max-w-7xl px-4 py-10 sm:px-6">
       <Breadcrumbs
         items={[
           { label: "Inicio", href: "/" },
