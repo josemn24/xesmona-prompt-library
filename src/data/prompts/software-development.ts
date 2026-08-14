@@ -1417,9 +1417,9 @@ Sé específico para mi sistema: prefiero diez amenazas concretas a cincuenta ge
 
 Configura y arranca Supabase local desde cero en este repositorio. Antes de actuar, consulta la documentación oficial actual:
 
-- https://supabase.com/docs/guides/local-development
-- https://supabase.com/docs/guides/local-development/cli/getting-started
-- https://supabase.com/docs/guides/local-development/cli-workflows
+- https://supabase.com/docs/guides/local-development.md
+- https://supabase.com/docs/guides/local-development/cli/getting-started.md
+- https://supabase.com/docs/guides/local-development/cli-workflows.md
 
 Inspecciona el repositorio y adapta la solución al framework, package manager y convenciones existentes.
 
@@ -1463,8 +1463,8 @@ Entrega:
 
 Quiero añadir scripts de Supabase al \`package.json\` de este repositorio. Consulta la documentación oficial actual antes de proponer cambios:
 
-- https://supabase.com/docs/guides/local-development/cli/getting-started
-- https://supabase.com/docs/guides/local-development/cli-workflows
+- https://supabase.com/docs/guides/local-development/cli/getting-started.md
+- https://supabase.com/docs/guides/local-development/cli-workflows.md
 
 Inspecciona el package manager, los scripts existentes y si la CLI está instalada localmente.
 
@@ -1503,8 +1503,8 @@ Explica los cambios realizados en \`package.json\`, justifica brevemente cada sc
 
 Configura las variables de entorno y los secretos de Supabase en este repositorio. Antes de actuar, consulta la documentación oficial actual:
 
-- https://supabase.com/docs/guides/local-development/managing-config
-- https://supabase.com/docs/guides/local-development/cli-workflows
+- https://supabase.com/docs/guides/local-development/managing-config.md
+- https://supabase.com/docs/guides/local-development/cli-workflows.md
 
 Inspecciona el framework, los archivos de entorno existentes, el \`.gitignore\`, \`supabase/config.toml\` y cómo la aplicación lee sus variables.
 
@@ -1548,8 +1548,8 @@ Entrega:
 
 Crea los datos seed para el entorno local de este proyecto. Antes de actuar, consulta:
 
-- https://supabase.com/docs/guides/local-development/seeding-your-database
-- https://supabase.com/docs/guides/local-development/cli-workflows
+- https://supabase.com/docs/guides/local-development/seeding-your-database.md
+- https://supabase.com/docs/guides/local-development/cli-workflows.md
 
 Inspecciona \`supabase/schemas/\`, \`supabase/migrations/\`, \`supabase/config.toml\` y cualquier seed existente.
 
@@ -1921,8 +1921,8 @@ Base image preference: official, minimal (alpine or distroless when the runtime 
 
 Define y configura el workflow de migraciones de este repositorio. Antes de actuar, consulta la documentación oficial actual:
 
-- https://supabase.com/docs/guides/local-development/declarative-database-schemas
-- https://supabase.com/docs/guides/local-development/cli-workflows
+- https://supabase.com/docs/guides/local-development/declarative-database-schemas.md
+- https://supabase.com/docs/guides/local-development/cli-workflows.md
 
 Inspecciona la estructura actual de \`supabase/\`, sus migraciones, esquemas y configuración.
 
@@ -1970,8 +1970,8 @@ Entrega:
 
 Diseña el esquema inicial y las políticas Row Level Security (RLS) para este proyecto. Consulta la documentación oficial actual:
 
-- https://supabase.com/docs/guides/local-development/declarative-database-schemas
-- https://supabase.com/docs/guides/database/postgres/row-level-security
+- https://supabase.com/docs/guides/local-development/declarative-database-schemas.md
+- https://supabase.com/docs/guides/database/postgres/row-level-security.md
 
 Requisitos del dominio:
 {{requirements}}
