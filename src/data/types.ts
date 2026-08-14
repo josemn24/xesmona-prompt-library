@@ -99,10 +99,16 @@ export type Category = {
 
 export type Subcategory = {
   id: SubcategoryId;
+  /** Optional visual identifier rendered by the illustration registry. */
+  iconId?: IllustrationId;
   /** Spanish label shown in the UI. */
   label: string;
   /** Category this subcategory belongs to. A subcategory has exactly one category. */
   category: CategoryId;
+  /** Optional short Spanish description shown on subcategory cards. */
+  description?: string;
+  /** Whether the subcategory has a dedicated landing page. */
+  isNavigable?: boolean;
 };
 
 export type Tag = {

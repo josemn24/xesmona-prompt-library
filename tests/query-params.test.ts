@@ -5,12 +5,25 @@ import {
   promptUrl,
   promptsUrl,
   promptsReturnUrl,
+  subcategoryUrl,
 } from "@/src/lib/query-params";
 
 describe("URLs de navegación", () => {
   it("construye la URL canónica de categoría sin etapas ni filtros", () => {
     expect(categoryUrl("software-development", "software-architecture")).toBe(
       "/modules/software-development/software-architecture",
+    );
+  });
+
+  it("construye la URL canónica de subcategoría", () => {
+    expect(
+      subcategoryUrl(
+        "software-development",
+        "project-setup-and-workflow",
+        "database",
+      ),
+    ).toBe(
+      "/modules/software-development/project-setup-and-workflow/database",
     );
   });
 });
@@ -33,6 +46,14 @@ describe("promptsUrl", () => {
       new URLSearchParams("category=apis-and-integrations"),
     );
     expect(filters.categories).toEqual(["backend-and-apis"]);
+  });
+
+  it("resuelve un alias antiguo de subcategoría y conserva su etiqueta tecnológica", () => {
+    const filters = filtersFromSearchParams(
+      new URLSearchParams("subcategory=supabase-migrations"),
+    );
+    expect(filters.subcategories).toEqual(["database"]);
+    expect(filters.tags).toEqual(["supabase"]);
   });
 });
 

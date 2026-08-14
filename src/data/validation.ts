@@ -115,6 +115,9 @@ export function validateLibraryData(data: LibraryData): string[] {
   for (const id of findDuplicates(data.categoryAliases.map((alias) => alias.legacyId))) {
     errors.push(`Alias de categoría duplicado: "${id}".`);
   }
+  for (const id of findDuplicates(data.subcategoryAliases.map((alias) => alias.legacyId))) {
+    errors.push(`Alias de subcategoría duplicado: "${id}".`);
+  }
   for (const id of findDuplicates(data.subcategories.map((s) => s.id))) {
     errors.push(`Identificador de subcategoría duplicado: "${id}".`);
   }
@@ -131,6 +134,7 @@ export function validateLibraryData(data: LibraryData): string[] {
   // 3. Referential integrity of the taxonomy itself.
   const moduleIds = new Set(data.modules.map((m) => m.id));
   const categoryIds = new Set(data.categories.map((c) => c.id));
+  const subcategoryIds = new Set(data.subcategories.map((s) => s.id));
   const tagIds = new Set(data.tags.map((t) => t.id));
   const categoryById = new Map(data.categories.map((c) => [c.id, c]));
   const subcategoryById = new Map(data.subcategories.map((s) => [s.id, s]));
@@ -167,6 +171,40 @@ export function validateLibraryData(data: LibraryData): string[] {
     if (legacyCategoryIds.has(category.id)) {
       errors.push(
         `Categoría "${category.id}": el ID antiguo no puede aparecer en la taxonomía canónica.`,
+      );
+    }
+  }
+
+  const legacySubcategoryIds = new Set(
+    data.subcategoryAliases.map((alias) => alias.legacyId),
+  );
+  for (const alias of data.subcategoryAliases) {
+    const legacyResult = idSchema.safeParse(alias.legacyId);
+    if (!legacyResult.success) {
+      errors.push(
+        ...formatZodIssues(
+          `Alias de subcategoría "${alias.legacyId}"`,
+          legacyResult.error.issues,
+        ),
+      );
+    }
+    if (!subcategoryIds.has(alias.canonicalId)) {
+      errors.push(
+        `Alias de subcategoría "${alias.legacyId}": referencia a la subcategoría inexistente "${alias.canonicalId}".`,
+      );
+    }
+    for (const tagId of alias.tagIds ?? []) {
+      if (!tagIds.has(tagId)) {
+        errors.push(
+          `Alias de subcategoría "${alias.legacyId}": referencia a la etiqueta inexistente "${tagId}".`,
+        );
+      }
+    }
+  }
+  for (const subcategory of data.subcategories) {
+    if (legacySubcategoryIds.has(subcategory.id)) {
+      errors.push(
+        `Subcategoría "${subcategory.id}": el ID antiguo no puede aparecer en la taxonomía canónica.`,
       );
     }
   }

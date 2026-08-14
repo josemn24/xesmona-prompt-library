@@ -75,6 +75,55 @@ describe("searchPrompts", () => {
     ).toBe(true);
   });
 
+  it("encuentra los prompts de onboarding por sus temas", () => {
+    expect(
+      searchPrompts(allPrompts, "onboarding").some(
+        (result) => result.prompt.id === "prepare-project-onboarding-checklist",
+      ),
+    ).toBe(true);
+    expect(
+      searchPrompts(allPrompts, "CONTRIBUTING").some(
+        (result) => result.prompt.id === "create-contributing-guide",
+      ),
+    ).toBe(true);
+    expect(
+      searchPrompts(allPrompts, "commits").some(
+        (result) => result.prompt.id === "define-branch-and-commit-conventions",
+      ),
+    ).toBe(true);
+  });
+
+  it("encuentra los prompts del proceso de revisión de código", () => {
+    expect(
+      searchPrompts(allPrompts, "proceso de revisión").some(
+        (result) => result.prompt.id === "define-code-review-process",
+      ),
+    ).toBe(true);
+    expect(
+      searchPrompts(allPrompts, "checklist revisión").some(
+        (result) => result.prompt.id === "create-project-code-review-checklist",
+      ),
+    ).toBe(true);
+  });
+
+  it("encuentra los prompts de releases y cambios por sus temas", () => {
+    expect(
+      searchPrompts(allPrompts, "release").some(
+        (result) => result.prompt.id === "generate-release-notes-from-commits",
+      ),
+    ).toBe(true);
+    expect(
+      searchPrompts(allPrompts, "migración").some(
+        (result) => result.prompt.id === "turn-pull-request-into-release-note",
+      ),
+    ).toBe(true);
+    expect(
+      searchPrompts(allPrompts, "rollback").some(
+        (result) => result.prompt.id === "prepare-release-checklist",
+      ),
+    ).toBe(true);
+  });
+
   it("encuentra prompts en ambos idiomas", () => {
     const spanish = searchPrompts(allPrompts, "pull request");
     expect(spanish.some((r) => r.prompt.id === "review-pull-request")).toBe(true);

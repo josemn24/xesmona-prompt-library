@@ -110,12 +110,26 @@ export function getPromptsForCategory(categoryId: CategoryId): Prompt[] {
   return allPrompts.filter((prompt) => prompt.category === categoryId);
 }
 
+export function getPromptsForSubcategory(subcategoryId: SubcategoryId): Prompt[] {
+  return allPrompts.filter((prompt) =>
+    (prompt.subcategories ?? []).includes(subcategoryId),
+  );
+}
+
 export function countPromptsForModule(moduleId: ModuleId): number {
   return getPromptsForModule(moduleId).length;
 }
 
 export function countPromptsForCategory(categoryId: CategoryId): number {
   return getPromptsForCategory(categoryId).length;
+}
+
+export function countPromptsForSubcategory(subcategoryId: SubcategoryId): number {
+  return getPromptsForSubcategory(subcategoryId).length;
+}
+
+export function isNavigableSubcategory(subcategoryId: SubcategoryId): boolean {
+  return subcategoryById.get(subcategoryId)?.isNavigable === true;
 }
 
 export function getSubcategoriesForCategory(

@@ -6,7 +6,7 @@ import { allPrompts, modules } from "@/src/data";
 import { SITE_DESCRIPTION } from "@/src/lib/i18n";
 import { sortByUpdatedAtDesc } from "@/src/lib/taxonomy";
 
-const RECENT_PROMPTS_COUNT = 6;
+const RECENT_PROMPTS_COUNT = 3;
 
 export default function HomePage() {
   const recentPrompts = sortByUpdatedAtDesc(allPrompts).slice(

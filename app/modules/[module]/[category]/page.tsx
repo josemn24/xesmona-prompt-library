@@ -3,16 +3,15 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { Breadcrumbs } from "@/src/components/breadcrumbs";
-import { PromptCard } from "@/src/components/prompt-card";
+import { SubcategoryCard } from "@/src/components/subcategory-card";
 import { Illustration } from "@/src/components/illustrations";
 import { categories } from "@/src/data";
-import { moduleUrl, promptUrl, promptsUrl } from "@/src/lib/query-params";
+import { moduleUrl, promptsUrl } from "@/src/lib/query-params";
 import {
+  countPromptsForCategory,
   getCategoryForModule,
   getModuleById,
-  getPromptsForCategory,
   getSubcategoriesForCategory,
-  sortByUpdatedAtDesc,
 } from "@/src/lib/taxonomy";
 
 type PageProps = {
@@ -52,12 +51,11 @@ export default async function CategoryPage({ params }: PageProps) {
   if (!moduleData || !category) notFound();
 
   const categorySubcategories = getSubcategoriesForCategory(category.id);
-  const categoryPrompts = sortByUpdatedAtDesc(getPromptsForCategory(category.id));
+  const categoryPromptCount = countPromptsForCategory(category.id);
   const explorerUrl = promptsUrl({
     module: moduleData.id,
     categories: [category.id],
   });
-  const fromQuery = explorerUrl.split("?")[1] ?? "";
 
   return (
     <div className="mx-auto max-w-7xl px-4 py-10 sm:px-6">
@@ -77,7 +75,7 @@ export default async function CategoryPage({ params }: PageProps) {
           </h1>
           <p className="mt-3 text-brand-slate">{category.description}</p>
           <p className="mt-4 text-sm text-brand-slate">
-            {categoryPrompts.length} {categoryPrompts.length === 1 ? "prompt" : "prompts"} en esta categoría
+            {categoryPromptCount} {categoryPromptCount === 1 ? "prompt" : "prompts"} en esta categoría
             {" · "}
             <Link
               href={explorerUrl}
@@ -95,48 +93,22 @@ export default async function CategoryPage({ params }: PageProps) {
           <h2 id="subcategorias" className="text-xl font-semibold tracking-tight text-brand-ink">
             Subcategorías
           </h2>
-          <div className="mt-4 flex flex-wrap gap-2">
+          <ul className="mt-4 grid list-none gap-3 p-0 sm:grid-cols-2 lg:grid-cols-3">
             {categorySubcategories.map((subcategory) => (
-              <Link
+              <li
                 key={subcategory.id}
-                href={promptsUrl({
-                  module: moduleData.id,
-                  categories: [category.id],
-                  subcategories: [subcategory.id],
-                })}
-                className="rounded-full border border-brand-turquoise/30 bg-brand-turquoise-soft px-3 py-1.5 text-sm font-medium text-brand-ink transition-colors hover:border-brand-violet"
               >
-                {subcategory.label}
-              </Link>
-            ))}
-          </div>
-        </section>
-      )}
-
-      <section aria-labelledby="prompts-de-categoria" className="mt-10">
-        <div className="flex items-baseline justify-between gap-4">
-          <h2 id="prompts-de-categoria" className="text-xl font-semibold tracking-tight text-brand-ink">
-            Prompts de {category.label}
-          </h2>
-          <span className="text-sm text-brand-slate">{categoryPrompts.length} disponibles</span>
-        </div>
-        {categoryPrompts.length > 0 ? (
-          <ul className="mt-6 grid list-none gap-4 p-0 sm:grid-cols-2 lg:grid-cols-3">
-            {categoryPrompts.map((prompt) => (
-              <li key={prompt.id}>
-                <PromptCard
-                  prompt={prompt}
-                  href={promptUrl(prompt.slug, fromQuery)}
+                <SubcategoryCard
+                  moduleId={moduleData.id}
+                  categoryId={category.id}
+                  subcategory={subcategory}
                 />
               </li>
             ))}
           </ul>
-        ) : (
-          <p className="mt-4 rounded-2xl border border-brand-blue/10 bg-white p-5 text-sm text-brand-slate">
-            Todavía no hay prompts en esta categoría. Explora otras categorías del módulo para encontrar contenido relacionado.
-          </p>
-        )}
-      </section>
+        </section>
+      )}
+
     </div>
   );
 }

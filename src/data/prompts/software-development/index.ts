@@ -27,6 +27,8 @@ const promptsById = new Map<string, Prompt>(
 
 const promptOrder = [
   "review-pull-request",
+  "define-code-review-process",
+  "create-project-code-review-checklist",
   "refactor-legacy-code",
   "design-rest-api",
   "review-software-architecture",
@@ -46,6 +48,9 @@ const promptOrder = [
   "improve-observability",
   "write-technical-decision-record",
   "design-cicd-pipeline",
+  "generate-release-notes-from-commits",
+  "turn-pull-request-into-release-note",
+  "prepare-release-checklist",
   "optimize-sql-query",
   "threat-modeling",
   "setup-supabase-local-project",
@@ -58,6 +63,9 @@ const promptOrder = [
   "create-shadcn-component-gallery",
   "evaluate-configure-storybook",
   "write-git-commit-messages",
+  "create-contributing-guide",
+  "prepare-project-onboarding-checklist",
+  "define-branch-and-commit-conventions",
   "evaluate-rendering-strategies",
   "classify-frontend-state",
   "debug-frontend-issue",

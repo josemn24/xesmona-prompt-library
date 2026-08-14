@@ -9,6 +9,7 @@ import { leanStartupPrompts } from "./prompts/lean-startup";
 import { productivityPrompts } from "./prompts/productivity";
 import { softwareDevelopmentPrompts } from "./prompts/software-development";
 import { subcategories } from "./subcategories";
+import { subcategoryAliases } from "./subcategory-aliases";
 import { tags } from "./tags";
 import type { Prompt } from "./types";
 
@@ -16,6 +17,7 @@ export { modules } from "./modules";
 export { moduleNavigation } from "./module-navigation";
 export { categories } from "./categories";
 export { subcategories } from "./subcategories";
+export { subcategoryAliases } from "./subcategory-aliases";
 export { tags } from "./tags";
 export { categoryAliases } from "./category-aliases";
 export type {
@@ -36,6 +38,7 @@ export type {
   TagId,
 } from "./types";
 export type { CategoryAlias } from "./category-aliases";
+export type { SubcategoryAlias } from "./subcategory-aliases";
 
 export const allPrompts: Prompt[] = [
   ...softwareDevelopmentPrompts,
@@ -52,6 +55,7 @@ export type LibraryData = {
   categories: typeof categories;
   categoryAliases: typeof categoryAliases;
   subcategories: typeof subcategories;
+  subcategoryAliases: typeof subcategoryAliases;
   tags: typeof tags;
   prompts: Prompt[];
 };
@@ -62,6 +66,7 @@ export const libraryData: LibraryData = {
   categories,
   categoryAliases,
   subcategories,
+  subcategoryAliases,
   tags,
   prompts: allPrompts,
 };

@@ -22,10 +22,10 @@ describe("validación de los datos estáticos", () => {
     expect(libraryData.categories.every((category) => category.description.trim().length > 0)).toBe(true);
   });
 
-  it("conserva los 72 prompts y sus identificadores únicos", () => {
-    expect(libraryData.prompts).toHaveLength(72);
-    expect(new Set(libraryData.prompts.map((prompt) => prompt.id)).size).toBe(72);
-    expect(new Set(libraryData.prompts.map((prompt) => prompt.slug)).size).toBe(72);
+  it("conserva los 80 prompts y sus identificadores únicos", () => {
+    expect(libraryData.prompts).toHaveLength(80);
+    expect(new Set(libraryData.prompts.map((prompt) => prompt.id)).size).toBe(80);
+    expect(new Set(libraryData.prompts.map((prompt) => prompt.slug)).size).toBe(80);
     expect(libraryData.prompts.every((prompt) => prompt.category.length > 0)).toBe(true);
   });
 
@@ -108,13 +108,13 @@ describe("validación de los datos estáticos", () => {
   it("detecta subcategorías que no pertenecen a las categorías del prompt", () => {
     const data = cloneLibrary();
     const prompt = firstPrompt(data);
-    // "git" pertenece a "project-setup-and-workflow"; forzamos una categoría distinta.
+    // "database" pertenece a "project-setup-and-workflow"; forzamos una categoría distinta.
     prompt.category = "data";
-    prompt.subcategories = ["git"];
+    prompt.subcategories = ["database"];
     const errors = validateLibraryData(data);
     expect(
       errors.some(
-        (e) => e.includes(prompt.id) && e.includes('la subcategoría "git"'),
+        (e) => e.includes(prompt.id) && e.includes('la subcategoría "database"'),
       ),
     ).toBe(true);
   });
@@ -155,6 +155,25 @@ describe("validación de los datos estáticos", () => {
     const errors = validateLibraryData(data);
     expect(
       errors.some((e) => e.includes('referencia a la categoría inexistente "categoria-inexistente"')),
+    ).toBe(true);
+  });
+
+  it("detecta aliases de subcategoría que apuntan a referencias inexistentes", () => {
+    const data = cloneLibrary();
+    const alias = data.subcategoryAliases[0];
+    if (!alias) throw new Error("No hay aliases de subcategoría");
+    alias.canonicalId = "subcategoria-inexistente";
+    alias.tagIds = ["etiqueta-inexistente"];
+    const errors = validateLibraryData(data);
+    expect(
+      errors.some((e) =>
+        e.includes('referencia a la subcategoría inexistente "subcategoria-inexistente"'),
+      ),
+    ).toBe(true);
+    expect(
+      errors.some((e) =>
+        e.includes('referencia a la etiqueta inexistente "etiqueta-inexistente"'),
+      ),
     ).toBe(true);
   });
 

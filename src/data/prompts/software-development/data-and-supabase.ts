@@ -82,7 +82,7 @@ Entrega:
     language: "es",
     module: "software-development",
     category: "project-setup-and-workflow",
-    subcategories: ["local-development"],
+    subcategories: ["local-environment"],
     tags: ["supabase", "docker", "checklist"],
     useCases: [
       "Preparar Supabase local al comenzar un proyecto nuevo",
@@ -123,7 +123,7 @@ Explica los cambios realizados en \`package.json\`, justifica brevemente cada sc
     language: "es",
     module: "software-development",
     category: "project-setup-and-workflow",
-    subcategories: ["local-development"],
+    subcategories: ["local-environment"],
     tags: ["supabase", "checklist", "template"],
     useCases: [
       "Estandarizar los comandos locales de Supabase en un proyecto",
@@ -169,7 +169,7 @@ Entrega:
     language: "es",
     module: "software-development",
     category: "project-setup-and-workflow",
-    subcategories: ["environment-configuration"],
+    subcategories: ["local-environment"],
     tags: ["supabase", "checklist", "template"],
     useCases: [
       "Preparar las variables de entorno al configurar Supabase local",
@@ -227,7 +227,7 @@ Entrega:
     language: "es",
     module: "software-development",
     category: "project-setup-and-workflow",
-    subcategories: ["supabase-seed-data"],
+    subcategories: ["database"],
     tags: ["supabase", "postgresql", "sql", "checklist"],
     useCases: [
       "Preparar datos de prueba al comenzar un proyecto Supabase",
@@ -289,7 +289,7 @@ Entrega:
     language: "es",
     module: "software-development",
     category: "project-setup-and-workflow",
-    subcategories: ["shadcn-presets"],
+    subcategories: ["frontend-and-components"],
     tags: ["shadcn", "checklist", "analysis"],
     useCases: [
       "Elegir la dirección visual de una web app nueva",
@@ -346,7 +346,7 @@ Entrega:
     language: "es",
     module: "software-development",
     category: "project-setup-and-workflow",
-    subcategories: ["shadcn-theming"],
+    subcategories: ["frontend-and-components"],
     tags: ["shadcn", "checklist", "analysis"],
     useCases: [
       "Aplicar un preset visual de shadcn a una web app",
@@ -408,7 +408,7 @@ Entrega:
     language: "es",
     module: "software-development",
     category: "project-setup-and-workflow",
-    subcategories: ["shadcn-components"],
+    subcategories: ["frontend-and-components"],
     tags: ["shadcn", "checklist", "analysis"],
     useCases: [
       "Preparar la base de componentes de una web app nueva",
@@ -468,7 +468,7 @@ Entrega:
     language: "es",
     module: "software-development",
     category: "project-setup-and-workflow",
-    subcategories: ["shadcn-component-gallery"],
+    subcategories: ["frontend-and-components"],
     tags: ["shadcn", "checklist", "analysis"],
     useCases: [
       "Validar visualmente los componentes tras configurar shadcn/ui",
@@ -541,7 +541,7 @@ Entrega:
     language: "es",
     module: "software-development",
     category: "project-setup-and-workflow",
-    subcategories: ["storybook"],
+    subcategories: ["frontend-and-components"],
     tags: ["storybook", "checklist", "analysis"],
     useCases: [
       "Decidir si una web app necesita Storybook desde el inicio",
@@ -592,7 +592,7 @@ Closes: #412`,
     language: "es",
     module: "software-development",
     category: "project-setup-and-workflow",
-    subcategories: ["commits", "git"],
+    subcategories: ["version-control-and-collaboration"],
     tags: ["git", "template"],
     useCases: [
       "Escribir el mensaje de un commit complejo",
@@ -601,6 +601,186 @@ Closes: #412`,
     ],
     createdAt: "2025-09-05",
     updatedAt: "2026-01-25",
+  },
+
+  {
+    id: "create-contributing-guide",
+    slug: "crear-guia-contributing",
+    title: "Crear una guía CONTRIBUTING.md",
+    description:
+      "Analiza el repositorio y propone una guía CONTRIBUTING.md clara para preparar el entorno y colaborar con seguridad.",
+    content: `Actúa como un responsable de onboarding y colaboración técnica.
+
+Necesito crear o mejorar la guía \`CONTRIBUTING.md\` de este repositorio. No modifiques directamente ningún archivo: primero inspecciona el proyecto y propón el contenido exacto y las decisiones necesarias.
+
+Inspecciona, cuando existan:
+
+- README y otra documentación de entrada;
+- package manager, dependencias y scripts;
+- versiones de runtime y herramientas necesarias;
+- archivos de variables de entorno y configuración local;
+- comandos de desarrollo, lint, typecheck, tests y build;
+- configuración de CI;
+- convenciones visibles de ramas, commits y pull requests;
+- instrucciones específicas para migraciones, datos seed o servicios locales.
+
+Contexto adicional del equipo o del proyecto:
+{{context}}
+
+Diseña la guía con esta estructura:
+
+1. propósito y audiencia;
+2. requisitos previos y versiones;
+3. preparación del entorno local;
+4. comandos habituales con su resultado esperado;
+5. flujo para crear una rama, implementar un cambio y abrir un pull request;
+6. convenciones que ya existen y convenciones que todavía deben decidirse;
+7. problemas frecuentes y cómo diagnosticarlos;
+8. checklist final para confirmar que una contribución está lista.
+
+No inventes comandos, scripts, servicios ni políticas que no puedas justificar con el repositorio. Distingue entre hechos observados, recomendaciones y decisiones pendientes. Si la información actual es contradictoria o está incompleta, señala exactamente qué debe confirmarse antes de publicar la guía.
+
+Entrega:
+
+1. diagnóstico de la documentación actual;
+2. estructura propuesta para \`CONTRIBUTING.md\`;
+3. contenido completo listo para revisar y copiar;
+4. decisiones pendientes y supuestos;
+5. checklist para validar la guía con una persona que no conozca el repositorio.`,
+    language: "es",
+    module: "software-development",
+    category: "project-setup-and-workflow",
+    subcategories: ["onboarding-and-conventions"],
+    tags: ["template", "checklist", "git"],
+    useCases: [
+      "Documentar cómo empezar a contribuir a un repositorio nuevo",
+      "Actualizar una guía de contribución que ya no refleja el proyecto",
+      "Reducir preguntas repetitivas durante la incorporación de colaboradores",
+    ],
+    notes:
+      "El prompt genera una propuesta basada en el repositorio; una persona del equipo debe revisar las convenciones antes de publicarla como norma.",
+    createdAt: "2026-08-14",
+    updatedAt: "2026-08-14",
+  },
+
+  {
+    id: "prepare-project-onboarding-checklist",
+    slug: "preparar-checklist-onboarding-proyecto",
+    title: "Preparar una checklist de onboarding",
+    description:
+      "Convierte la preparación de un proyecto en una checklist verificable para que una persona nueva pueda empezar a contribuir.",
+    content: `Actúa como una persona responsable de developer experience.
+
+Prepara una checklist de onboarding para este proyecto. Inspecciona el repositorio y propone los pasos exactos, pero no modifiques archivos ni ejecutes acciones destructivas.
+
+Contexto del proyecto y del rol de la persona que se incorpora:
+{{context}}
+
+Comprueba y documenta:
+
+- sistema operativo, runtime, package manager y herramientas necesarias;
+- instalación de dependencias;
+- configuración de variables de entorno y secretos locales sin exponer valores;
+- servicios externos o locales que haya que arrancar;
+- comando para ejecutar la aplicación;
+- lint, typecheck, tests y build;
+- estructura básica del repositorio y puntos de entrada importantes;
+- dónde encontrar documentación, decisiones técnicas y tareas pendientes;
+- cómo crear un primer cambio pequeño y abrir un pull request.
+
+Organiza la salida por fases:
+
+1. antes de clonar o instalar;
+2. preparar la máquina;
+3. arrancar el proyecto;
+4. comprobar que todo funciona;
+5. entender la estructura y las convenciones;
+6. realizar la primera contribución.
+
+Para cada paso incluye:
+
+- acción concreta;
+- comando, archivo o URL cuando corresponda;
+- resultado esperado;
+- criterio de completado;
+- bloqueo frecuente y cómo resolverlo.
+
+No inventes requisitos que no aparezcan en el repositorio o en el contexto. Marca como "por confirmar" cualquier paso que dependa de credenciales, permisos o servicios no documentados.
+
+Entrega también una versión resumida de una página que pueda seguir una persona nueva sin acompañamiento y una lista de mejoras recomendadas para hacer el onboarding más reproducible.`,
+    language: "es",
+    module: "software-development",
+    category: "project-setup-and-workflow",
+    subcategories: ["onboarding-and-conventions"],
+    tags: ["checklist", "template"],
+    useCases: [
+      "Preparar la llegada de una persona nueva al equipo",
+      "Detectar pasos de instalación que solo conoce el equipo actual",
+      "Convertir un onboarding informal en un proceso repetible",
+    ],
+    notes:
+      "La checklist debe basarse en el repositorio real y señalar cualquier requisito que necesite acceso o confirmación del equipo.",
+    createdAt: "2026-08-14",
+    updatedAt: "2026-08-14",
+  },
+
+  {
+    id: "define-branch-and-commit-conventions",
+    slug: "definir-convenciones-ramas-y-commits",
+    title: "Definir convenciones de ramas y commits",
+    description:
+      "Analiza el historial de Git y propone convenciones pragmáticas para ramas, commits, squash, merge y rebase.",
+    content: `Actúa como un responsable de colaboración técnica con experiencia en Git.
+
+Necesito definir o revisar las convenciones de ramas y commits de este proyecto. Inspecciona el historial y la configuración disponible, pero no reescribas commits ni modifiques ramas.
+
+Información del repositorio o salida de comandos Git:
+{{repository}}
+
+Contexto del equipo, tamaño, frecuencia de despliegue y flujo de revisión:
+{{context}}
+
+Analiza, cuando esté disponible:
+
+- nombres y patrones de ramas existentes;
+- mensajes de commit recientes;
+- ramas protegidas y reglas de pull request;
+- relación entre issues, ramas, commits y releases;
+- uso actual de merge, squash o rebase;
+- automatizaciones de CI relacionadas con ramas o commits.
+
+Propón una política concreta que cubra:
+
+1. nombres de ramas y prefijos recomendados;
+2. estructura y nivel de detalle de los mensajes de commit;
+3. cuándo usar squash, merge o rebase;
+4. cómo enlazar issues y pull requests;
+5. qué debe comprobarse antes de integrar un cambio;
+6. cómo aplicar la convención gradualmente sin reescribir el historial existente.
+
+Incluye ejemplos realistas de ramas, commits y pull requests. Considera Conventional Commits como una opción, no como una obligación: recomiéndalo solo si aporta valor al versionado, changelog, automatizaciones o comunicación del proyecto.
+
+Entrega:
+
+1. diagnóstico de las prácticas actuales;
+2. convención propuesta con ejemplos válidos e inválidos;
+3. política breve lista para añadir a la documentación del repositorio;
+4. estrategia de adopción gradual;
+5. decisiones pendientes y riesgos de la propuesta.`,
+    language: "es",
+    module: "software-development",
+    category: "project-setup-and-workflow",
+    subcategories: ["onboarding-and-conventions"],
+    tags: ["git", "template", "checklist"],
+    useCases: [
+      "Alinear las prácticas Git de un equipo nuevo",
+      "Mejorar la claridad del historial sin reescribir commits antiguos",
+      "Preparar una política de ramas y commits para documentarla en CONTRIBUTING.md",
+    ],
+    notes:
+      "La propuesta debe adaptarse al tamaño y al flujo real del equipo; una convención demasiado estricta puede añadir trabajo sin mejorar la colaboración.",
+    createdAt: "2026-08-14",
+    updatedAt: "2026-08-14",
   },
 
   {
@@ -640,7 +820,7 @@ Entrega:
     language: "es",
     module: "software-development",
     category: "project-setup-and-workflow",
-    subcategories: ["supabase-migrations"],
+    subcategories: ["database"],
     tags: ["supabase", "postgresql", "migration", "checklist"],
     useCases: [
       "Establecer un workflow de base de datos en un proyecto nuevo",
@@ -695,7 +875,7 @@ Entrega:
     language: "es",
     module: "software-development",
     category: "project-setup-and-workflow",
-    subcategories: ["supabase-schema-design"],
+    subcategories: ["database"],
     tags: ["supabase", "postgresql", "sql", "checklist"],
     useCases: [
       "Diseñar la primera versión de la base de datos de una aplicación Supabase",

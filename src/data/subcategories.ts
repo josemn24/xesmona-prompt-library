@@ -24,7 +24,15 @@ export const subcategories: Subcategory[] = [
   // Desarrollo de software: calidad, seguridad y rendimiento
   { id: "unit-testing", label: "Pruebas unitarias", category: "quality-security-performance" },
   { id: "integration-testing", label: "Pruebas de integración", category: "quality-security-performance" },
-  { id: "code-review", label: "Revisión de código", category: "quality-security-performance" },
+  {
+    id: "code-review",
+    iconId: "test-check",
+    label: "Revisión de código",
+    category: "quality-security-performance",
+    description:
+      "Definir y aplicar criterios consistentes para revisar cambios de código.",
+    isNavigable: true,
+  },
   { id: "software-security", label: "Seguridad del software", category: "quality-security-performance" },
 
   // Desarrollo de software: entrega y despliegue
@@ -32,6 +40,14 @@ export const subcategories: Subcategory[] = [
   { id: "automation", label: "Automatización", category: "delivery-and-deployment" },
   { id: "deployments", label: "Despliegues", category: "delivery-and-deployment" },
   { id: "containers", label: "Contenedores", category: "delivery-and-deployment" },
+  {
+    id: "releases-and-changes",
+    iconId: "pipeline",
+    label: "Releases y cambios",
+    category: "delivery-and-deployment",
+    description: "Preparar, comunicar y verificar releases de forma segura.",
+    isNavigable: true,
+  },
 
   // Desarrollo de software: observabilidad
   { id: "incident-response", label: "Respuesta a incidentes", category: "observability" },
@@ -46,19 +62,51 @@ export const subcategories: Subcategory[] = [
   { id: "query-performance", label: "Rendimiento de consultas", category: "data" },
   { id: "database-migrations", label: "Migraciones de base de datos", category: "data" },
 
-  // Desarrollo de software: setup y mantenimiento
-  { id: "local-development", label: "Desarrollo local", category: "project-setup-and-workflow" },
-  { id: "environment-configuration", label: "Configuración del entorno", category: "project-setup-and-workflow" },
-  { id: "supabase-migrations", label: "Migraciones con Supabase", category: "project-setup-and-workflow" },
-  { id: "supabase-schema-design", label: "Diseño de esquema con Supabase", category: "project-setup-and-workflow" },
-  { id: "supabase-seed-data", label: "Datos seed con Supabase", category: "project-setup-and-workflow" },
-  { id: "shadcn-presets", label: "Presets de shadcn", category: "project-setup-and-workflow" },
-  { id: "shadcn-theming", label: "Temas de shadcn", category: "project-setup-and-workflow" },
-  { id: "shadcn-components", label: "Componentes de shadcn/ui", category: "project-setup-and-workflow" },
-  { id: "shadcn-component-gallery", label: "Galería de componentes shadcn/ui", category: "project-setup-and-workflow" },
-  { id: "storybook", label: "Storybook", category: "project-setup-and-workflow" },
-  { id: "commits", label: "Commits", category: "project-setup-and-workflow" },
-  { id: "git", label: "Git", category: "project-setup-and-workflow" },
+  // Desarrollo de software: setup y forma de trabajar
+  {
+    id: "local-environment",
+    iconId: "gear-cycle",
+    label: "Entorno local",
+    category: "project-setup-and-workflow",
+    description:
+      "Preparar el repositorio, las herramientas y la configuración para empezar a desarrollar.",
+    isNavigable: true,
+  },
+  {
+    id: "database",
+    iconId: "database-cylinder",
+    label: "Base de datos",
+    category: "project-setup-and-workflow",
+    description:
+      "Diseñar el esquema, las migraciones y los datos necesarios para trabajar con persistencia.",
+    isNavigable: true,
+  },
+  {
+    id: "frontend-and-components",
+    iconId: "browser-window",
+    label: "Frontend y componentes",
+    category: "project-setup-and-workflow",
+    description:
+      "Definir la base visual y el sistema de componentes de la interfaz.",
+    isNavigable: true,
+  },
+  {
+    id: "version-control-and-collaboration",
+    iconId: "git-branches",
+    label: "Control de versiones y colaboración",
+    category: "project-setup-and-workflow",
+    description:
+      "Establecer convenciones de Git, commits y colaboración del equipo.",
+  },
+  {
+    id: "onboarding-and-conventions",
+    iconId: "document-code",
+    label: "Onboarding y convenciones",
+    category: "project-setup-and-workflow",
+    description:
+      "Preparar la incorporación de colaboradores y establecer normas de trabajo.",
+    isNavigable: true,
+  },
   { id: "legacy-code", label: "Código legado", category: "maintenance-and-evolution" },
   { id: "refactoring", label: "Refactorización", category: "maintenance-and-evolution" },
   { id: "technical-documentation", label: "Documentación técnica", category: "maintenance-and-evolution" },

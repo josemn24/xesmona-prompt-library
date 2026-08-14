@@ -128,6 +128,123 @@ Prioriza la velocidad de feedback: lo que falla más a menudo debe ejecutarse pr
   },
 
   {
+    id: "generate-release-notes-from-commits",
+    slug: "generar-notas-release-desde-commits",
+    title: "Generar notas de release a partir de commits",
+    description:
+      "Convierte commits, pull requests o un changelog en notas de release claras para usuarios y desarrolladores.",
+    content: `Actúa como una persona responsable de comunicar una release de software.
+
+Información disponible sobre la release (commits, pull requests, changelog o resumen de cambios):
+{{changes}}
+
+Contexto del producto y de sus usuarios:
+{{context}}
+
+Analiza únicamente la información proporcionada y entrega:
+
+1. Un resumen de la release en una frase.
+2. Notas agrupadas en funcionalidades nuevas, correcciones, cambios internos y posibles breaking changes.
+3. Una versión orientada a usuarios, eliminando lenguaje técnico innecesario y explicando el beneficio práctico.
+4. Una versión orientada a desarrolladores, conservando los detalles técnicos relevantes.
+5. Una sección de impactos, riesgos o acciones necesarias cuando estén explícitamente indicados.
+
+No inventes cambios, beneficios, impactos ni breaking changes. Si la información no permite confirmar algo, indícalo como pendiente de verificar. Conserva enlaces, referencias o identificadores de commits y pull requests cuando se hayan proporcionado.`,
+    language: "es",
+    module: "software-development",
+    category: "delivery-and-deployment",
+    subcategories: ["releases-and-changes"],
+    tags: ["git", "template"],
+    useCases: [
+      "Preparar notas públicas a partir del historial de cambios",
+      "Comunicar una release a usuarios y al equipo técnico",
+      "Ordenar un changelog antes de publicar una versión",
+    ],
+    createdAt: "2026-08-14",
+    updatedAt: "2026-08-14",
+  },
+
+  {
+    id: "turn-pull-request-into-release-note",
+    slug: "convertir-pull-request-en-nota-release",
+    title: "Convertir una pull request en una nota de release",
+    description:
+      "Transforma una pull request en una nota de release breve y ampliada, con impactos y pasos adicionales claramente identificados.",
+    content: `Actúa como una persona editora técnica que debe convertir una pull request en una nota de release.
+
+Pull request (título, descripción, cambios, revisiones y enlaces):
+{{pull_request}}
+
+Contexto del producto, equipos y entornos afectados:
+{{context}}
+
+Genera el resultado con esta estructura:
+
+1. Qué cambia y por qué, explicado de forma clara.
+2. A quién afecta: usuarios, desarrolladores, operaciones y soporte.
+3. Migraciones, cambios de configuración, variables de entorno, secretos o pasos adicionales que deban realizarse.
+4. Riesgos, compatibilidades y dependencias que estén documentados en la pull request.
+5. Una nota breve para publicar con la release.
+6. Una nota ampliada para la documentación interna.
+
+Distingue entre información confirmada, supuestos y puntos pendientes. No inventes impactos, instrucciones ni pasos de migración. Si la pull request no contiene suficiente información para valorar un aspecto, indícalo y formula la pregunta concreta que habría que resolver.`,
+    language: "es",
+    module: "software-development",
+    category: "delivery-and-deployment",
+    subcategories: ["releases-and-changes"],
+    tags: ["git", "template"],
+    useCases: [
+      "Redactar una comunicación de release a partir de una pull request",
+      "Detectar pasos adicionales que deben conocer otros equipos",
+      "Crear una versión pública y otra interna de un cambio",
+    ],
+    createdAt: "2026-08-14",
+    updatedAt: "2026-08-14",
+  },
+
+  {
+    id: "prepare-release-checklist",
+    slug: "preparar-checklist-release",
+    title: "Preparar una checklist de release",
+    description:
+      "Crea una checklist de release con comprobaciones técnicas, responsables, criterios de aprobación y plan de rollback.",
+    content: `Actúa como responsable de release y prepara una checklist adaptada al proyecto.
+
+Contexto del proyecto, stack y tipo de release:
+{{context}}
+
+Cambios incluidos:
+{{changes}}
+
+Restricciones, responsables y ventanas de despliegue:
+{{constraints}}
+
+Organiza la checklist por fases y, para cada comprobación, incluye responsable, evidencia esperada y resultado:
+
+1. Calidad previa: tests, lint, typecheck y build.
+2. Datos y compatibilidad: migraciones, datos seed, compatibilidad hacia atrás y dependencias.
+3. Configuración: variables de entorno, secretos y diferencias entre entornos.
+4. Documentación y comunicación: notas de release, documentación operativa, soporte y personas afectadas.
+5. Aprobación y ejecución: criterios de aprobación, responsables, orden de pasos y puntos de decisión.
+6. Verificación posterior: smoke tests, métricas, logs, alertas y confirmación del resultado.
+7. Rollback: condiciones para activarlo, pasos, responsable, datos que deben preservarse y comprobaciones posteriores.
+
+Separa cada elemento como obligatorio, recomendado o no aplicable. No inventes comandos, migraciones ni responsables: marca como pendiente cualquier dato que no se haya proporcionado.`,
+    language: "es",
+    module: "software-development",
+    category: "delivery-and-deployment",
+    subcategories: ["releases-and-changes"],
+    tags: ["checklist", "template", "git"],
+    useCases: [
+      "Preparar una release con varios responsables y entornos",
+      "Reducir omisiones antes y después de un despliegue",
+      "Documentar criterios de aprobación y rollback",
+    ],
+    createdAt: "2026-08-14",
+    updatedAt: "2026-08-14",
+  },
+
+  {
     id: "review-docker-configuration",
     slug: "review-docker-configuration",
     title: "Review a Dockerfile and Compose setup",
@@ -178,4 +295,3 @@ Base image preference: official, minimal (alpine or distroless when the runtime 
   },
 
 ];
-

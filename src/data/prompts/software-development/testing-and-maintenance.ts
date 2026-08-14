@@ -48,6 +48,128 @@ Sé directo y específico. No uses frases genéricas como "podría mejorarse": e
   },
 
   {
+    id: "define-code-review-process",
+    slug: "definir-proceso-revision-codigo",
+    title: "Definir un proceso de revisión de código",
+    description:
+      "Diseña un proceso de revisión de código adaptado al equipo, al producto y al nivel de riesgo de los cambios.",
+    content: `Actúa como una persona responsable de la calidad del desarrollo y de la colaboración técnica.
+
+Necesito definir o revisar el proceso de code review de este equipo. El objetivo no es revisar una pull request concreta, sino establecer reglas y responsabilidades que podamos aplicar de forma consistente.
+
+Contexto del equipo:
+{{team}}
+
+Contexto del producto, stack y nivel de criticidad:
+{{project}}
+
+Flujo actual de Git, pull requests y CI:
+{{workflow}}
+
+Diseña el proceso completo:
+
+1. Principios: qué debe conseguir una revisión y qué problemas no debe intentar resolver.
+2. Responsabilidades del autor: qué debe comprobar, documentar y probar antes de abrir la pull request.
+3. Responsabilidades de la persona revisora: qué debe analizar y qué información debe pedir cuando falte contexto.
+4. Responsabilidades de aprobación: cuándo basta una aprobación y cuándo se necesitan dos o más personas.
+5. Criterios bloqueantes: problemas de corrección, seguridad, datos, rendimiento o compatibilidad que deben impedir la integración.
+6. Criterios no bloqueantes: mejoras de estilo, mantenibilidad o documentación que pueden convertirse en tareas posteriores.
+7. Flujo de revisión: orden recomendado desde la descripción inicial hasta la aprobación, incluyendo cómo resolver desacuerdos.
+8. Excepciones: hotfixes, incidentes, cambios urgentes y pull requests generadas automáticamente.
+9. Evidencias mínimas: tests, capturas, métricas, migraciones, notas de despliegue o cualquier otra prueba necesaria según el tipo de cambio.
+
+Adapta el proceso al tamaño y a la madurez del equipo. No impongas Conventional Commits, pair review, CODEOWNERS ni herramientas concretas si el contexto no justifica su coste. Distingue las prácticas actuales de las recomendaciones nuevas y señala las decisiones que el equipo debe tomar.
+
+Entrega:
+
+1. diagnóstico del proceso actual;
+2. política de revisión lista para documentar en \`CONTRIBUTING.md\`;
+3. matriz de responsabilidades entre autor, reviewer y aprobador;
+4. tabla de criterios bloqueantes y no bloqueantes;
+5. variantes del proceso para cambios normales, cambios de alto riesgo y hotfixes;
+6. plan de adopción gradual con las tres primeras acciones concretas.`,
+    language: "es",
+    module: "software-development",
+    category: "quality-security-performance",
+    subcategories: ["code-review"],
+    tags: ["checklist", "template", "git"],
+    useCases: [
+      "Establecer un proceso de revisión en un equipo nuevo",
+      "Reducir revisiones inconsistentes o bloqueadas durante días",
+      "Documentar responsabilidades y criterios antes de aumentar el equipo",
+    ],
+    notes:
+      "Este prompt define el proceso del equipo; para revisar una pull request concreta utiliza el prompt de revisión profunda.",
+    createdAt: "2026-08-14",
+    updatedAt: "2026-08-14",
+  },
+
+  {
+    id: "create-project-code-review-checklist",
+    slug: "crear-checklist-revision-codigo",
+    title: "Crear una checklist de revisión adaptada al proyecto",
+    description:
+      "Genera una checklist reutilizable para revisar cambios según el stack, la arquitectura y el nivel de riesgo del proyecto.",
+    content: `Actúa como un ingeniero senior especializado en calidad de software.
+
+Necesito crear una checklist de code review para este proyecto. No revises una pull request concreta: diseña una herramienta reutilizable que ayude al autor y a la persona revisora a no olvidar riesgos importantes.
+
+Stack y herramientas:
+{{stack}}
+
+Arquitectura y tipo de aplicación:
+{{architecture}}
+
+Nivel de criticidad, datos sensibles y requisitos de disponibilidad:
+{{risk}}
+
+Flujo actual de desarrollo y revisión:
+{{workflow}}
+
+Construye la checklist por fases:
+
+1. Contexto y alcance: objetivo del cambio, comportamiento afectado, dependencias y riesgos.
+2. Corrección: casos felices, casos límite, errores, concurrencia y compatibilidad.
+3. Tests: cobertura relevante, calidad de los casos, regresiones y nivel de prueba adecuado.
+4. Seguridad: validación, autorización, secretos, datos sensibles, dependencias y exposición de información.
+5. Rendimiento: consultas, llamadas remotas, consumo de recursos, latencia y escalabilidad cuando aplique.
+6. Accesibilidad y experiencia: teclado, foco, estados de error, responsive y mensajes comprensibles cuando haya interfaz.
+7. Mantenibilidad: nombres, complejidad, duplicación, coherencia con la arquitectura y deuda técnica.
+8. Operación y documentación: logs, métricas, migraciones, configuración, rollback y documentación necesaria.
+
+Para cada criterio indica:
+
+- si es obligatorio, recomendado o no aplicable;
+- qué evidencia debe aportar el autor;
+- qué pregunta debe hacerse la persona revisora;
+- qué condición justificaría solicitar cambios.
+
+Adapta la checklist al contexto y elimina los criterios que no aporten valor. No la conviertas en una lista genérica ni dupliques el análisis detallado de una pull request concreta. Incluye una clasificación final: aprobado, aprobado con comentarios o solicitar cambios.
+
+Entrega:
+
+1. checklist completa en Markdown lista para copiar;
+2. versión corta para la descripción de una pull request;
+3. criterios específicos por tipo de cambio: frontend, backend/API, base de datos, seguridad y configuración;
+4. ejemplos de evidencias válidas;
+5. lista de criterios que deben revisarse periódicamente porque pueden quedarse obsoletos.`,
+    language: "es",
+    module: "software-development",
+    category: "quality-security-performance",
+    subcategories: ["code-review"],
+    tags: ["checklist", "template", "analysis"],
+    useCases: [
+      "Crear una checklist de pull requests para un proyecto nuevo",
+      "Adaptar los criterios de revisión a distintos tipos de cambios",
+      "Hacer explícitos los riesgos que el equipo debe comprobar antes de integrar código",
+    ],
+    notes:
+      "La checklist debe revisarse cuando cambien el stack, la arquitectura, los requisitos de seguridad o el proceso de despliegue.",
+    createdAt: "2026-08-14",
+    updatedAt: "2026-08-14",
+  },
+
+  {
     id: "refactor-legacy-code",
     slug: "refactor-legacy-code",
     title: "Refactor a legacy code module safely",
@@ -257,4 +379,3 @@ Reglas de estilo: frases cortas, ejemplos antes que explicaciones, nada de docum
   },
 
 ];
-

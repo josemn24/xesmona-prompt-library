@@ -72,10 +72,13 @@ export const categorySchema = z.object({
 
 export const subcategorySchema = z.object({
   id: idSchema,
+  iconId: idSchema.optional(),
   label: z
     .string()
     .min(1, "El nombre de la subcategoría no puede estar vacío"),
   category: idSchema,
+  description: z.string().min(1).optional(),
+  isNavigable: z.boolean().optional(),
 });
 
 export const tagSchema = z.object({

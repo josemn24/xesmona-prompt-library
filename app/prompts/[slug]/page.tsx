@@ -9,7 +9,12 @@ import { PromptCard } from "@/src/components/prompt-card";
 import { PromptContent } from "@/src/components/prompt-content";
 import { allPrompts } from "@/src/data";
 import { formatDate } from "@/src/lib/i18n";
-import { categoryUrl, moduleUrl, promptsUrl } from "@/src/lib/query-params";
+import {
+  categoryUrl,
+  moduleUrl,
+  promptsUrl,
+  subcategoryUrl,
+} from "@/src/lib/query-params";
 import {
   getCategoryById,
   getModuleById,
@@ -17,6 +22,7 @@ import {
   getRelatedPrompts,
   getSubcategoryById,
   getTagById,
+  isNavigableSubcategory,
 } from "@/src/lib/taxonomy";
 
 type PageProps = {
@@ -109,11 +115,19 @@ export default async function PromptDetailPage({ params }: PageProps) {
             {promptSubcategories.map((subcategory) => (
               <Link
                 key={subcategory.id}
-                href={promptsUrl({
-                  module: prompt.module,
-                  categories: [prompt.category],
-                  subcategories: [subcategory.id],
-                })}
+                href={
+                  isNavigableSubcategory(subcategory.id)
+                    ? subcategoryUrl(
+                        prompt.module,
+                        prompt.category,
+                        subcategory.id,
+                      )
+                    : promptsUrl({
+                        module: prompt.module,
+                        categories: [prompt.category],
+                        subcategories: [subcategory.id],
+                      })
+                }
                 className="inline-flex items-center rounded-full border border-brand-turquoise/30 bg-brand-turquoise-soft px-2 py-0.5 text-xs font-medium text-brand-ink transition-colors hover:border-brand-violet"
               >
                 {subcategory.label}
