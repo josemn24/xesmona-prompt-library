@@ -61,9 +61,9 @@ describe("integración final de la arquitectura", () => {
       "frontend-and-components",
       "onboarding-and-conventions",
     ]);
-    expect(getPromptsForSubcategory("local-environment")).toHaveLength(3);
+    expect(getPromptsForSubcategory("local-environment")).toHaveLength(4);
     expect(getPromptsForSubcategory("database")).toHaveLength(3);
-    expect(getPromptsForSubcategory("frontend-and-components")).toHaveLength(5);
+    expect(getPromptsForSubcategory("frontend-and-components")).toHaveLength(8);
     expect(getPromptsForSubcategory("version-control-and-collaboration")).toHaveLength(1);
     expect(getPromptsForSubcategory("onboarding-and-conventions")).toHaveLength(3);
     expect(isNavigableSubcategory("database")).toBe(true);
@@ -80,7 +80,7 @@ describe("integración final de la arquitectura", () => {
     );
     const tagIds = new Set(tags.map((tag) => tag.id));
 
-    expect(allPrompts).toHaveLength(81);
+    expect(allPrompts).toHaveLength(85);
     for (const prompt of allPrompts) {
       const category = categoryById.get(prompt.category);
       expect(moduleIds.has(prompt.module)).toBe(true);

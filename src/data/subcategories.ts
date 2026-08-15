@@ -4,6 +4,7 @@ export const subcategories: Subcategory[] = [
   // Desarrollo de software: descubrimiento y alcance
   {
     id: "project-analysis",
+    iconId: "project-analysis",
     label: "Análisis del proyecto",
     category: "discovery-and-scope",
     description:

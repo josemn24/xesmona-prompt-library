@@ -7,6 +7,7 @@ import { backendAndApisPrompts } from "./backend-and-apis";
 import { frontendPrompts } from "./frontend";
 import { deliveryAndOperationsPrompts } from "./delivery-and-operations";
 import { dataAndSupabasePrompts } from "./data-and-supabase";
+import { nextjsPrompts } from "./nextjs";
 import { testingAndMaintenancePrompts } from "./testing-and-maintenance";
 import { projectDiscoveryPrompts } from "./project-discovery";
 
@@ -20,6 +21,7 @@ const promptGroups: Prompt[][] = [
   frontendPrompts,
   deliveryAndOperationsPrompts,
   dataAndSupabasePrompts,
+  nextjsPrompts,
   testingAndMaintenancePrompts,
 ];
 
@@ -65,6 +67,10 @@ const promptOrder = [
   "install-shadcn-core-components",
   "create-shadcn-component-gallery",
   "evaluate-configure-storybook",
+  "configure-nextjs-environment",
+  "configure-nextjs-error-states",
+  "configure-nextjs-metadata-seo",
+  "evaluate-configure-nextjs-proxy",
   "write-git-commit-messages",
   "create-contributing-guide",
   "prepare-project-onboarding-checklist",

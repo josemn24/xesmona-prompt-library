@@ -39,14 +39,14 @@ export const categories: Category[] = [
   },
   {
     id: "data",
-    iconId: "database-cylinder",
+    iconId: "data-cylinder",
     label: "Datos",
     description: "Modelar, consultar, migrar y optimizar los datos persistentes de una aplicación.",
     module: "software-development",
   },
   {
     id: "integrations",
-    iconId: "link-nodes",
+    iconId: "integration-plugs",
     label: "Integraciones",
     description: "Conectar el producto con APIs, webhooks y servicios de terceros.",
     module: "software-development",
@@ -60,7 +60,7 @@ export const categories: Category[] = [
   },
   {
     id: "delivery-and-deployment",
-    iconId: "pipeline",
+    iconId: "deploy-package",
     label: "Entrega y despliegue",
     description: "Automatizar la entrega, empaquetar versiones y desplegar cambios con seguridad.",
     module: "software-development",
@@ -74,7 +74,7 @@ export const categories: Category[] = [
   },
   {
     id: "maintenance-and-evolution",
-    iconId: "code-refresh",
+    iconId: "refactor-loop",
     label: "Mantenimiento y evolución",
     description: "Documentar, refactorizar, modernizar y reducir la deuda técnica del producto.",
     module: "software-development",

@@ -69,6 +69,21 @@ describe("applyFilters", () => {
     expect(results.every((p) => p.tags.includes("docker"))).toBe(true);
   });
 
+  it("filtra los cuatro prompts de setup de Next.js por etiqueta", () => {
+    const results = applyFilters(allPrompts, {
+      ...emptyFilters,
+      tags: ["nextjs"],
+    });
+
+    expect(results).toHaveLength(4);
+    expect(results.map((prompt) => prompt.id)).toEqual([
+      "configure-nextjs-environment",
+      "configure-nextjs-error-states",
+      "configure-nextjs-metadata-seo",
+      "evaluate-configure-nextjs-proxy",
+    ]);
+  });
+
   it("filtra por idioma", () => {
     const results = applyFilters(allPrompts, {
       ...emptyFilters,
