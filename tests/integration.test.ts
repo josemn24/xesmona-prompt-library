@@ -80,7 +80,7 @@ describe("integración final de la arquitectura", () => {
     );
     const tagIds = new Set(tags.map((tag) => tag.id));
 
-    expect(allPrompts).toHaveLength(80);
+    expect(allPrompts).toHaveLength(81);
     for (const prompt of allPrompts) {
       const category = categoryById.get(prompt.category);
       expect(moduleIds.has(prompt.module)).toBe(true);
@@ -127,7 +127,12 @@ describe("integración final de la arquitectura", () => {
   it("genera las páginas de subcategoría navegables", () => {
     const params = generateSubcategoryStaticParams();
 
-    expect(params).toHaveLength(6);
+    expect(params).toHaveLength(7);
+    expect(params).toContainEqual({
+      module: "software-development",
+      category: "discovery-and-scope",
+      subcategory: "project-analysis",
+    });
     expect(params).toContainEqual({
       module: "software-development",
       category: "project-setup-and-workflow",

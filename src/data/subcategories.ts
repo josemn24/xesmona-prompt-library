@@ -1,6 +1,16 @@
 import type { Subcategory } from "./types";
 
 export const subcategories: Subcategory[] = [
+  // Desarrollo de software: descubrimiento y alcance
+  {
+    id: "project-analysis",
+    label: "Análisis del proyecto",
+    category: "discovery-and-scope",
+    description:
+      "Comprender el propósito, los usuarios, el estado, el equipo y la construcción de un proyecto software.",
+    isNavigable: true,
+  },
+
   // Desarrollo de software: arquitectura y diseño
   { id: "clean-architecture", label: "Arquitectura limpia", category: "software-architecture" },
   { id: "hexagonal-architecture", label: "Arquitectura hexagonal", category: "software-architecture" },

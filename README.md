@@ -196,7 +196,7 @@ Unit tests live in `tests/` and cover:
 - Combined search + filters and empty-result behavior.
 - Canonical module/category URLs, category-page taxonomy helpers and
   related-prompt ordering.
-- Preservation of the 80 prompt records and their stable identifiers.
+- Preservation of the 81 prompt records and their stable identifiers.
 
 Run them with `npm run test`.
 

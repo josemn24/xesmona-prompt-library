@@ -8,8 +8,10 @@ import { frontendPrompts } from "./frontend";
 import { deliveryAndOperationsPrompts } from "./delivery-and-operations";
 import { dataAndSupabasePrompts } from "./data-and-supabase";
 import { testingAndMaintenancePrompts } from "./testing-and-maintenance";
+import { projectDiscoveryPrompts } from "./project-discovery";
 
 const promptGroups: Prompt[][] = [
+  projectDiscoveryPrompts,
   architectureQualityPrompts,
   architectureStructurePrompts,
   architectureDecisionPrompts,
@@ -26,6 +28,7 @@ const promptsById = new Map<string, Prompt>(
 );
 
 const promptOrder = [
+  "analyze-project-repository",
   "review-pull-request",
   "define-code-review-process",
   "create-project-code-review-checklist",
