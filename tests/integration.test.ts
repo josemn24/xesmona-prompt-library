@@ -49,6 +49,7 @@ describe("integración final de la arquitectura", () => {
       "database",
       "frontend-and-components",
       "version-control-and-collaboration",
+      "testing",
       "onboarding-and-conventions",
     ]);
     expect(
@@ -59,15 +60,19 @@ describe("integración final de la arquitectura", () => {
       "local-environment",
       "database",
       "frontend-and-components",
+      "testing",
       "onboarding-and-conventions",
     ]);
     expect(getPromptsForSubcategory("local-environment")).toHaveLength(4);
     expect(getPromptsForSubcategory("database")).toHaveLength(3);
     expect(getPromptsForSubcategory("frontend-and-components")).toHaveLength(8);
+    expect(getPromptsForSubcategory("architecture-decisions")).toHaveLength(4);
     expect(getPromptsForSubcategory("version-control-and-collaboration")).toHaveLength(1);
+    expect(getPromptsForSubcategory("testing")).toHaveLength(1);
     expect(getPromptsForSubcategory("onboarding-and-conventions")).toHaveLength(3);
     expect(isNavigableSubcategory("database")).toBe(true);
     expect(isNavigableSubcategory("version-control-and-collaboration")).toBe(false);
+    expect(isNavigableSubcategory("testing")).toBe(true);
     expect(isNavigableSubcategory("onboarding-and-conventions")).toBe(true);
     expect(isNavigableSubcategory("code-review")).toBe(true);
   });
@@ -80,7 +85,7 @@ describe("integración final de la arquitectura", () => {
     );
     const tagIds = new Set(tags.map((tag) => tag.id));
 
-    expect(allPrompts).toHaveLength(85);
+    expect(allPrompts).toHaveLength(88);
     for (const prompt of allPrompts) {
       const category = categoryById.get(prompt.category);
       expect(moduleIds.has(prompt.module)).toBe(true);
@@ -127,7 +132,7 @@ describe("integración final de la arquitectura", () => {
   it("genera las páginas de subcategoría navegables", () => {
     const params = generateSubcategoryStaticParams();
 
-    expect(params).toHaveLength(7);
+    expect(params).toHaveLength(8);
     expect(params).toContainEqual({
       module: "software-development",
       category: "discovery-and-scope",
@@ -137,6 +142,11 @@ describe("integración final de la arquitectura", () => {
       module: "software-development",
       category: "project-setup-and-workflow",
       subcategory: "onboarding-and-conventions",
+    });
+    expect(params).toContainEqual({
+      module: "software-development",
+      category: "project-setup-and-workflow",
+      subcategory: "testing",
     });
     expect(params).toContainEqual({
       module: "software-development",

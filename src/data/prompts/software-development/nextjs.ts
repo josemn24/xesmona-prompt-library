@@ -278,5 +278,264 @@ Después verifica TypeScript, lint, build y requests representativas sin ejecuta
     createdAt: "2026-08-15",
     updatedAt: "2026-08-15",
   },
-];
 
+  {
+    id: "recommend-nextjs-testing-stack",
+    slug: "evaluar-recomendar-stack-testing-nextjs",
+    title: "Evaluar y recomendar el stack de testing para una aplicación Next.js",
+    description:
+      "Analiza las necesidades de calidad de un proyecto Next.js nuevo y recomienda un stack de testing proporcionado antes de configurarlo.",
+    content: `Actúa como un arquitecto de calidad especializado en Next.js, React y testing frontend.
+
+Este proyecto nuevo ya ha sido creado con "create-next-app". Evalúa y recomienda su stack de testing, pero no instales dependencias ni modifiques archivos. Antes de actuar, consulta la documentación oficial actual:
+
+- https://nextjs.org/docs/app/guides/testing
+- https://nextjs.org/docs/app/guides/testing/vitest
+- https://nextjs.org/docs/app/guides/testing/playwright
+- https://nextjs.org/docs/app/guides/testing/jest
+- https://nextjs.org/docs/app/guides/testing/cypress
+
+Contexto de la aplicación:
+{{application}}
+
+Stack y estructura técnica:
+{{stack}}
+
+Flujos críticos, riesgos y funcionalidades prioritarias:
+{{criticalFlows}}
+
+Flujo actual de desarrollo y revisión:
+{{workflow}}
+
+CI, restricciones de ejecución y presupuesto de mantenimiento:
+{{ci}}
+
+Inspecciona "package.json", el package manager y sus lockfiles, TypeScript, aliases de importación, la estructura "app" o "src/app", Server y Client Components, Route Handlers, Server Functions, configuración de CI y cualquier herramienta o carpeta de testing ya existente. Conserva los cambios y decisiones que ya estén presentes.
+
+Evalúa Vitest, Playwright, Jest y Cypress según las necesidades reales del proyecto:
+
+- funciones, utilidades y lógica pura;
+- componentes síncronos y pruebas de interacción;
+- Server Components asíncronos;
+- Route Handlers, Server Functions y flujos de integración;
+- recorridos E2E en un navegador real;
+- velocidad, feedback local y estabilidad;
+- ejecución en CI, mantenimiento y complejidad operativa;
+- cobertura útil, sin convertir el porcentaje en un objetivo aislado.
+
+Ten en cuenta que la documentación actual de Next.js indica que Vitest y Jest no soportan completamente los Server Components asíncronos y recomienda pruebas E2E para esos casos. No conviertas esa limitación en una regla para todo el proyecto: distingue componentes síncronos, lógica aislable y flujos que necesitan un entorno real.
+
+Recomienda una combinación concreta de herramientas y explica por qué. No recomiendes instalar Vitest, Playwright, Jest y Cypress a la vez sin una justificación específica. Considera si basta con una única herramienta, si conviene combinar Vitest con Playwright o si el stack existente debe conservarse.
+
+La respuesta debe ser una recomendación, no una configuración. No instales paquetes, no edites "package.json", no crees "vitest.config.*", "playwright.config.*", "jest.config.*" ni archivos de test, y no ejecutes comandos que modifiquen el proyecto. No generes una suite completa de tests de negocio, no impongas una cobertura numérica sin contexto y no añadas servicios externos como BrowserStack o plataformas de regresión visual sin requisitos explícitos.
+
+Diferencia claramente hechos observados, supuestos, recomendación, alternativas descartadas y decisiones pendientes.
+
+Entrega:
+
+1. recomendación principal del stack y su alcance;
+2. herramientas evaluadas, descartadas o mantenidas y motivo;
+3. matriz de herramientas frente a tipos de prueba;
+4. estructura de carpetas y convenciones de tests propuesta;
+5. dependencias, scripts y archivos de configuración que se añadirían en una segunda fase, sin crearlos;
+6. uno o dos smoke tests representativos que convendría implementar después, sin escribirlos;
+7. límites conocidos, riesgos y costes de mantenimiento;
+8. decisiones pendientes y plan de adopción incremental.
+
+Si faltan datos, no inventes flujos, requisitos de CI ni objetivos de cobertura: indica qué información concreta debe aportar el equipo. Verifica únicamente la coherencia de la recomendación con la versión de Next.js y el scaffold inspeccionado.`,
+    language: "es",
+    module: "software-development",
+    category: "project-setup-and-workflow",
+    subcategories: ["testing"],
+    tags: ["nextjs", "analysis", "checklist"],
+    useCases: [
+      "Elegir un stack de testing proporcionado para un proyecto Next.js nuevo",
+      "Distinguir qué probar con Vitest y qué validar con Playwright",
+      "Preparar una futura configuración de testing sin instalar herramientas prematuramente",
+    ],
+    notes:
+      "Este prompt recomienda herramientas y convenciones; la instalación, configuración y creación de tests deben hacerse en una fase posterior con un prompt específico.",
+    createdAt: "2026-08-15",
+    updatedAt: "2026-08-15",
+  },
+
+  {
+    id: "define-nextjs-data-fetching-cache",
+    slug: "definir-fetching-cache-revalidacion-nextjs",
+    title: "Definir fetching, caché y revalidación en Next.js",
+    description:
+      "Define una estrategia explícita para obtener, cachear, transmitir y revalidar datos en una aplicación Next.js según sus requisitos de frescura y consistencia.",
+    content: `Actúa como un arquitecto experto en Next.js, React Server Components y sistemas de datos.
+
+Este proyecto nuevo ya ha sido creado con "create-next-app". Define la estrategia de acceso, caché y revalidación sin inventar una fuente de datos ni activar Cache Components por defecto. Antes de actuar, consulta la documentación oficial actual:
+
+- https://nextjs.org/docs/app/getting-started/fetching-data
+- https://nextjs.org/docs/app/getting-started/revalidating
+- https://nextjs.org/docs/app/getting-started/partial-prerendering
+- https://nextjs.org/docs/app/getting-started/server-and-client-components
+- https://nextjs.org/docs/app/getting-started/updating-data
+
+Contexto del producto:
+{{application}}
+
+Fuentes de datos, APIs, ORM o base de datos previstos:
+{{dataSources}}
+
+Lecturas y mutaciones principales:
+{{operations}}
+
+Requisitos de frescura, consistencia y tolerancia a datos obsoletos:
+{{freshnessRequirements}}
+
+Usuarios, autenticación y datos personalizados por request:
+{{accessRequirements}}
+
+Inspecciona la versión de Next.js, "next.config.*", la estructura "app" o "src/app", Server y Client Components existentes, Route Handlers, Server Functions, proveedores de datos, variables de entorno y cualquier uso actual de "fetch", "use cache", "cacheLife", "cacheTag", "revalidateTag", "updateTag", "revalidatePath" o configuraciones antiguas de caché.
+
+Entrega primero una decisión sobre el modelo de caché:
+
+1. mantener el modelo por defecto sin Cache Components;
+2. activar "cacheComponents: true" y adoptar "use cache";
+3. mantener Cache Components desactivado temporalmente y documentar qué información falta.
+
+Para cada operación relevante, define:
+
+- dónde se inicia el fetching: Server Component, Client Component, Route Handler, Server Function o capa de datos;
+- si los datos son estáticos, cacheables, dinámicos o dependientes de la request;
+- si debe usarse "use cache" y qué valores forman parte de la clave;
+- duración mediante "cacheLife" cuando se use Cache Components;
+- tags de invalidación mediante "cacheTag";
+- si una mutación requiere "updateTag" para read-your-own-writes o "revalidateTag" para stale-while-revalidate;
+- cuándo "revalidatePath" es preferible por no existir una etiqueta suficientemente precisa;
+- qué datos deben quedar fuera de la caché por depender de cookies, headers, sesión o permisos;
+- qué lecturas pueden ejecutarse en paralelo y dónde conviene usar "Suspense" o "loading.tsx" para streaming.
+
+No mezcles el modelo de Cache Components con configuraciones antiguas como "dynamic", "revalidate" o "fetchCache" sin explicar la compatibilidad y la versión. No actives caché globalmente por defecto, no caches datos personalizados sin revisar la clave y la autorización, no expongas credenciales al cliente y no inventes consultas, tablas ni contratos de API. No ejecutes acciones remotas ni modifiques una base de datos real.
+
+Si faltan requisitos para decidir la política, no elijas una duración arbitraria: crea una tabla de decisiones pendientes y propone el dato concreto que debe aportar el equipo.
+
+Entrega:
+
+1. modelo de caché recomendado y motivo;
+2. matriz de operaciones con fuente, entorno de ejecución, frescura, caché e invalidación;
+3. resumen de los archivos creados o modificados y de los cambios realizados;
+4. riesgos de datos obsoletos, filtración entre usuarios, waterfalls y sobre-invalidación;
+5. estrategia de streaming, loading y manejo de errores;
+6. comandos y casos de prueba para verificar lecturas, mutaciones y revalidación;
+7. cuestiones pendientes y decisiones que deba tomar el equipo.
+
+Después verifica TypeScript, lint y build. Si existe una fuente de datos local, ejecuta únicamente pruebas sintéticas y no uses credenciales ni datos reales.`,
+    language: "es",
+    module: "software-development",
+    category: "software-architecture",
+    subcategories: ["architecture-decisions"],
+    tags: ["nextjs", "checklist", "analysis"],
+    useCases: [
+      "Decidir cómo obtener y cachear datos en una aplicación Next.js",
+      "Evitar mezclar el modelo antiguo de caché con Cache Components",
+      "Diseñar la invalidación después de mutaciones y Server Functions",
+    ],
+    notes:
+      "Debe ejecutarse cuando las fuentes de datos y operaciones principales estén definidas; no activa Cache Components ni inventa una política sin requisitos de frescura.",
+    createdAt: "2026-08-15",
+    updatedAt: "2026-08-15",
+  },
+
+  {
+    id: "audit-nextjs-production-readiness",
+    slug: "auditar-preparacion-nextjs-produccion",
+    title: "Preparar Next.js para producción",
+    description:
+      "Audita si un proyecto Next.js nuevo está preparado para llegar a producción y recomienda acciones priorizadas sin modificar el repositorio ni desplegarlo.",
+    content: `Actúa como un arquitecto de plataforma y fiabilidad especializado en Next.js.
+
+Este proyecto nuevo ya ha sido creado con "create-next-app". Audita su preparación para producción y recomienda las acciones necesarias, pero no modifiques archivos, no instales dependencias y no realices despliegues. Antes de actuar, consulta la documentación oficial actual:
+
+- https://nextjs.org/docs/app/api-reference/cli/next
+- https://nextjs.org/docs/app/guides/self-hosting
+- https://nextjs.org/docs/app/guides/deploying-to-platforms
+- https://nextjs.org/docs/app/guides/environment-variables
+- https://nextjs.org/docs/app/guides/instrumentation
+- https://nextjs.org/docs/app/api-reference/config/next-config-js/output
+
+Contexto de la aplicación:
+{{application}}
+
+Plataforma y estrategia de despliegue prevista:
+{{deployment}}
+
+Entornos, variables y diferencias entre build-time y runtime:
+{{environment}}
+
+Rutas y flujos críticos:
+{{criticalFlows}}
+
+Logging, métricas, errores e instrumentación disponibles:
+{{observability}}
+
+Restricciones operativas, seguridad, disponibilidad y rollback:
+{{constraints}}
+
+Inspecciona, sin sobrescribir cambios existentes:
+
+- versión de Node.js, Next.js, React y package manager;
+- "package.json", lockfiles y scripts disponibles;
+- TypeScript, ESLint, tests y comandos de build;
+- "next.config.*", la opción "output", adaptadores y configuración de runtime;
+- estructura "app" o "src/app", Server y Client Components, streaming y rutas críticas;
+- imágenes, fuentes, assets, metadata, "robots.txt", "sitemap.xml" y dominio canónico;
+- archivos de entorno, variables públicas y privadas, y valores necesarios durante build o runtime;
+- caché, revalidación, Server Functions, Route Handlers y Proxy cuando afecten al despliegue;
+- manejo de errores, logs, "instrumentation.ts", smoke tests y CI existente;
+- requisitos de rollback, health checks, migraciones o coordinación operativa que estén documentados.
+
+Evalúa como mínimo:
+
+1. reproducibilidad y compatibilidad del build;
+2. existencia y coherencia de los comandos "next build" y "next start";
+3. compatibilidad entre la modalidad de despliegue y las capacidades utilizadas;
+4. separación de secretos, variables públicas y configuración de build/runtime;
+5. rendimiento de imágenes, bundles, streaming, caché y rutas críticas;
+6. seguridad de headers, cookies, dominios, assets y superficies expuestas;
+7. manejo de errores, logging, instrumentation y capacidad de diagnóstico;
+8. smoke tests, rollback, health checks y comprobaciones posteriores;
+9. riesgos específicos de self-hosting, reverse proxy o múltiples instancias cuando correspondan.
+
+Entrega uno de estos veredictos:
+
+- preparado;
+- preparado con condiciones;
+- no preparado.
+
+Justifica el veredicto con evidencias observadas. Distingue hechos, supuestos, riesgos y recomendaciones. Si faltan requisitos de tráfico, disponibilidad, seguridad o plataforma, no inventes métricas ni SLA: indica la decisión pendiente y el dato concreto que debe aportar el equipo.
+
+Entrega:
+
+1. veredicto y resumen ejecutivo;
+2. matriz por área con estado, evidencia, impacto y acción recomendada;
+3. comandos locales no destructivos para verificar el proyecto;
+4. diferencias entre configuración de build-time y runtime;
+5. riesgos de seguridad, rendimiento, disponibilidad y operación;
+6. requisitos pendientes del despliegue;
+7. plan priorizado antes del primer despliegue;
+8. comprobaciones y smoke tests posteriores al despliegue.
+
+No modifiques "package.json", "next.config.*", Docker, CI ni archivos de entorno. No instales paquetes, no uses credenciales reales, no accedas a servicios externos y no despliegues la aplicación. No diseñes un pipeline completo de CI/CD, no sustituyas una checklist de release, no configures un proveedor de observabilidad y no redefinas la estrategia detallada de fetching, caché o revalidación. No conviertas la auditoría en una lista genérica: relaciona cada recomendación con evidencia del proyecto o marca la información como pendiente.
+
+Puedes ejecutar únicamente comprobaciones locales ya disponibles y seguras, como inspección de versiones, lint, typecheck, tests, "next build" o una ejecución controlada de "next start" si el contexto lo permite. No borres artefactos ni cambies la configuración para hacer pasar una comprobación.`,
+    language: "es",
+    module: "software-development",
+    category: "delivery-and-deployment",
+    subcategories: ["deployments"],
+    tags: ["nextjs", "analysis", "checklist"],
+    useCases: [
+      "Auditar si un proyecto Next.js nuevo está listo para producción",
+      "Detectar riesgos de build, runtime, seguridad y operación antes del primer despliegue",
+      "Preparar un plan de readiness sin modificar el repositorio",
+    ],
+    notes:
+      "Este prompt audita y recomienda; no configura el despliegue, no instala dependencias y no sustituye una checklist de release ni un diseño de CI/CD.",
+    createdAt: "2026-08-15",
+    updatedAt: "2026-08-15",
+  },
+];

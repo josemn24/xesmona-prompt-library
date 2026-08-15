@@ -110,6 +110,15 @@ export const subcategories: Subcategory[] = [
       "Establecer convenciones de Git, commits y colaboración del equipo.",
   },
   {
+    id: "testing",
+    iconId: "test-check",
+    label: "Testing",
+    category: "project-setup-and-workflow",
+    description:
+      "Preparar las herramientas, convenciones y estrategia inicial de pruebas del proyecto.",
+    isNavigable: true,
+  },
+  {
     id: "onboarding-and-conventions",
     iconId: "document-code",
     label: "Onboarding y convenciones",
