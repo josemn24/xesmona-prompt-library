@@ -131,4 +131,16 @@ describe("helpers de navegación por taxonomía", () => {
       "git",
     ]);
   });
+
+  it("obtiene los dos prompts de despliegues sin mezclar categorías", () => {
+    const prompts = getPromptsForSubcategory("deployments");
+
+    expect(prompts).toHaveLength(2);
+    expect(prompts.map((prompt) => prompt.id)).toEqual([
+      "design-cicd-pipeline",
+      "audit-nextjs-production-readiness",
+    ]);
+    expect(prompts.every((prompt) => prompt.category === "delivery-and-deployment")).toBe(true);
+    expect(prompts.every((prompt) => prompt.subcategories?.includes("deployments"))).toBe(true);
+  });
 });

@@ -5,6 +5,7 @@ export const tags: Tag[] = [
   { id: "typescript", label: "TypeScript", facet: "technology" },
   { id: "python", label: "Python", facet: "technology" },
   { id: "react", label: "React", facet: "technology" },
+  { id: "nextjs", label: "Next.js", facet: "technology" },
   { id: "sql", label: "SQL", facet: "technology" },
   { id: "postgresql", label: "PostgreSQL", facet: "technology" },
   { id: "docker", label: "Docker", facet: "technology" },

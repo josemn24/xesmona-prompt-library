@@ -69,6 +69,36 @@ describe("applyFilters", () => {
     expect(results.every((p) => p.tags.includes("docker"))).toBe(true);
   });
 
+  it("filtra los siete prompts de Next.js por etiqueta", () => {
+    const results = applyFilters(allPrompts, {
+      ...emptyFilters,
+      tags: ["nextjs"],
+    });
+
+    expect(results).toHaveLength(7);
+    expect(results.map((prompt) => prompt.id)).toEqual([
+      "configure-nextjs-environment",
+      "configure-nextjs-error-states",
+      "configure-nextjs-metadata-seo",
+      "evaluate-configure-nextjs-proxy",
+      "recommend-nextjs-testing-stack",
+      "define-nextjs-data-fetching-cache",
+      "audit-nextjs-production-readiness",
+    ]);
+    expect(results.find((prompt) => prompt.id === "recommend-nextjs-testing-stack")).toMatchObject({
+      category: "project-setup-and-workflow",
+      subcategories: ["testing"],
+    });
+    expect(results.find((prompt) => prompt.id === "define-nextjs-data-fetching-cache")).toMatchObject({
+      category: "software-architecture",
+      subcategories: ["architecture-decisions"],
+    });
+    expect(results.find((prompt) => prompt.id === "audit-nextjs-production-readiness")).toMatchObject({
+      category: "delivery-and-deployment",
+      subcategories: ["deployments"],
+    });
+  });
+
   it("filtra por idioma", () => {
     const results = applyFilters(allPrompts, {
       ...emptyFilters,

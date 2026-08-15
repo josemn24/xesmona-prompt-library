@@ -4,6 +4,7 @@ export const subcategories: Subcategory[] = [
   // Desarrollo de software: descubrimiento y alcance
   {
     id: "project-analysis",
+    iconId: "project-analysis",
     label: "Análisis del proyecto",
     category: "discovery-and-scope",
     description:
@@ -107,6 +108,15 @@ export const subcategories: Subcategory[] = [
     category: "project-setup-and-workflow",
     description:
       "Establecer convenciones de Git, commits y colaboración del equipo.",
+  },
+  {
+    id: "testing",
+    iconId: "test-check",
+    label: "Testing",
+    category: "project-setup-and-workflow",
+    description:
+      "Preparar las herramientas, convenciones y estrategia inicial de pruebas del proyecto.",
+    isNavigable: true,
   },
   {
     id: "onboarding-and-conventions",

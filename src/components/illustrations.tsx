@@ -9,6 +9,9 @@ type SceneId =
   | "code"
   | "decision"
   | "document"
+  | "data-cylinder"
+  | "integration-plugs"
+  | "deploy-package"
   | "files"
   | "funnel"
   | "gears"
@@ -18,7 +21,9 @@ type SceneId =
   | "nodes"
   | "pencil"
   | "pipeline"
+  | "project-analysis"
   | "robot"
+  | "refactor-loop"
   | "server"
   | "shield"
   | "speed"
@@ -38,6 +43,11 @@ const sceneByIllustration: Record<IllustrationId, SceneId> = {
   "architecture-blocks": "nodes",
   "browser-window": "code",
   "server-stack": "server",
+  "data-cylinder": "data-cylinder",
+  "integration-plugs": "integration-plugs",
+  "deploy-package": "deploy-package",
+  "refactor-loop": "refactor-loop",
+  "project-analysis": "project-analysis",
   "globe-window": "globe",
   "test-check": "shield",
   "git-branches": "nodes",
@@ -193,6 +203,72 @@ function Scene({ scene }: { scene: SceneId }) {
           <Dot cx={40} cy={31} r={6} color={coral} />
         </>
       );
+    case "data-cylinder":
+      return (
+        <>
+          <path
+            d="M21 24v48c0 8 17 13 39 13s39-5 39-13V24"
+            fill={blue}
+            stroke={ink}
+            strokeLinejoin="round"
+            strokeWidth="4"
+          />
+          <ellipse cx="60" cy="24" rx="39" ry="13" fill={yellow} stroke={ink} strokeWidth="4" />
+          <path
+            d="M21 48c0 8 17 13 39 13s39-5 39-13"
+            fill="none"
+            stroke={cream}
+            strokeWidth="4"
+          />
+          <circle cx="42" cy="36" r="4" fill={coral} stroke={ink} strokeWidth="2" />
+          <Line x1={53} y1={36} x2={80} y2={36} color={cream} width={4} />
+        </>
+      );
+    case "project-analysis":
+      return (
+        <>
+          <path
+            d="M19 14h43l20 20v48H19z"
+            fill={cream}
+            stroke={ink}
+            strokeLinejoin="round"
+            strokeWidth="4"
+          />
+          <path d="M62 14v22h20" fill={yellow} stroke={ink} strokeLinejoin="round" strokeWidth="4" />
+          <Line x1={31} y1={49} x2={61} y2={49} color={blue} width={5} />
+          <Line x1={31} y1={61} x2={54} y2={61} color={slate} width={4} />
+          <Line x1={31} y1={72} x2={47} y2={72} color={slate} width={4} />
+          <circle cx="68" cy="61" r="17" fill={turquoise} stroke={ink} strokeWidth="4" />
+          <path d="M60 64l6-7 5 4 7-10" fill="none" stroke={coral} strokeLinecap="round" strokeLinejoin="round" strokeWidth="4" />
+          <Line x1={81} y1={74} x2={98} y2={88} color={ink} width={8} />
+        </>
+      );
+    case "integration-plugs":
+      return (
+        <>
+          <path d="M43 43h34" stroke={ink} strokeLinecap="round" strokeWidth="7" />
+          <path d="M51 43h18" stroke={yellow} strokeLinecap="round" strokeWidth="4" />
+          <path d="M16 31h28v25H16z" fill={turquoise} stroke={ink} strokeLinejoin="round" strokeWidth="4" />
+          <path d="M76 31h28v25H76z" fill={coral} stroke={ink} strokeLinejoin="round" strokeWidth="4" />
+          <Line x1={24} y1={24} x2={24} y2={31} color={ink} width={5} />
+          <Line x1={36} y1={24} x2={36} y2={31} color={ink} width={5} />
+          <Line x1={84} y1={56} x2={84} y2={63} color={ink} width={5} />
+          <Line x1={96} y1={56} x2={96} y2={63} color={ink} width={5} />
+          <path d="M46 37l7 6-7 6M74 37l-7 6 7 6" fill="none" stroke={cream} strokeLinecap="round" strokeLinejoin="round" strokeWidth="3" />
+        </>
+      );
+    case "deploy-package":
+      return (
+        <>
+          <rect x="13" y="50" width="22" height="25" rx="6" fill={coral} stroke={ink} strokeWidth="4" />
+          <rect x="43" y="50" width="22" height="25" rx="6" fill={yellow} stroke={ink} strokeWidth="4" />
+          <Line x1={35} y1={62} x2={43} y2={62} color={ink} width={5} />
+          <Line x1={65} y1={62} x2={77} y2={62} color={ink} width={5} />
+          <path d="M77 39h27v36H77z" fill={turquoise} stroke={ink} strokeLinejoin="round" strokeWidth="4" />
+          <path d="M77 49h27M90 39v36" fill="none" stroke={cream} strokeWidth="3" />
+          <path d="M90 14v20M82 23l8-9 8 9" fill="none" stroke={violet} strokeLinecap="round" strokeLinejoin="round" strokeWidth="5" />
+        </>
+      );
     case "files":
       return (
         <>
@@ -269,6 +345,17 @@ function Scene({ scene }: { scene: SceneId }) {
           <rect x="83" y="25" width="23" height="46" rx="7" fill={turquoise} stroke={ink} strokeWidth="4" />
           <Line x1={38} y1={48} x2={49} y2={48} color={ink} width={5} /><Line x1={72} y1={48} x2={83} y2={48} color={ink} width={5} />
           <path d="M29 38v22M63 38v22M97 38v22" stroke={cream} strokeLinecap="round" strokeWidth="4" />
+        </>
+      );
+    case "refactor-loop":
+      return (
+        <>
+          <path d="M30 35a34 34 0 0 1 57-5l7 7" fill="none" stroke={turquoise} strokeLinecap="round" strokeWidth="5" />
+          <path d="M94 37l-2-11-10 5" fill="none" stroke={turquoise} strokeLinecap="round" strokeLinejoin="round" strokeWidth="5" />
+          <path d="M90 61a34 34 0 0 1-57 5l-7-7" fill="none" stroke={coral} strokeLinecap="round" strokeWidth="5" />
+          <path d="M26 59l2 11 10-5" fill="none" stroke={coral} strokeLinecap="round" strokeLinejoin="round" strokeWidth="5" />
+          <path d="M43 40l-11 8 11 8M77 40l11 8-11 8M65 37l-9 22" fill="none" stroke={ink} strokeLinecap="round" strokeLinejoin="round" strokeWidth="5" />
+          <circle cx="60" cy="48" r="3" fill={yellow} />
         </>
       );
     case "robot":
